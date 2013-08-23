@@ -1,13 +1,13 @@
 package org.sacredheart
 
 class User {
-    String email;
-    String secret;
-    String fullName;
+    String email
+    String fullName
+    String passwordHash
+    
+    static hasMany = [ roles: Role, permissions: String ]
 
     static constraints = {
-        id name: 'email'
-        secret(blank: false)
-        fullName(blank: false)
+        email(nullable: false, blank: false, unique: true)
     }
 }

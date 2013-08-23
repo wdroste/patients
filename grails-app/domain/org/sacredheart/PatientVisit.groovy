@@ -2,11 +2,13 @@ package org.sacredheart
 
 class PatientVisit {
 
-    Date dateOfVisit;
-    String patientId;
-    String typeOfVisit;
-    String screeningResults;
+    Date dateOfVisit
+    String typeOfVisit
+    String screeningResults
+
+    static belongsTo = [patient: Patient]
 
     static constraints = {
+
     }
 }

@@ -60,15 +60,10 @@
 					<tbody>
 					<g:each in="${patientVisitInstanceList}" var="patientVisitInstance">
 						<tr>
-						
 							<td><g:formatDate date="${patientVisitInstance.dateOfVisit}" /></td>
-						
-							<td>${fieldValue(bean: patientVisitInstance, field: "patientId")}</td>
-						
+							<td>${fieldValue(bean: patientVisitInstance, field: "patient.patientId")}</td>
 							<td>${fieldValue(bean: patientVisitInstance, field: "screeningResults")}</td>
-						
 							<td>${fieldValue(bean: patientVisitInstance, field: "typeOfVisit")}</td>
-						
 							<td class="link">
 								<g:link action="show" id="${patientVisitInstance.id}" class="btn btn-small">Show &raquo;</g:link>
 							</td>

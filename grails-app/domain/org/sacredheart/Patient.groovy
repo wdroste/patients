@@ -21,6 +21,8 @@ class Patient {
     Education education;
     Reference reference;
 
+    static hasMany = [visits: PatientVisit]
+
     static constraints = {
         patientId unique: true, blank: false
         firstName blank: false
