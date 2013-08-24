@@ -72,6 +72,7 @@
 		</nav>
 
 		<div class="container-fluid">
+
 			<g:layoutBody/>
 			<hr>
 			<footer>

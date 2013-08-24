@@ -3,7 +3,7 @@ package org.sacredheart
 class PatientVisit {
 
     Date dateOfVisit
-    String typeOfVisit
+    VisitType typeOfVisit
     String screeningResults
 
     static belongsTo = [patient: Patient]
