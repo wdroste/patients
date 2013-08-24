@@ -10,10 +10,12 @@ import org.apache.shiro.grails.ConfigUtils
 class AuthController {
     def shiroSecurityManager
 
-    def index = { redirect(action: "login", params: params) }
+    def index = { redirect url:'/' }
 
     def login = {
-        return [ email: params.email, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
+        flash.message = g.message(code:'not.loggedin')
+        redirect url:'/'
+        //return [email: params.email, rememberMe: (params.rememberMe != null), targetUri: params.targetUri]
     }
 
     def signIn = {
@@ -23,19 +25,19 @@ class AuthController {
         if (params.rememberMe) {
             authToken.rememberMe = true
         }
-        
+
         // If a controller redirected to this page, redirect back
         // to it. Otherwise redirect to the root URI.
         def targetUri = params.targetUri ?: "/"
-        
+
         // Handle requests saved by Shiro filters.
         def savedRequest = WebUtils.getSavedRequest(request)
         if (savedRequest) {
             targetUri = savedRequest.requestURI - request.contextPath
             if (savedRequest.queryString) targetUri = targetUri + '?' + savedRequest.queryString
         }
-        
-        try{
+
+        try {
             // Perform the actual login. An AuthenticationException
             // will be thrown if the email is unrecognised or the
             // password is incorrect.
@@ -44,7 +46,7 @@ class AuthController {
             log.info "Redirecting to '${targetUri}'."
             redirect(uri: targetUri)
         }
-        catch (AuthenticationException ex){
+        catch (AuthenticationException ex) {
             // Authentication failed, so display the appropriate message
             // on the login page.
             log.info "Authentication failure for user '${params.email}'."
@@ -52,7 +54,7 @@ class AuthController {
 
             // Keep the email and "remember me" setting so that the
             // user doesn't have to enter them again.
-            def m = [ email: params.email ]
+            def m = [email: params.email]
             if (params.rememberMe) {
                 m["rememberMe"] = true
             }
@@ -73,8 +75,8 @@ class AuthController {
         SecurityUtils.subject?.logout()
         // For now, redirect back to the home page.
         if (ConfigUtils.getCasEnable() && ConfigUtils.isFromCas(principal)) {
-            redirect(uri:ConfigUtils.getLogoutUrl())
-        }else {
+            redirect(uri: ConfigUtils.getLogoutUrl())
+        } else {
             redirect(uri: "/")
         }
         ConfigUtils.removePrincipal(principal)

@@ -1,28 +1,19 @@
 <%@ page import="org.sacredheart.User" %>
 
+<f:field bean="userInstance" property="fullName" label="user.fullName.label"/>
+<f:field bean="userInstance" property="email" label="user.email.label"/>
 
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'secret', 'error')} required">
-	<label for="secret">
-		<g:message code="user.secret.label" default="Secret" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="secret" required="" value="${userInstance?.secret}"/>
+<div class="control-group">
+    <label class="control-label" for="password"><g:message code="user.password.label"/></label>
+    <div class="controls">
+        <g:passwordField name="password" label="user.password.label"/>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'fullName', 'error')} required">
-	<label for="fullName">
-		<g:message code="user.fullName.label" default="Full Name" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="fullName" required="" value="${userInstance?.fullName}"/>
+<div class="control-group">
+    <label class="control-label" for="confirmPassword"><g:message code="user.confirmPassword.label"/></label>
+    <div class="controls">
+        <g:passwordField name="confirmPassword" label="user.confirmPassword.label"/>
+    </div>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'email', 'error')} ">
-	<label for="email">
-		<g:message code="user.email.label" default="Email" />
-		
-	</label>
-	<g:textField name="email" value="${userInstance?.email}"/>
-</div>
-

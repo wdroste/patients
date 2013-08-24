@@ -4,6 +4,7 @@ class Patient {
 
     String patientId;
     String firstName;
+    String middleName;
     String lastName;
 
     Date dateOfBirth;

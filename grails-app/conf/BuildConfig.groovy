@@ -49,21 +49,23 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
 
-        compile ":cache-headers:1.1.5"
-        runtime ":zipped-resources:1.0.1"
-        runtime ":cached-resources:1.0"
-        runtime ":yui-minify-resources:0.1.5"
+        //compile ":cache-headers:1.1.5"
+        //runtime ":zipped-resources:1.0.1"
+        //runtime ":cached-resources:1.0"
+        //runtime ":yui-minify-resources:0.1.5"
 
         build ":tomcat:$grailsVersion"
 
         runtime ":database-migration:1.3.2"
 
-        compile ':cache:1.0.1'
+        //compile ':cache:1.0.1'
 
         runtime ":fields:1.3"
         compile ":twitter-bootstrap:2.3.2"
+        //compile ":twitter-typeahead:0.9.3.1"
 
         // security
         compile ":shiro:1.1.4"
+        compile "br.com.geocontrol.grails.plugin.ko:knockoutjs:1.2.1.2"
     }
 }

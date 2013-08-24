@@ -54,11 +54,18 @@
                                 <g:link controller="user">Users</g:link>
                             </li>
 						</ul>
-                        <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
-                            <button type="submit" class="btn">Sign in</button>
-                        </form>
+                        <shiro:notAuthenticated>
+                            <g:form id="login" class="navbar-form pull-right" action="signIn" controller="auth">
+                                <input class="span2" type="text" placeholder="Email" name="email">
+                                <input class="span2" type="password" placeholder="Password" name="password">
+                                <button type="submit" class="btn">Sign in</button>
+                            </g:form>
+                        </shiro:notAuthenticated>
+                        <shiro:authenticated>
+                            <g:form id="loginout" class="navbar-form pull-right" action="signOut" controller="auth">
+                                <button type="submit" class="btn">Sign Out</button>
+                            </g:form>
+                        </shiro:authenticated>
                     </div>
 				</div>
 			</div>
