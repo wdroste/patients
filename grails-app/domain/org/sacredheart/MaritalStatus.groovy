@@ -1,5 +1,5 @@
 package org.sacredheart
 
-enum Status {
+enum MaritalStatus {
     ChildUnder5yrs, Student, Single, Married, Separated, Divorced, Widowed
 }

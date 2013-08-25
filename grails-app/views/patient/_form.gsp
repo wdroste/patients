@@ -12,6 +12,5 @@
 <f:field bean="patientInstance" property="language" label="patient.language.label"/>
 <f:field bean="patientInstance" property="yearlyFamilyIncome" label="patient.yearlyFamilyIncome.label"/>
 <f:field bean="patientInstance" property="numberOfFamily" label="patient.numberOfFamily.label"/>
-<f:field bean="patientInstance" property="status" label="patient.status.label"/>
+<f:field bean="patientInstance" property="maritalStatus" label="patient.maritalStatus.label"/>
 <f:field bean="patientInstance" property="education" label="patient.education.label"/>
-<f:field bean="patientInstance" property="reference" label="patient.reference.label"/>

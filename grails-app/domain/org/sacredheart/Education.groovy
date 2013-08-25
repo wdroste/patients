@@ -1,5 +1,5 @@
 package org.sacredheart
 
 enum Education {
-    GradeSchool, SomeHighSchool ,HighSchoolDegree, SomeCollege, CollegeDegree, SomePostGrad, PostGradDegree;
+    None, GradeSchool, SomeHighSchool ,GED, HighSchoolDegree, SomeCollege, CollegeDegree, SomePostGrad, PostGradDegree;
 }
