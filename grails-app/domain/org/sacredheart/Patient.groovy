@@ -17,7 +17,7 @@ class Patient {
     Language language
 
     Integer yearlyFamilyIncome
-    Integer numberOfFamily
+    Integer numberOfFamily = 1
 
     Education education
     MaritalStatus maritalStatus
@@ -28,6 +28,7 @@ class Patient {
         patientId unique: true, blank: false
         firstName blank: false
         lastName blank: false
+        middleName nullable: true
         yearlyFamilyIncome nullable: true
         gender nullable: true
     }

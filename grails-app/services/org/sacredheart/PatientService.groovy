@@ -10,9 +10,9 @@ class PatientService {
     def sessionFactory
 
     def importCSVData(Reader reader) {
+        int success = 0, failed = 0;
         def failedPatientIds = [] as List<String>
         new MedkindPatientParser().parse(reader) { Patient p ->
-            int success = 0, failed = 0;
             Patient old = Patient.findByPatientId(p.patientId)
             if (old) {
                 // overwrite existing properties

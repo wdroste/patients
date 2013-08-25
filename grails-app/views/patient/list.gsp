@@ -75,7 +75,6 @@
                                 params="${[patientId: params.patientId, lastName: params.lastName]}"/>
         </div>
     </div>
-
 </div>
 </body>
 </html>

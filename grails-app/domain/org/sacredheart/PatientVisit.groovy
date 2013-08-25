@@ -2,9 +2,8 @@ package org.sacredheart
 
 class PatientVisit {
 
-    Date dateOfVisit
     VisitType typeOfVisit
-    String screeningResults
+    Date dateOfVisit = new Date()
 
     static belongsTo = [patient: Patient]
 
