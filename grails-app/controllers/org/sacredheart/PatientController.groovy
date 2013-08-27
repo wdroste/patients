@@ -40,6 +40,9 @@ class PatientController {
 
     }
 
+    /**
+     * TODO:
+     */
     def patientIdLookup() {
         println "Parameters: ${params}"
         withFormat {

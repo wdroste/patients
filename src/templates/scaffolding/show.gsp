@@ -47,7 +47,7 @@
 					Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
 					props.each { p -> %>
 					<g:if test="\${${propertyName}?.${p.name}}">
-						<dt><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></dt>
+						<dt><g:message code="${domainClass.propertyName}.${p.name}.label" /></dt>
 						<%  if (p.isEnum()) { %>
 							<dd><g:fieldValue bean="\${${propertyName}}" field="${p.name}"/></dd>
 						<%  } else if (p.oneToMany || p.manyToMany) { %>

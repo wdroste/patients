@@ -7,13 +7,17 @@
 <div class="control-group">
     <label class="control-label" for="password"><g:message code="user.password.label"/></label>
     <div class="controls">
-        <g:passwordField name="password" label="user.password.label"/>
+        <g:passwordField name="password" label="user.password.label" value="********"/>
     </div>
 </div>
 
 <div class="control-group">
     <label class="control-label" for="confirmPassword"><g:message code="user.confirmPassword.label"/></label>
     <div class="controls">
-        <g:passwordField name="confirmPassword" label="user.confirmPassword.label"/>
+        <g:passwordField name="confirmPassword" label="user.confirmPassword.label" value="********"/>
     </div>
 </div>
+
+<r:script>
+
+</r:script>

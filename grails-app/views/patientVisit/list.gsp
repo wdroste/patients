@@ -45,24 +45,17 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-						
-							<g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label', default: 'Date Of Visit')}" />
-						
-							<g:sortableColumn property="patientId" title="${message(code: 'patientVisit.patientId.label', default: 'Patient Id')}" />
-						
-							<g:sortableColumn property="screeningResults" title="${message(code: 'patientVisit.screeningResults.label', default: 'Screening Results')}" />
-						
-							<g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label', default: 'Type Of Visit')}" />
-						
+							<g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}" />
+							<g:sortableColumn property="patientId" title="${message(code: 'patientVisit.patientId.label')}" />
+							<g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}" />
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 					<g:each in="${patientVisitInstanceList}" var="patientVisitInstance">
 						<tr>
-							<td><g:formatDate date="${patientVisitInstance.dateOfVisit}" /></td>
+							<td><g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}" /></td>
 							<td>${fieldValue(bean: patientVisitInstance, field: "patient.patientId")}</td>
-							<td>${fieldValue(bean: patientVisitInstance, field: "screeningResults")}</td>
 							<td>${fieldValue(bean: patientVisitInstance, field: "typeOfVisit")}</td>
 							<td class="link">
 								<g:link action="show" id="${patientVisitInstance.id}" class="btn btn-small">Show &raquo;</g:link>

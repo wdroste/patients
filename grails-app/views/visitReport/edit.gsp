@@ -1,9 +1,9 @@
-<%@ page import="org.sacredheart.PatientVisit" %>
+<%@ page import="org.sacredheart.report.VisitReport" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="bootstrap">
-		<g:set var="entityName" value="${message(code: 'patientVisit.label', default: 'PatientVisit')}" />
+		<g:set var="entityName" value="${message(code: 'visitReport.label', default: 'VisitReport')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -39,10 +39,10 @@
 				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
 				</g:if>
 
-				<g:hasErrors bean="${patientVisitInstance}">
+				<g:hasErrors bean="${visitReportInstance}">
 				<bootstrap:alert class="alert-error">
 				<ul>
-					<g:eachError bean="${patientVisitInstance}" var="error">
+					<g:eachError bean="${visitReportInstance}" var="error">
 					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 					</g:eachError>
 				</ul>
@@ -50,10 +50,10 @@
 				</g:hasErrors>
 
 				<fieldset>
-					<g:form class="form-horizontal" action="edit" id="${patientVisitInstance?.id}" >
-						<g:hiddenField name="version" value="${patientVisitInstance?.version}" />
+					<g:form class="form-horizontal" action="edit" id="${visitReportInstance?.id}" >
+						<g:hiddenField name="version" value="${visitReportInstance?.version}" />
 						<fieldset>
-							<g:render template="form"/>
+							<f:all bean="visitReportInstance"/>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">
 									<i class="icon-ok icon-white"></i>

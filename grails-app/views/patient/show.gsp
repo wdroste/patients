@@ -41,116 +41,76 @@
         </g:if>
 
         <dl>
-
             <g:if test="${patientInstance?.citizen}">
-                <dt><g:message code="patient.citizen.label" default="Citizen"/></dt>
-
-                <dd><g:formatBoolean boolean="${patientInstance?.citizen}"/></dd>
-
+                <dt><g:message code="patient.citizen.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="citizen"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.dateOfBirth}">
-                <dt><g:message code="patient.dateOfBirth.label" default="Date Of Birth"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="dateOfBirth"/></dd>
-
+                <dt><g:message code="patient.dateOfBirth.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="dateOfBirth"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.education}">
-                <dt><g:message code="patient.education.label" default="Education"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="education"/></dd>
-
+                <dt><g:message code="patient.education.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="education"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.firstName}">
-                <dt><g:message code="patient.firstName.label" default="First Name"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="firstName"/></dd>
-
+                <dt><g:message code="patient.firstName.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="firstName"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.gender}">
-                <dt><g:message code="patient.gender.label" default="Gender"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="gender"/></dd>
-
+                <dt><g:message code="patient.gender.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="gender"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.language}">
-                <dt><g:message code="patient.language.label" default="Language"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="language"/></dd>
-
+                <dt><g:message code="patient.language.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="language"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.lastName}">
                 <dt><g:message code="patient.lastName.label" default="Last Name"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="lastName"/></dd>
-
+                <dd><f:display bean="${patientInstance}" property="lastName"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.numberOfFamily}">
-                <dt><g:message code="patient.numberOfFamily.label" default="Number Of Family"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="numberOfFamily"/></dd>
-
+                <dt><g:message code="patient.numberOfFamily.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="numberOfFamily"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.race}">
-                <dt><g:message code="patient.race.label" default="Race"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="race"/></dd>
-
+                <dt><g:message code="patient.race.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="race"/></dd>
             </g:if>
-
             <g:if test="${patientInstance?.maritalStatus}">
-                <dt><g:message code="patient.maritalStatus.label" default="maritalStatus"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="maritalStatus"/></dd>
-
+                <dt><g:message code="patient.maritalStatus.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="maritalStatus"/></dd>
             </g:if>
 
             <g:if test="${patientInstance?.veteran}">
-                <dt><g:message code="patient.veteran.label" default="Veteran"/></dt>
-
-                <dd><g:formatBoolean boolean="${patientInstance?.veteran}"/></dd>
-
+                <dt><g:message code="patient.veteran.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="veteran"/></dd>
             </g:if>
 
             <g:if test="${patientInstance?.yearlyFamilyIncome}">
-                <dt><g:message code="patient.yearlyFamilyIncome.label" default="Yearly Family Income"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="yearlyFamilyIncome"/></dd>
-
+                <dt><g:message code="patient.yearlyFamilyIncome.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="yearlyFamilyIncome"/></dd>
             </g:if>
 
             <g:if test="${patientInstance?.zipcode}">
-                <dt><g:message code="patient.zipcode.label" default="Zipcode"/></dt>
-
-                <dd><g:fieldValue bean="${patientInstance}" field="zipcode"/></dd>
-
+                <dt><g:message code="patient.zipcode.label"/></dt>
+                <dd><f:display bean="${patientInstance}" property="zipcode"/></dd>
             </g:if>
-
         </dl>
-
         <g:form>
             <g:hiddenField name="id" value="${patientInstance?.id}"/>
             <div class="form-actions">
                 <g:link class="btn" action="edit" id="${patientInstance?.id}">
                     <i class="icon-pencil"></i>
-                    <g:message code="default.button.edit.label" default="Edit"/>
+                    <g:message code="default.button.edit.label"/>
                 </g:link>
                 <button class="btn btn-danger" type="submit" name="_action_delete">
                     <i class="icon-trash icon-white"></i>
-                    <g:message code="default.button.delete.label" default="Delete"/>
+                    <g:message code="default.button.delete.label"/>
                 </button>
             </div>
         </g:form>
-
     </div>
-
 </div>
 </body>
 </html>

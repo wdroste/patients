@@ -1,5 +1,8 @@
 package org.sacredheart
 
+/**
+ * TODO: Remove not used..
+ */
 public enum Reference {
     Friend,
     StWilliamsChruch,

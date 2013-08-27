@@ -1,9 +1,13 @@
 package org.sacredheart.medkind
 
+import org.apache.commons.lang.BooleanUtils
 import org.sacredheart.Education
+import org.sacredheart.Gender
 import org.sacredheart.Language
 import org.sacredheart.Patient
 import org.sacredheart.Race
+import org.sacredheart.YesNo
+import org.supercsv.cellprocessor.ConvertNullTo
 import org.supercsv.cellprocessor.Optional
 import org.supercsv.cellprocessor.ParseDate
 import org.supercsv.cellprocessor.ParseInt
@@ -61,9 +65,21 @@ class MedkindPatientParser {
 
     }
 
+    static class ParseYesNo implements CellProcessor {
+        Object execute(Object value, CsvContext context) {
+            BooleanUtils.toBoolean(value) ? YesNo.Yes : YesNo.No
+        }
+    }
+
+    static class ParseGender implements CellProcessor {
+        Object execute(Object value, CsvContext context) {
+            Gender.valueOf(value)
+        }
+    }
+
     static class ParseRace implements CellProcessor {
         Object execute(Object value, CsvContext context) {
-            switch (value.toString()) {
+            switch (value.toString().toUpperCase()) {
                 case 'WHITE':
                     return Race.White
                 case 'BLACK':
@@ -79,7 +95,7 @@ class MedkindPatientParser {
 
     static class ParseLanguage implements CellProcessor {
         Object execute(Object value, CsvContext context) {
-            switch (value.toString()) {
+            switch (value.toString().toUpperCase()) {
                 case 'ENGLISH':
                     return Language.English
                 case 'SPANISH':
@@ -123,7 +139,7 @@ class MedkindPatientParser {
                 new Optional(), // 3 middleName
                 new Optional(), // 4 SSN
                 new Optional(new ParseDate("yyyy/MM/dd")), // 5 birthDate
-                new Optional(), // 6 Gender
+                new Optional(new ParseGender()), // 6 Gender
                 new Optional(new ParseRace()), // 7 Race
                 new Optional(), // 8 Address
                 new Optional(), // 9 City
@@ -132,9 +148,9 @@ class MedkindPatientParser {
                 new Optional(), // 12 ZipCode
                 new Optional(), // 13 Telephone
                 new Optional(), // 14 Housing
-                new Optional(new ParseInt()), // 15 Household
-                new Optional(), // 16 Citizen
-                new Optional(), // 17 Veteran
+                new ConvertNullTo(1, new ParseInt()), // 15 Household
+                new Optional(new ParseYesNo()), // 16 Citizen
+                new Optional(new ParseYesNo()), // 17 Veteran
                 new Optional(), // 18 Marital Status
                 new Optional(new ParseEducation()), // 19 Education
                 new Optional(new ParseLanguage()), // 20 Language

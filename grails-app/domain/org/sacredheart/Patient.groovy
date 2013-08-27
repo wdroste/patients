@@ -10,14 +10,14 @@ class Patient {
     Date dateOfBirth
     String zipcode
     String county
-    Boolean citizen
-    Boolean veteran
+    YesNo citizen
+    YesNo veteran
     Gender gender
     Race race
     Language language
 
     Integer yearlyFamilyIncome
-    Integer numberOfFamily = 1
+    Integer numberOfFamily
 
     Education education
     MaritalStatus maritalStatus
@@ -31,5 +31,14 @@ class Patient {
         middleName nullable: true
         yearlyFamilyIncome nullable: true
         gender nullable: true
+        county nullable: true
+        race nullable: true
+        language nullable: true
+        maritalStatus nullable: true
+        education nullable: true
+        dateOfBirth nullable: true
+        zipcode nullable: true
+        citizen nullable: true
+        veteran nullable: true
     }
 }
