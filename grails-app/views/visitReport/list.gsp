@@ -51,19 +51,9 @@
 					<tbody>
 					<g:each in="${visitReportInstanceList}" var="visitReportInstance">
 						<tr>
-						
-							<td>${fieldValue(bean: visitReportInstance, field: "ageRange")}</td>
-						
-							<td><g:formatBoolean boolean="${visitReportInstance.citizen}" /></td>
-						
-							<td>${fieldValue(bean: visitReportInstance, field: "education")}</td>
-						
-							<td>${fieldValue(bean: visitReportInstance, field: "familyIncomeRange")}</td>
-						
-							<td>${fieldValue(bean: visitReportInstance, field: "firstNamePattern")}</td>
-						
-							<td>${fieldValue(bean: visitReportInstance, field: "gender")}</td>
-						
+							<td><f:display bean="${visitReportInstance}" property="name"/></td>
+							<td><f:display bean="${visitReportInstance}" property="description"/></td>
+							<td><f:display bean="${visitReportInstance}" property="lastUpdated"/></td>
 							<td class="link">
 								<g:link action="show" id="${visitReportInstance.id}" class="btn btn-small">Show &raquo;</g:link>
 							</td>

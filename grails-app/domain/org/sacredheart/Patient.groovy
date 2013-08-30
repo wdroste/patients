@@ -25,9 +25,9 @@ class Patient {
     static hasMany = [visits: PatientVisit]
 
     static constraints = {
-        patientId unique: true, blank: false
+        patientId unique: true, blank: false, index: 'IDX_PATIENT_PATIENTID'
         firstName blank: false
-        lastName blank: false
+        lastName blank: false, index: 'IDX_PATIENT_LASTNAME'
         middleName nullable: true
         yearlyFamilyIncome nullable: true
         gender nullable: true

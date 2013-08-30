@@ -56,7 +56,7 @@
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">
 									<i class="icon-ok icon-white"></i>
-									<g:message code="default.button.create.label" default="Create" />
+									<g:message code="default.button.create.label" />
 								</button>
 							</div>
 						</fieldset>

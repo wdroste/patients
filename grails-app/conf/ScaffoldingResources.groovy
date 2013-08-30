@@ -2,5 +2,7 @@ modules = {
 	scaffolding {
 		dependsOn 'bootstrap'
 		resource url: 'css/scaffolding.css'
+        resource url: 'css/bootstrap-duallistbox.css'
+        resource url: 'js/bootstrap-duallistbox.js'
 	}
 }

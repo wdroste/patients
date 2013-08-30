@@ -5,6 +5,7 @@ import org.sacredheart.Gender
 import org.sacredheart.Language
 import org.sacredheart.MaritalStatus
 import org.sacredheart.Race
+import org.sacredheart.VisitType
 import org.sacredheart.YesNo
 
 /**
@@ -22,26 +23,27 @@ class VisitReport {
 
     AgeRange ageRange
 
-    List<String> counties = []
-    List<String> zipCodes = []
-
     YesNo citizen
     YesNo veteran
     Gender gender
 
-    Race race
-    Language language
 
     SizeRange numberOfFamilyRange
     IncomeRange familyIncomeRange
 
-    Education education
-    MaritalStatus maritalStatus
+    List<Race> races = []
+    List<String> counties = []
+    List<String> zipCodes = []
+    List<Language> languages = []
+    List<VisitType> visitTypes = []
+    List<Education> educations = []
+    List<MaritalStatus> maritalStatuses = []
 
-    Date dateCreated
     Date lastUpdated
 
     static constraints = {
+        name unique: true
+        description maxSize: 512
         patientIdPattern nullable: true
         firstNamePattern nullable: true
         middleNamePattern nullable: true
@@ -50,13 +52,40 @@ class VisitReport {
         citizen nullable: true
         veteran nullable: true
         gender nullable: true
-
-        race nullable: true
-        language nullable: true
-
-        education nullable: true
-        maritalStatus nullable: true
+        ageRange nullable: true
+        familyIncomeRange nullable: true
+        numberOfFamilyRange nullable: true
     }
 
     static embedded = ['ageRange', 'numberOfFamilyRange', 'familyIncomeRange']
+}
+
+class AgeRange {
+    Integer start
+    Integer end
+
+    static constraints = {
+        start nullable: true
+        end nullable: true
+    }
+}
+
+class IncomeRange {
+    Integer start
+    Integer end
+
+    static constraints = {
+        start nullable: true
+        end nullable: true
+    }
+}
+
+class SizeRange {
+    Integer start
+    Integer end
+
+    static constraints = {
+        start nullable: true
+        end nullable: true
+    }
 }

@@ -1,13 +1,11 @@
 package org.sacredheart
 
+import org.apache.commons.lang.StringUtils
 import org.sacredheart.medkind.MedkindPatientParser
-import org.springframework.transaction.annotation.Propagation
-import org.springframework.transaction.annotation.Transactional
+import org.sacredheart.report.VisitReport
 
 class PatientService {
     static transactional = true
-
-    def sessionFactory
 
     def importCSVData(Reader reader) {
         int success = 0, failed = 0;
@@ -32,7 +30,6 @@ class PatientService {
         failedPatientIds
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     def list(params) {
 
         def ignoreCaseLike = [
@@ -65,6 +62,111 @@ class PatientService {
         }
 
         [patientInstanceList: results, patientInstanceTotal: count[0]]
+    }
 
+    List<String> getAllZipCodes() {
+        findAllByPropertyName('zipcode')
+    }
+
+    List<String> getAllCounties() {
+        findAllByPropertyName('county')
+    }
+
+    List<String> findAllByPropertyName(String prop) {
+        Patient.createCriteria() {
+            projections {
+                distinct(prop)
+            }
+            isNotNull(prop)
+        }
+    }
+
+    def run(VisitReport vp, Date start, Date end) {
+        PatientVisit.createCriteria() {
+            // only visits between these dates
+            between('dateOfVisit', start, end)
+
+            // only visits of these types
+            if (vp.visitTypes) {
+                inList('visitType', vp.visitTypes)
+            }
+
+            // all the patient criteria
+            patient {
+                if (StringUtils.isNotBlank(vp.patientIdPattern)) {
+                    def propValue = vp.patientIdPattern.replace('*', '%')
+                    ilike('patientId', propValue)
+                }
+                if (StringUtils.isNotBlank(vp.firstNamePattern)) {
+                    def propValue = vp.firstNamePattern.replace('*', '%')
+                    ilike('firstName', propValue)
+                }
+                if (StringUtils.isNotBlank(vp.middleNamePattern)) {
+                    def propValue = vp.middleNamePattern.replace('*', '%')
+                    ilike('middleName', propValue)
+                }
+                if (StringUtils.isNotBlank(vp.lastNamePattern)) {
+                    def propValue = vp.lastNamePattern.replace('*', '%')
+                    ilike('lastName', propValue)
+                }
+
+                if (vp.counties) {
+                    inList('county', vp.counties)
+                }
+
+                if (vp.zipCodes) {
+                    inList('zipcode', vp.zipCodes)
+                }
+
+                if (vp.ageRange.start != null && vp.ageRange.end != null) {
+                    Calendar startCalendar = Calendar.getInstance()
+                    startCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.end)
+                    Calendar endCalendar = Calendar.getInstance()
+                    endCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.start)
+                    between('dateOfBirth', startCalendar.getTime(), endCalendar.getTime())
+                }
+
+                if (vp.citizen) {
+                    eq('citizen', vp.citizen)
+                }
+
+                if (vp.veteran) {
+                    eq('veteran', vp.veteran)
+                }
+
+                if (vp.gender) {
+                    eq('gender', vp.gender)
+                }
+
+                if (vp.races) {
+                    inList('race', vp.races)
+                }
+
+                if (vp.languages) {
+                    inList('language', vp.languages)
+                }
+
+                if (vp.maritalStatuses) {
+                    inList('maritalStatus', vp.maritalStatuses)
+                }
+
+                if (vp.educations) {
+                    inList('education', vp.educations)
+                }
+
+                if (vp.numberOfFamilyRange.start != null
+                        && vp.numberOfFamilyRange.end != null) {
+                    between('numberOfFamily',
+                            vp.numberOfFamilyRange.start,
+                            vp.numberOfFamilyRange.end)
+
+                }
+
+//                Integer yearlyFamilyIncome
+//                IncomeRange familyIncomeRange
+
+            }
+
+        }
     }
 }
