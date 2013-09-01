@@ -2,13 +2,13 @@
 <%@ page import="org.sacredheart.Patient" %>
 
 
-<f:field bean="visitReportInstance" property="name"/>
+<f:field bean="visitReportInstance" property="name" required=""/>
 <f:field bean="visitReportInstance" property="description"/>
 
 <div class="control-group ">
     <label class="control-label" for="zipCodes">ZIP Codes</label>
 
-    <div class="controls span4">
+    <div class="controls">
         <g:select name="zipCodes"
                   from="${zipcodes}"
                   value="${visitReportInstance.zipCodes}"
@@ -61,9 +61,47 @@
 
 <f:field bean="visitReportInstance" property="citizen"/>
 <f:field bean="visitReportInstance" property="veteran"/>
-<f:field bean="visitReportInstance" property="gender"/>
-<f:field bean="visitReportInstance" property="race"/>
-<f:field bean="visitReportInstance" property="language"/>
+
+<div class="control-group">
+    <label class="control-label" for="gender">
+        <g:message code="patient.gender.label"/>
+    </label>
+    <div class="controls">
+        <g:select name="gender" value="${fieldValue}"
+                  noSelection="['':'']" valueMessagePrefix="patient.gender.select"
+                  from="${org.sacredheart.Gender.values()*.name()}"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="races">
+        <g:message code="patient.race.label"/>
+    </label>
+
+    <div class="controls">
+        <g:select name="races"
+                  multiple="true"
+                  noSelection="[null: '-- Any Selection --']"
+                  value="${visitReportInstance.races}"
+                  valueMessagePrefix="patient.race.select"
+                  from="${org.sacredheart.Race.values()*.name()}"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="languages">
+        <g:message code="patient.language.label"/>
+    </label>
+
+    <div class="controls">
+        <g:select name="languages"
+                  multiple="true"
+                  noSelection="[null: '-- Any Selection --']"
+                  value="${visitReportInstance.languages}"
+                  valueMessagePrefix="patient.language.select"
+                  from="${org.sacredheart.Language.values()*.name()}"/>
+    </div>
+</div>
 
 <div class="control-group ">
     <label class="control-label" for="numberOfFamilyRange">Number of Family</label>
@@ -84,8 +122,34 @@
 </div>
 
 
-<f:field bean="visitReportInstance" property="education"/>
-<f:field bean="visitReportInstance" property="maritalStatus"/>
+<div class="control-group">
+    <label class="control-label" for="educations">
+        <g:message code="patient.education.label"/>
+    </label>
+
+    <div class="controls">
+        <g:select name="educations"
+                  multiple="true"
+                  noSelection="[null: '-- Any Selection --']"
+                  value="${visitReportInstance.educations}"
+                  valueMessagePrefix="patient.education.select"
+                  from="${org.sacredheart.Education.values()*.name()}"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="maritalStatuses">
+        <g:message code="patient.maritalStatus.label"/>
+    </label>
+
+    <div class="controls">
+        <g:select name="maritalStatuses"
+                  multiple="true"
+                  noSelection="[null: '-- Any Selection --']"
+                  value="${visitReportInstance.maritalStatuses}"
+                  valueMessagePrefix="patient.maritalStatus.select"
+                  from="${org.sacredheart.MaritalStatus.values()*.name()}"/>
+    </div>
+</div>
 
 <r:script>
     $('#zipCodes').bootstrapDualListbox({

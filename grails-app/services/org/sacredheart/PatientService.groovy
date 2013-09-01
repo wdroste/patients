@@ -64,16 +64,16 @@ class PatientService {
         [patientInstanceList: results, patientInstanceTotal: count[0]]
     }
 
-    List<String> getAllZipCodes() {
+    List<?> getAllZipCodes() {
         findAllByPropertyName('zipcode')
     }
 
-    List<String> getAllCounties() {
+    List<?> getAllCounties() {
         findAllByPropertyName('county')
     }
 
-    List<String> findAllByPropertyName(String prop) {
-        Patient.createCriteria() {
+    List<?> findAllByPropertyName(String prop) {
+        Patient.withCriteria() {
             projections {
                 distinct(prop)
             }
@@ -81,10 +81,23 @@ class PatientService {
         }
     }
 
-    def run(VisitReport vp, Date start, Date end) {
-        PatientVisit.createCriteria() {
-            // only visits between these dates
+    def run(long vpId, Date start, Date end) {
+        VisitReport vp = VisitReport.get(vpId)
+        PatientVisit.withCriteria() {
+
+            projections {
+                property('dateOfVisit', 'dateOfVisit')
+                property('typeOfVisit', 'typeOfVisit')
+                patient {
+                    property('lastName', 'lastName')
+                    property('firstName', 'firstName')
+                }
+            }
+
             between('dateOfVisit', start, end)
+
+            // determine ordering..
+            order('dateOfVisit')
 
             // only visits of these types
             if (vp.visitTypes) {
@@ -118,7 +131,7 @@ class PatientService {
                     inList('zipcode', vp.zipCodes)
                 }
 
-                if (vp.ageRange.start != null && vp.ageRange.end != null) {
+                if (vp.ageRange?.start != null && vp.ageRange?.end != null) {
                     Calendar startCalendar = Calendar.getInstance()
                     startCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.end)
                     Calendar endCalendar = Calendar.getInstance()
@@ -154,8 +167,8 @@ class PatientService {
                     inList('education', vp.educations)
                 }
 
-                if (vp.numberOfFamilyRange.start != null
-                        && vp.numberOfFamilyRange.end != null) {
+                if (vp.numberOfFamilyRange?.start != null
+                        && vp.numberOfFamilyRange?.end != null) {
                     between('numberOfFamily',
                             vp.numberOfFamilyRange.start,
                             vp.numberOfFamilyRange.end)
@@ -166,7 +179,6 @@ class PatientService {
 //                IncomeRange familyIncomeRange
 
             }
-
         }
     }
 }

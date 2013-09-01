@@ -3,7 +3,7 @@ package org.sacredheart.report
 class VisitReportController {
 
     static scaffold = true
-    
+
     def patientService
 
     def create() {
@@ -28,5 +28,33 @@ class VisitReportController {
                 redirect action: 'show', id: visitReportInstance.id
                 break
         }
+    }
+
+    /**
+     * Setup the dialog.
+     */
+    def setup() {
+        def inst = VisitReport.get(params.id)
+        [visitReportInstance: inst]
+    }
+
+    /**
+     * Run the report.
+     */
+    def run(RunCommand runCommand) {
+        [reportInstanceList: patientService.run(runCommand.id, runCommand.start, runCommand.end)]
+    }
+}
+
+
+@grails.validation.Validateable
+class RunCommand {
+    long id
+    Date start
+    Date end
+    static constraints = {
+        id nullable: false
+        start nullable: false
+        end nullable: false
     }
 }
