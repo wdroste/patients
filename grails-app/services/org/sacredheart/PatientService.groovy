@@ -31,37 +31,21 @@ class PatientService {
     }
 
     def list(params) {
-
         def ignoreCaseLike = [
             lastName: params.lastName?.replace('*', '%'),
             patientId: params.patientId?.replace('*', '%')
         ]
-
         def c = Patient.createCriteria()
-        def results = c {
+        def results = c.list(max: params.max, offset: params.offset) {
+            cache(true)
             ignoreCaseLike.each { k, v ->
                 if (v) {
                     ilike(k, v)
                 }
             }
-            maxResults(params.max)
-            firstResult(params.offset)
             order("lastName")
         }
-
-        c = Patient.createCriteria()
-        def count = c {
-            projections {
-                rowCount()
-            }
-            ignoreCaseLike.each { k, v ->
-                if (v) {
-                    ilike(k, v)
-                }
-            }
-        }
-
-        [patientInstanceList: results, patientInstanceTotal: count[0]]
+        [patientInstanceList: results.list, patientInstanceTotal: results.totalCount]
     }
 
     List<?> getAllZipCodes() {

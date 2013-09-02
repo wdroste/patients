@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="bootstrap">
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
+    <g:set var="entityName" value="${message(code: 'user.label')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -31,21 +31,15 @@
     </div>
 
     <div class="span9">
-
-        <div class="page-header">
-            <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-        </div>
-
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
-
         <table class="table table-striped">
             <thead>
             <tr>
-                <g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}"/>
-                <g:sortableColumn property="fullName"title="${message(code: 'user.fullName.label', default: 'Full Name')}"/>
-                <th></th>
+                <g:sortableColumn property="email" title="${message(code: 'user.email.label')}"/>
+                <g:sortableColumn property="fullName" title="${message(code: 'user.fullName.label')}"/>
+                <th><g:message code="default.actions.label"/></th>
             </tr>
             </thead>
             <tbody>
@@ -54,7 +48,9 @@
                     <td>${fieldValue(bean: userInstance, field: "email")}</td>
                     <td>${fieldValue(bean: userInstance, field: "fullName")}</td>
                     <td class="link">
-                        <g:link action="show" id="${userInstance.id}" class="btn btn-small">Show &raquo;</g:link>
+                        <g:link action="edit" id="${userInstance.id}" class="btn btn-small">
+                            <g:message code="default.action.edit.label"/>
+                        </g:link>
                     </td>
                 </tr>
             </g:each>

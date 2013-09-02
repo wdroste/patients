@@ -1,5 +1,5 @@
-<%@ page import="org.sacredheart.report.VisitReport" %>
 <%@ page import="org.sacredheart.Patient" %>
+<%@ page import="org.sacredheart.report.VisitReport" %>
 
 
 <f:field bean="visitReportInstance" property="name" required=""/>
@@ -10,9 +10,9 @@
 
     <div class="controls">
         <g:select name="zipCodes"
+                  multiple="true"
                   from="${zipcodes}"
-                  value="${visitReportInstance.zipCodes}"
-                  multiple="true"/>
+                  value="${visitReportInstance.zipCodes}"/>
     </div>
 </div>
 
@@ -38,7 +38,6 @@
     <div class="controls">
         <g:select name="visitType"
                   multiple="true"
-                  noSelection="[null: '-- Any Type --']"
                   value="${visitReportInstance.visitTypes}"
                   valueMessagePrefix="patientVisit.visitType.select"
                   from="${org.sacredheart.VisitType.values()*.name()}"/>
@@ -66,9 +65,12 @@
     <label class="control-label" for="gender">
         <g:message code="patient.gender.label"/>
     </label>
+
     <div class="controls">
-        <g:select name="gender" value="${fieldValue}"
-                  noSelection="['':'']" valueMessagePrefix="patient.gender.select"
+        <g:select name="gender"
+                  multiple="true"
+                  value="${fieldValue}"
+                  valueMessagePrefix="patient.gender.select"
                   from="${org.sacredheart.Gender.values()*.name()}"/>
     </div>
 </div>
@@ -81,7 +83,6 @@
     <div class="controls">
         <g:select name="races"
                   multiple="true"
-                  noSelection="[null: '-- Any Selection --']"
                   value="${visitReportInstance.races}"
                   valueMessagePrefix="patient.race.select"
                   from="${org.sacredheart.Race.values()*.name()}"/>
@@ -96,7 +97,6 @@
     <div class="controls">
         <g:select name="languages"
                   multiple="true"
-                  noSelection="[null: '-- Any Selection --']"
                   value="${visitReportInstance.languages}"
                   valueMessagePrefix="patient.language.select"
                   from="${org.sacredheart.Language.values()*.name()}"/>
@@ -130,12 +130,12 @@
     <div class="controls">
         <g:select name="educations"
                   multiple="true"
-                  noSelection="[null: '-- Any Selection --']"
                   value="${visitReportInstance.educations}"
                   valueMessagePrefix="patient.education.select"
                   from="${org.sacredheart.Education.values()*.name()}"/>
     </div>
 </div>
+
 <div class="control-group">
     <label class="control-label" for="maritalStatuses">
         <g:message code="patient.maritalStatus.label"/>
@@ -144,21 +144,23 @@
     <div class="controls">
         <g:select name="maritalStatuses"
                   multiple="true"
-                  noSelection="[null: '-- Any Selection --']"
                   value="${visitReportInstance.maritalStatuses}"
                   valueMessagePrefix="patient.maritalStatus.select"
                   from="${org.sacredheart.MaritalStatus.values()*.name()}"/>
     </div>
 </div>
 
-<r:script>
-    $('#zipCodes').bootstrapDualListbox({
-        nonselectedlistlabel: 'Non-selected',
-        selectedlistlabel: 'Selected',
-        preserveselectiononmove: 'moved',
-        moveonselect: true
-    });
-</r:script>
+
+<g:if test="${false}">
+    <r:script>
+        $('#zipCodes').bootstrapDualListbox({
+            nonselectedlistlabel: 'Non-selected',
+            selectedlistlabel: 'Selected',
+            preserveselectiononmove: 'moved',
+            moveonselect: true
+        });
+    </r:script>
+</g:if>
 
 <g:if test="${counties}">
     <r:script>

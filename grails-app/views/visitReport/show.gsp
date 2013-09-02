@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="bootstrap">
-    <g:set var="entityName" value="${message(code: 'visitReport.label', default: 'VisitReport')}"/>
+    <g:set var="entityName" value="${message(code: 'visitReport.label')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 
@@ -17,13 +17,13 @@
                 <li>
                     <g:link class="list" action="list">
                         <i class="icon-list"></i>
-                        <g:message code="default.list.label" args="[entityName]"/>
+                        <g:message code="visitReport.list.label"/>
                     </g:link>
                 </li>
                 <li>
                     <g:link class="create" action="create">
                         <i class="icon-plus"></i>
-                        <g:message code="default.create.label" args="[entityName]"/>
+                        <g:message code="visitReport.create.label"/>
                     </g:link>
                 </li>
             </ul>
@@ -33,7 +33,7 @@
     <div class="span9">
 
         <div class="page-header">
-            <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+            <h1><g:message code="visitReport.show.header" args="[visitReportInstance.name]"/></h1>
         </div>
 
         <g:if test="${flash.message}">
@@ -51,9 +51,9 @@
                 <dd><g:formatBoolean boolean="${visitReportInstance?.citizen}"/></dd>
             </g:if>
 
-            <g:if test="${visitReportInstance?.education}">
+            <g:if test="${visitReportInstance?.educations}">
                 <dt><g:message code="visitReport.education.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="education"/></dd>
+                <dd><g:fieldValue bean="${visitReportInstance}" field="educations"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.familyIncomeRange}">
@@ -71,9 +71,9 @@
                 <dd><g:fieldValue bean="${visitReportInstance}" field="gender"/></dd>
             </g:if>
 
-            <g:if test="${visitReportInstance?.language}">
+            <g:if test="${visitReportInstance?.languages}">
                 <dt><g:message code="visitReport.language.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="language"/></dd>
+                <dd><g:fieldValue bean="${visitReportInstance}" field="languages"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.lastNamePattern}">
@@ -81,9 +81,9 @@
                 <dd><g:fieldValue bean="${visitReportInstance}" field="lastNamePattern"/></dd>
             </g:if>
 
-            <g:if test="${visitReportInstance?.maritalStatus}">
+            <g:if test="${visitReportInstance?.maritalStatuses}">
                 <dt><g:message code="visitReport.maritalStatus.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="maritalStatus"/></dd>
+                <dd><g:fieldValue bean="${visitReportInstance}" field="maritalStatuses"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.middleNamePattern}">
@@ -101,9 +101,9 @@
                 <dd><g:fieldValue bean="${visitReportInstance}" field="patientIdPattern"/></dd>
             </g:if>
 
-            <g:if test="${visitReportInstance?.race}">
+            <g:if test="${visitReportInstance?.races}">
                 <dt><g:message code="visitReport.race.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="race"/></dd>
+                <dd><g:fieldValue bean="${visitReportInstance}" field="races"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.veteran}">

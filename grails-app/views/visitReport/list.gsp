@@ -30,11 +30,6 @@
     </div>
 
     <div class="span9">
-
-        <div class="page-header">
-            <h1><g:message code="visitReport.list.label"/></h1>
-        </div>
-
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
@@ -45,7 +40,7 @@
                 <g:sortableColumn property="name" title="${message(code: 'visitReport.name.label')}"/>
                 <th class="header"><g:message code="visitReport.description.label"/></th>
                 <g:sortableColumn property="lastUpdated" title="${message(code: 'visitReport.lastUpdated.label')}"/>
-                <th></th>
+                <th><g:message code="default.actions.label"/></th>
             </tr>
             </thead>
             <tbody>
@@ -55,9 +50,9 @@
                     <td><f:display bean="${visitReportInstance}" property="description"/></td>
                     <td><f:display bean="${visitReportInstance}" property="lastUpdated"/></td>
                     <td class="link">
-                        <g:link action="show" id="${visitReportInstance.id}" class="btn btn-small">Show &raquo;</g:link>
-                    </td>
-                    <td class="link">
+                        <g:link action="edit" id="${visitReportInstance.id}" class="btn btn-small">
+                            <g:message code="default.action.edit.label"/>
+                        </g:link>
                         <g:link action="setup" id="${visitReportInstance.id}" class="btn btn-small">Run &raquo;</g:link>
                     </td>
                 </tr>

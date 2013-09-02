@@ -16,13 +16,13 @@
 						<li>
 							<g:link class="list" action="list">
 								<i class="icon-list"></i>
-								<g:message code="default.list.label" args="[entityName]" />
+                                <g:message code="visitReport.list.label"/>
 							</g:link>
 						</li>
 						<li class="active">
 							<g:link class="create" action="create">
 								<i class="icon-plus icon-white"></i>
-								<g:message code="default.create.label" args="[entityName]" />
+                                <g:message code="visitReport.create.label"/>
 							</g:link>
 						</li>
 					</ul>
@@ -32,7 +32,7 @@
 			<div class="span9">
 
 				<div class="page-header">
-					<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+					<h1><g:message code="visitReport.create.label"/></h1>
 				</div>
 
 				<g:if test="${flash.message}">

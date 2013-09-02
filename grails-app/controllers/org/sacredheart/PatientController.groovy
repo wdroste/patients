@@ -9,7 +9,7 @@ class PatientController {
 
     def list() {
         params.offset = params.int('offset') ?: 0
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 10, 1000)
         patientService.list(params)
     }
 

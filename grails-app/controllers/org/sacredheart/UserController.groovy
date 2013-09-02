@@ -11,17 +11,26 @@ class UserController {
                 [userInstance: new User(params)]
                 break
             case 'POST':
+
+                def userInstance = new User(params)
                 if (params.password != params.confirmPassword) {
-                    userInstance.errors.rejectValue(
-                            'password',
+                    userInstance.errors.reject(
                             'user.passwordMismatch',
                             [message(code: 'user.label')] as Object[],
-                            "Passwords do not match.")
+                            'Passwords do not match.')
                     render view: 'create', model: [userInstance: userInstance]
                     return
                 }
 
-                def userInstance = new User(params)
+                if (params.password == '********') {
+                    userInstance.errors.reject(
+                            'user.passwordNotProvided',
+                            [message(code: 'user.label')] as Object[],
+                            'Please fill in the password and confirm password fields.')
+                    render view: 'create', model: [userInstance: userInstance]
+                    return
+                }
+
                 userInstance.passwordHash = new Sha256Hash(params.password).toHex()
                 if (!userInstance.save(flush: true)) {
                     render view: 'create', model: ['userInstance': userInstance]
@@ -37,17 +46,16 @@ class UserController {
         switch (request.method) {
             case 'POST':
                 if (params.password != params.confirmPassword) {
-                    userInstance.errors.rejectValue(
-                            'password',
+                    userInstance.errors.reject(
                             'user.passwordMismatch',
                             [message(code: 'user.label')] as Object[],
-                            "Passwords do not match.")
+                            'Passwords do not match.')
                     render view: 'edit', model: [userInstance: userInstance]
                     return
                 }
 
                 def userInstance = User.get(params.id)
-                if (params.password == params.confirmPassword && params.password != '********') {
+                if (params.password != '********') {
                     userInstance.passwordHash = new Sha256Hash(params.password).toHex()
                 }
 
@@ -88,7 +96,5 @@ class UserController {
                 redirect action: 'show', id: userInstance.id
                 break
         }
-
     }
-
 }

@@ -1,0 +1,1 @@
+<g:formatDate type="date" style="MEDIUM" value="${value}"/>
