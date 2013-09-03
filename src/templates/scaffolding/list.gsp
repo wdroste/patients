@@ -32,10 +32,6 @@
 
 			<div class="span9">
 				
-				<div class="page-header">
-					<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-				</div>
-
 				<g:if test="\${flash.message}">
 				<bootstrap:alert class="alert-info">\${flash.message}</bootstrap:alert>
 				</g:if>
@@ -50,9 +46,9 @@
 							props.eachWithIndex { p, i ->
 								if (i < 6) {
 									if (p.isAssociation()) { %>
-							<th class="header"><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></th>
+							<th class="header"><g:message code="${domainClass.propertyName}.${p.name}.label" /></th>
 						<%      } else { %>
-							<g:sortableColumn property="${p.name}" title="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}" />
+							<g:sortableColumn property="${p.name}" title="\${message(code: '${domainClass.propertyName}.${p.name}.label')}" />
 						<%  }   }   } %>
 							<th></th>
 						</tr>

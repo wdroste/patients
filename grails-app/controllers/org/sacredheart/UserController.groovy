@@ -1,6 +1,7 @@
 package org.sacredheart
 
 import org.apache.shiro.crypto.hash.Sha256Hash
+import org.springframework.dao.DataIntegrityViolationException
 
 class UserController {
     static scaffold = true
@@ -36,42 +37,37 @@ class UserController {
                     render view: 'create', model: ['userInstance': userInstance]
                     return
                 }
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label'), userInstance.id])
-                redirect action: 'show', id: userInstance.id
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label'), userInstance.fullName])
+                redirect action: 'list'
                 break
         }
     }
 
-    def update() {
+    def edit() {
         switch (request.method) {
+            case 'GET':
+                def userInstance = User.get(params.id)
+                if (!userInstance) {
+                    flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label'), params.id])
+                    redirect action: 'list'
+                    return
+                }
+                [userInstance: userInstance]
+                break
             case 'POST':
+                def userInstance = User.get(params.id)
+                if (!userInstance) {
+                    flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
+                    redirect action: 'list'
+                    return
+                }
+
                 if (params.password != params.confirmPassword) {
                     userInstance.errors.reject(
                             'user.passwordMismatch',
                             [message(code: 'user.label')] as Object[],
                             'Passwords do not match.')
                     render view: 'edit', model: [userInstance: userInstance]
-                    return
-                }
-
-                def userInstance = User.get(params.id)
-                if (params.password != '********') {
-                    userInstance.passwordHash = new Sha256Hash(params.password).toHex()
-                }
-
-                if (!userInstance) {
-                    flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label'), params.id])
-                    redirect action: 'list'
-                    return
-                }
-
-                [userInstance: userInstance]
-                break
-            case 'GET':
-                def userInstance = User.get(params.id)
-                if (!userInstance) {
-                    flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
-                    redirect action: 'list'
                     return
                 }
 
@@ -87,14 +83,37 @@ class UserController {
                 }
                 userInstance.properties = params
 
+                if (params.password != '********') {
+                    userInstance.passwordHash = new Sha256Hash(params.password).toHex()
+                }
+
                 if (!userInstance.save(flush: true)) {
                     render view: 'edit', model: [userInstance: userInstance]
                     return
                 }
 
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label'), userInstance.id])
-                redirect action: 'show', id: userInstance.id
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label'), userInstance.fullName])
+                redirect action: 'list'
                 break
+        }
+    }
+
+    def delete() {
+        def userInstance = User.get(params.id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label'), params.id])
+            redirect action: 'list'
+            return
+        }
+
+        try {
+            userInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label'), userInstance.fullName])
+            redirect action: 'list'
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label'), params.id])
+            redirect action: 'show', id: params.id
         }
     }
 }

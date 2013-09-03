@@ -49,7 +49,13 @@
                     <td>${fieldValue(bean: userInstance, field: "fullName")}</td>
                     <td class="link">
                         <g:link action="edit" id="${userInstance.id}" class="btn btn-small">
+                            <i class="icon-edit"></i>
                             <g:message code="default.action.edit.label"/>
+                        </g:link>
+                        <g:link action="delete" id="${userInstance.id}" class="btn btn-small btn-danger"
+                                onclick="window.confirm('${g.message(code:'default.confirmation')}')">
+                            <i class="icon-trash icon-white"></i>
+                            <g:message code="default.action.delete.label"/>
                         </g:link>
                     </td>
                 </tr>
