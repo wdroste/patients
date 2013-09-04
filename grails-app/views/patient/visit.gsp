@@ -3,31 +3,13 @@
 <html>
 <head>
     <meta name="layout" content="bootstrap">
-    <g:set var="entityName" value="${message(code: 'patient.label')}" />
+    <g:set var="entityName" value="${message(code: 'patientVisit.label')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 <body>
 <div class="row-fluid">
 
-    <div class="span3">
-        <div class="well">
-            <ul class="nav nav-list">
-                <li class="nav-header">${entityName}</li>
-                <li>
-                    <g:link class="list" action="list">
-                        <i class="icon-list"></i>
-                        <g:message code="default.list.label" args="[entityName]" />
-                    </g:link>
-                </li>
-                <li class="active">
-                    <g:link class="create" action="create">
-                        <i class="icon-plus icon-white"></i>
-                        <g:message code="default.create.label" args="[entityName]" />
-                    </g:link>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <g:render template="nav"/>
 
     <div class="span9">
 
@@ -54,6 +36,21 @@
                 <fieldset>
                     <f:field bean="${patientVisitInstance}" property="typeOfVisit"/>
                     <f:field bean="${patientVisitInstance}" property="dateOfVisit"/>
+
+                    <div class="input-append date" id="dp3" data-date-format="mm/dd/yyyy">
+                        <input class="span2" size="16" type="text" value="12/02/2013">
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <r:script>
+                        $('#dp3').datepicker().on('changeDate', function(e){
+                            var y = e.date.getFullYear(),
+                                    _m = e.date.getMonth() + 1,
+                                    m = (_m > 9 ? _m : '0'+_m),
+                                    _d = e.date.getDate(),
+                                    d = (_d > 9 ? _d : '0'+_d);
+                            $(this).text(y + '-' + m + '-' + d);
+                        });
+                    </r:script>
                     
                     <g:field type="hidden" name="patient.id" value="${patientVisitInstance.patient.id}"/>
 

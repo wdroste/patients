@@ -39,21 +39,11 @@
 <!-- Jumbotron -->
 <div class="jumbotron">
     <h1>Sacred Heart</h1>
-
     <h1>Community Clinic</h1>
-
     <p class="lead">SHCC is a FREE "Walk In" Clinic serving the uninsured and underinsured living in Round Rock,TX.
     Our Goal is to be God's hands and feet in our community by taking care of his children. SHCC is staffed by volunteers
     from the community.</p>
     <a class="btn btn-large btn-success" href="http://www.sacredheartclinic.org/">More information</a>
 </div>
-
-<hr>
-
-<a href="https://www.positiveSSL.com"
-   style="font-family: arial; font-size: 10px; color: #212121; text-decoration: none;"><img
-        src="https://www.positivessl.com/images-new/PossitiveSSL_tl_trans.gif"
-        alt="Positve SSL on a transparent background" title="Positve SSL on a transparent background" border="0"/></a>
-
 </body>
 </html>

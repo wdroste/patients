@@ -37,20 +37,44 @@ class PatientController {
                 redirect action: 'list'
                 break
         }
-
     }
 
-    /**
-     * TODO:
-     */
-    def patientIdLookup() {
-        println "Parameters: ${params}"
-        withFormat {
-            json {
-                def data = ['A', 'B', 'C'] as JSON
-                render data
-            }
+    def uploadProgress() {
+        String transactionId = params.get('id')
+        def results = patientService.progress(transactionId).collect { map ->
+            def msg = (map.success) ?
+                g.message(code:'patient.upload.success', args:[map.patientId] as Object[]) :
+                g.message(code:'patient.upload.failure', args:[map.patientId, map.message] as Object[])
+            ['success':map.success, 'message':msg]
         }
+        render (results as JSON)
+    }
+
+    def upload() {
+        switch (request.method) {
+            case 'POST':
+                // check the parameter
+                def f = request.getFile('upload_csv')
+                if (f.empty) {
+                    flash.message = 'File cannot be empty'
+                    return [:]
+                }
+
+                // upload the file..
+                def tmpFile = File.createTempFile("upload_csv-", ".csv")
+                f.transferTo(tmpFile)
+                try {
+                    // send back a transaction ID for progress reports..
+                    ['transactionId': patientService.processFile(tmpFile)]
+                } catch (ex) {
+                    flash.message = ex.message
+                }
+                break
+            default:
+                [:]
+                break
+        }
+
     }
 
 }

@@ -43,6 +43,7 @@ grails.project.dependency.resolution = {
 
         runtime 'mysql:mysql-connector-java:5.1.22'
         runtime 'net.sf.supercsv:super-csv:2.1.0'
+        runtime 'com.google.guava:guava:14.0.1'
     }
 
     plugins {

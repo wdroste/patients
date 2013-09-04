@@ -22,12 +22,18 @@ class BootStrap {
         }
 
         // load sacred heart data..
-        try {
-            new File("/tmp/data.csv").withReader { rdr ->
-                patientService.importCSVData(rdr)
+        Thread.start {
+            try {
+                new File("/tmp/data.csv").withReader { rdr ->
+                    patientService.importCSVData(rdr) { success, patientId, message ->
+                        if (!success) {
+                            log.error("Failed to process patient ${patientId}: ${message}")
+                        }
+                    }
+                }
+            } catch (IOException ex) {
+                log.warn("Failed to load initialization data.")
             }
-        } catch (IOException ex) {
-            log.warn("Failed to load initialization data.")
         }
     }
 
