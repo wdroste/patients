@@ -1,74 +1,57 @@
-
 <%@ page import="org.sacredheart.PatientVisit" %>
 <!doctype html>
 <html>
-	<head>
-		<meta name="layout" content="bootstrap">
-		<g:set var="entityName" value="${message(code: 'patientVisit.label', default: 'Patient Visits')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<div class="row-fluid">
-			
-			<div class="span3">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li class="nav-header">Patient Visits</li>
-						<li class="active">
-							<g:link class="list" action="list">
-								<i class="icon-list icon-white"></i>
-								List Patient Visits
-							</g:link>
-						</li>
-						<li>
-							<g:link class="create" action="create">
-								<i class="icon-plus"></i>
-								Create Patient Visit
-							</g:link>
-						</li>
-					</ul>
-				</div>
-			</div>
+<head>
+    <meta name="layout" content="bootstrap">
+    <g:set var="entityName" value="${message(code: 'patientVisit.label', default: 'Patient Visits')}"/>
+    <title><g:message code="default.list.label" args="[entityName]"/></title>
+</head>
 
-			<div class="span9">
+<body>
+<div class="row-fluid">
+    <g:render template="nav"/>
 
-                <!--
-				<div class="page-header">
-					<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-				</div>
-				-->
+    <div class="span9">
+        <g:if test="${flash.message}">
+            <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
+        </g:if>
 
-				<g:if test="${flash.message}">
-				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
-				</g:if>
-				
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}" />
-							<g:sortableColumn property="patientId" title="${message(code: 'patientVisit.patientId.label')}" />
-							<g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}" />
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<g:each in="${patientVisitInstanceList}" var="patientVisitInstance">
-						<tr>
-							<td><g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}" /></td>
-							<td>${fieldValue(bean: patientVisitInstance, field: "patient.patientId")}</td>
-							<td>${fieldValue(bean: patientVisitInstance, field: "typeOfVisit")}</td>
-							<td class="link">
-								<g:link action="show" id="${patientVisitInstance.id}" class="btn btn-small">Show &raquo;</g:link>
-							</td>
-						</tr>
-					</g:each>
-					</tbody>
-				</table>
-				<div class="pagination">
-					<bootstrap:paginate total="${patientVisitInstanceTotal}" />
-				</div>
-			</div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}"/>
+                <g:sortableColumn property="patientId" title="${message(code: 'patientVisit.patientId.label')}"/>
+                <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}"/>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:each in="${patientVisitInstanceList}" var="patientVisitInstance">
+                <tr>
+                    <td><g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}"/></td>
+                    <td><f:display bean="${patientVisitInstance.patient}" property="patientId"/></td>
+                    <td><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></td>
+                    <td class="link">
+                        <g:link action="edit" id="${patientVisitInstance.id}" class="btn btn-small">
+                            <i class="icon-edit"></i>
+                            <g:message code="default.action.edit.label"/>
+                        </g:link>
+                        <g:link action="delete" id="${patientVisitInstance.id}" class="btn btn-small btn-danger"
+                                onclick="window.confirm('${g.message(code: 'default.confirmation')}')">
+                            <i class="icon-trash icon-white"></i>
+                            <g:message code="default.action.delete.label"/>
+                        </g:link>
+                    </td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
 
-		</div>
-	</body>
+        <div class="pagination">
+            <bootstrap:paginate total="${patientVisitInstanceTotal}"/>
+        </div>
+    </div>
+
+</div>
+</body>
 </html>

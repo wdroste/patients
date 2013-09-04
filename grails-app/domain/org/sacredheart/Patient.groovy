@@ -22,6 +22,10 @@ class Patient {
     Education education
     MaritalStatus maritalStatus
 
+    String getFullName() { "${lastName}, ${firstName}"}
+
+    static transients = ['fullName']
+
     static hasMany = [visits: PatientVisit]
 
     static constraints = {

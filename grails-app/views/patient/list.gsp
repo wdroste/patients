@@ -43,9 +43,16 @@
                     <td><f:display bean="${patientInstance}" property="dateOfBirth"/></td>
                     <td><f:display bean="${patientInstance}" property="lastName"/></td>
                     <td><f:display bean="${patientInstance}" property="firstName"/></td>
-                    <td class="link">
-                        <g:link action="show" id="${patientInstance.id}" class="btn btn-small">Show &raquo;</g:link>
-                        <g:link action="visit" id="${patientInstance.id}" class="btn btn-small">Visit &raquo;</g:link>
+                    <td>
+                        <g:link action="visit" id="${patientInstance.id}" class="btn btn-small btn-primary">
+                            <i class="icon-plus icon-white"></i>
+                            <g:message code="patient.visit.label"/>
+                        </g:link>
+
+                        <g:link action="edit" id="${patientInstance.id}" class="btn btn-small">
+                            <i class="icon-edit"></i>
+                            <g:message code="default.action.edit.label"/>
+                        </g:link>
                     </td>
                 </tr>
             </g:each>
