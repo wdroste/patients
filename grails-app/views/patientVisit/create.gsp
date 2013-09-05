@@ -45,6 +45,8 @@
                                    id="search" autocomplete="off" style="width: 400px;">
                         </div>
                     </div>
+                    <g:hiddenField name="patient.id" value=""/>
+
                     <f:field bean="patientVisitInstance" property="dateOfVisit"/>
                     <f:field bean="patientVisitInstance" property="typeOfVisit"/>
                     <div class="form-actions">
@@ -82,7 +84,8 @@
             process(patients);
         },
         updater: function (item) {
-            selectedState = map[item].id;
+            var id = map[item].id
+            $('input[name="patient.id"]').attr('value',id);
             return item;
         },
         matcher: function (item) {

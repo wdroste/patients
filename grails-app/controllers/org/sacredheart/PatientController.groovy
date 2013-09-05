@@ -61,7 +61,7 @@ class PatientController {
                 }
 
                 // upload the file..
-                def tmpFile = File.createTempFile("upload_csv-", ".csv")
+                def tmpFile = File.createTempFile("patient_upload_csv-", ".csv")
                 f.transferTo(tmpFile)
                 try {
                     // send back a transaction ID for progress reports..
@@ -74,7 +74,6 @@ class PatientController {
                 [:]
                 break
         }
-
     }
 
 }

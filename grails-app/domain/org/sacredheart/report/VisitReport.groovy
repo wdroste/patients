@@ -43,7 +43,7 @@ class VisitReport {
 
     static constraints = {
         name unique: true
-        description maxSize: 512
+        description maxSize: 1024, widget:'textarea'
         patientIdPattern nullable: true
         firstNamePattern nullable: true
         middleNamePattern nullable: true
