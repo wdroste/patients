@@ -25,7 +25,7 @@ class ${className}Controller {
 	            return
 	        }
 
-			flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
+			flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label'), ${propertyName}.id])
 	        redirect action: 'show', id: ${propertyName}.id
 			break
 		}
@@ -34,7 +34,7 @@ class ${className}Controller {
     def show() {
         def ${propertyName} = ${className}.get(params.id)
         if (!${propertyName}) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+			flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label'), params.id])
             redirect action: 'list'
             return
         }
@@ -47,7 +47,7 @@ class ${className}Controller {
 		case 'GET':
 	        def ${propertyName} = ${className}.get(params.id)
 	        if (!${propertyName}) {
-	            flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+	            flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label'), params.id])
 	            redirect action: 'list'
 	            return
 	        }
@@ -57,14 +57,14 @@ class ${className}Controller {
 		case 'POST':
 	        def ${propertyName} = ${className}.get(params.id)
 	        if (!${propertyName}) {
-	            flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+	            flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label'), params.id])
 	            redirect action: 'list'
 	            return
 	        }
 
 	        if (params.version) {
 	            def version = params.version.toLong()
-	            if (${propertyName}.version > version) {<% def lowerCaseName = grails.util.GrailsNameUtils.getPropertyName(className) %>
+	            if (${propertyName}.version > version) {
 	                ${propertyName}.errors.rejectValue('version', 'default.optimistic.locking.failure',
 	                          [message(code: '${domainClass.propertyName}.label', default: '${className}')] as Object[],
 	                          "Another user has updated this ${className} while you were editing")
@@ -80,7 +80,7 @@ class ${className}Controller {
 	            return
 	        }
 
-			flash.message = message(code: 'default.updated.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
+			flash.message = message(code: 'default.updated.message', args: [message(code: '${domainClass.propertyName}.label'), ${propertyName}.id])
 	        redirect action: 'show', id: ${propertyName}.id
 			break
 		}
@@ -89,18 +89,18 @@ class ${className}Controller {
     def delete() {
         def ${propertyName} = ${className}.get(params.id)
         if (!${propertyName}) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+			flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label'), params.id])
             redirect action: 'list'
             return
         }
 
         try {
             ${propertyName}.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+			flash.message = message(code: 'default.deleted.message', args: [message(code: '${domainClass.propertyName}.label'), params.id])
             redirect action: 'list'
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: '${domainClass.propertyName}.label'), params.id])
             redirect action: 'show', id: params.id
         }
     }

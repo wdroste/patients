@@ -1,5 +1,6 @@
 package org.sacredheart.medkind
 
+import org.apache.commons.lang.StringUtils
 import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
 import org.sacredheart.VisitType
@@ -29,17 +30,27 @@ class MedkindPatientVisitParser {
             List<String> list;
             while ((list = listReader.read(processors)) != null) {
                 // create a new patient visit..
-                String patientId = list.get(0)
                 PatientVisit patientVisit = new PatientVisit()
-                patientVisit.patient = Patient.findByPatientId(patientId)
                 patientVisit.dateOfVisit = list.get(4)
 
-                // work the type of visit..
-                patientVisit.typeOfVisit = list.get(5)
+                // find the patient
+                String patientId = list.get(0)
+                if (StringUtils.isNotBlank(patientId)) {
+                    patientVisit.patient = Patient.findByPatientId(patientId)
+                    if (patientVisit.patient) {
+                        // work the type of visit..
+                        patientVisit.typeOfVisit = list.get(5)
+                        c.call(patientVisit)
+                    } else {
+                        println "Invalid Patient ID: ${listReader.lineNumber}"
+                    }
+                } else {
+                    println "Found error: ${listReader.lineNumber}"
+                }
 
-                // check to make services..
-                c.call(patientVisit)
             }
+
+            println "Unique List of Visit Types: ${ParseTypeOfVisit.unique}"
         }
         finally {
             if (listReader != null) {
@@ -49,26 +60,28 @@ class MedkindPatientVisitParser {
     }
 
     def getProcessors() {
+        // PatientID,LastName,FirstName,MiddleName,VisitDate,Category,
         [
             new NotNull(), // 0 PatientID
             new NotNull(), // 1 lastName
             new NotNull(), // 2 firstName
             new Optional(), // 3 middleName
-            new Optional(new ParseDate("yyyy/MM/dd")), // 4 visit date
-            new NotNull(), // 5 category
-            new Optional(), // 6 reason
-            new Optional(), // 7 service
+            new Optional(new ParseDate("MM/dd/yyyy")), // 4 visit date
+            new ParseTypeOfVisit(), // 5 category
+            new Optional()
         ] as CellProcessor[]
     }
 
     static class ParseTypeOfVisit implements CellProcessor {
+        static Set<String> unique = [] as Set
         Object execute(Object value, CsvContext context) {
+            unique.add(value)
             switch (value.toString().toUpperCase()) {
                 case 'WOMEN CANCER SCREENING':
                     return VisitType.CancerScreening
                 case 'CHRONIC CARE CLINIC':
                     return VisitType.ChronicCare
-                case '':
+                case 'DM EDUCATION WORKSHOP':
                     return VisitType.DiabeticEducation
                 case 'PHONE CONSULT WITH MD':
                     return VisitType.DrPhoneConsult
@@ -77,15 +90,17 @@ class MedkindPatientVisitParser {
                 case 'NURSE CONSULT':
                     return VisitType.NursesVisit
                 case '':
-                    return VisitType.Other
-                case '':
                     return VisitType.OtherEducation
                 case '':
                     return VisitType.RegistrationScreening
-                case '':
+                case 'Walk In Clinic':
                     return VisitType.WalkIn
+                case 'FLU SHOT':
+                    return VisitType.FluShot
+                case 'Other':
+                default:
+                    return VisitType.Other
             }
-            throw new IllegalArgumentException("Unknown value ${value}")
         }
     }
 }

@@ -13,14 +13,15 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+//            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 
-            //driverClassName = "com.mysql.jdbc.Driver"
-            //dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-            //url = "jdbc:mysql://localhost/shcc?useUnicode=yes&characterEncoding=UTF-8"
-            //username = "root"
-            //password = ""
+                dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            driverClassName = "com.mysql.jdbc.Driver"
+            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+            url = "jdbc:mysql://localhost/shcc?useUnicode=yes&characterEncoding=UTF-8"
+            username = "root"
+            password = ""
         }
     }
     test {

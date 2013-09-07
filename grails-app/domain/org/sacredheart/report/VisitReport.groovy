@@ -31,18 +31,20 @@ class VisitReport {
     SizeRange numberOfFamilyRange
     IncomeRange familyIncomeRange
 
-    List<Race> races = []
-    List<String> counties = []
-    List<String> zipCodes = []
-    List<Language> languages = []
-    List<VisitType> visitTypes = []
-    List<Education> educations = []
-    List<MaritalStatus> maritalStatuses = []
-
     Date lastUpdated
 
+    static hasMany = [
+            races: String,
+            countries:String,
+            zipCodes: String,
+            languages: String,
+            visitTypes: String,
+            educations: String,
+            maritalStatuses: String
+    ]
+
     static constraints = {
-        name unique: true
+        name unique: true, blank: false
         description maxSize: 1024, widget:'textarea'
         patientIdPattern nullable: true
         firstNamePattern nullable: true

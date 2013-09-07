@@ -10,9 +10,9 @@ class VisitReportController {
         switch (request.method) {
             case 'GET':
                 [
-                        visitReportInstance: new VisitReport(params),
-                        zipcodes: patientService.allZipCodes,
-                        countries: patientService.allCounties
+                    visitReportInstance: new VisitReport(params),
+                    zipcodes: patientService.allZipCodes,
+                    countries: patientService.allCounties
                 ]
                 break
             case 'POST':
@@ -57,9 +57,9 @@ class VisitReportController {
                 if (params.version) {
                     def version = params.version.toLong()
                     if (visitReportInstance.version > version) {
-                            visitReportInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
-                                    [message(code: 'visitReport.label', default: 'VisitReport')] as Object[],
-                                    "Another user has updated this VisitReport while you were editing")
+                        visitReportInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
+                                [message(code: 'visitReport.label', default: 'VisitReport')] as Object[],
+                                "Another user has updated this VisitReport while you were editing")
                         render view: 'edit', model: [visitReportInstance: visitReportInstance]
                         return
                     }
@@ -77,7 +77,6 @@ class VisitReportController {
                 break
         }
     }
-
 
     /**
      * Setup the dialog.

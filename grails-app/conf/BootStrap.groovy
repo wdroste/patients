@@ -4,6 +4,8 @@ import org.sacredheart.User
 class BootStrap {
 
     def patientService
+    def patientVisitService
+    def sessionFactory
 
     def init = { servletContext ->
         def password = 'heart'
@@ -24,15 +26,23 @@ class BootStrap {
         // load sacred heart data..
         Thread.start {
             try {
-                new File("/tmp/data.csv").withReader { rdr ->
+                new File("/tmp/patients.csv").withReader { rdr ->
                     patientService.importCSVData(rdr) { success, patientId, message ->
                         if (!success) {
                             log.error("Failed to process patient ${patientId}: ${message}")
                         }
                     }
                 }
+
+                new File("/tmp/patient_visits.csv").withReader { rdr ->
+                    patientVisitService.importCSVData(rdr) { success, patientId, message ->
+                        if (!success) {
+                            log.error("Failed to import patient visits.")
+                        }
+                    }
+                }
             } catch (IOException ex) {
-                log.warn("Failed to load initialization data.")
+                log.error("Failed to load initialization data.")
             }
         }
     }

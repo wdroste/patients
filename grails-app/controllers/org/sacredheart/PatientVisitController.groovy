@@ -1,7 +1,22 @@
 package org.sacredheart
 
+import grails.converters.JSON
+
 class PatientVisitController {
     static scaffold = true
+
+    def patientVisitService
+
+    def uploadProgress() {
+        String transactionId = params.get('id')
+        def results = patientVisitService.progress(transactionId).collect { map ->
+            def msg = (map.success) ?
+                g.message(code:'patientVisit.upload.success', args:[map.patientId] as Object[]) :
+                g.message(code:'patientVisit.upload.failure', args:[map.patientId, map.message] as Object[])
+            ['success':map.success, 'message':msg]
+        }
+        render (results as JSON)
+    }
 
     def upload() {
         switch (request.method) {
@@ -18,7 +33,7 @@ class PatientVisitController {
                 f.transferTo(tmpFile)
                 try {
                     // send back a transaction ID for progress reports..
-                    ['transactionId': patientService.processFile(tmpFile)]
+                    ['transactionId': patientVisitService.processFile(tmpFile)]
                 } catch (ex) {
                     flash.message = ex.message
                 }
@@ -27,7 +42,5 @@ class PatientVisitController {
                 [:]
                 break
         }
-
     }
-
 }

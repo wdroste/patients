@@ -1,6 +1,6 @@
 package org.sacredheart
 
-class Patient {
+class Patient implements Serializable {
 
     String patientId
     String firstName
@@ -44,5 +44,12 @@ class Patient {
         zipcode nullable: true
         citizen nullable: true
         veteran nullable: true
+    }
+
+    static mapping = {
+        lastName index: 'last_name_idx'
+        firstName index: 'first_name_idx'
+        patientId index: 'patient_id_idx'
+        dateOfBirth index: 'date_of_birth_idx'
     }
 }

@@ -38,8 +38,6 @@ class PatientService {
         }
     }
 
-
-
     def list(params) {
         def ignoreCaseLike = [
             lastName: params.lastName,
@@ -47,7 +45,6 @@ class PatientService {
         ]
         def c = Patient.createCriteria()
         def results = c.list(max: params.max, offset: params.offset) {
-            cache(true)
             ignoreCaseLike.each { k, v ->
                 if (StringUtils.isNotBlank(v)) {
                     ilike(k, "%${v}%")
