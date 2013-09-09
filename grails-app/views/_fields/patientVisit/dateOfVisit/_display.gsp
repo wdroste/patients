@@ -1,0 +1,1 @@
+<g:formatDate date="${bean.dateOfVisit}" type="date" style="MEDIUM"/>

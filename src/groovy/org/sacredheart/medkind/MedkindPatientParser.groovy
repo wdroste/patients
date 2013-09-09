@@ -1,11 +1,9 @@
 package org.sacredheart.medkind
 
 import org.apache.commons.lang.BooleanUtils
-import org.sacredheart.Education
-import org.sacredheart.Gender
-import org.sacredheart.Language
+
 import org.sacredheart.Patient
-import org.sacredheart.Race
+
 import org.sacredheart.YesNo
 import org.supercsv.cellprocessor.ConvertNullTo
 import org.supercsv.cellprocessor.Optional
@@ -73,7 +71,13 @@ class MedkindPatientParser {
 
     static class ParseGender implements CellProcessor {
         Object execute(Object value, CsvContext context) {
-            Gender.valueOf(value)
+            switch (value.toString().toUpperCase()) {
+                case 'MALE':
+                    return 'Male'
+                case 'FEMALE':
+                    return 'Female'
+            }
+            null
         }
     }
 
@@ -81,15 +85,15 @@ class MedkindPatientParser {
         Object execute(Object value, CsvContext context) {
             switch (value.toString().toUpperCase()) {
                 case 'WHITE':
-                    return Race.White
+                    return 'White'
                 case 'BLACK':
-                    return Race.Black
+                    return 'Black'
                 case 'ASIAN':
-                    return Race.Asian
+                    return 'Asian'
                 case 'HISPANIC':
-                    return Race.Hispanic
+                    return 'Hispanic'
             }
-            Race.Other
+            'Other'
         }
     }
 
@@ -97,11 +101,11 @@ class MedkindPatientParser {
         Object execute(Object value, CsvContext context) {
             switch (value.toString().toUpperCase()) {
                 case 'ENGLISH':
-                    return Language.English
+                    return 'English'
                 case 'SPANISH':
-                    return Language.Spanish
+                    return 'Spanish'
             }
-            Language.Other
+            'Other'
         }
     }
 
@@ -109,23 +113,23 @@ class MedkindPatientParser {
         Object execute(Object value, CsvContext context) {
             switch (value.toString()) {
                 case 'None':
-                    return Education.None
+                    return 'None'
                 case 'Grade School':
-                    return Education.GradeSchool
+                    return 'GradeSchool'
                 case 'Some High School':
-                    return Education.SomeHighSchool
+                    return 'SomeHighSchool'
                 case 'GED':
-                    return Education.GED
+                    return 'GED'
                 case 'High School':
-                    return Education.HighSchoolDegree
+                    return 'HighSchoolDegree'
                 case 'Some College':
-                    return Education.SomeCollege
+                    return 'SomeCollege'
                 case 'College Degree':
-                    return Education.CollegeDegree
+                    return 'CollegeDegree'
                 case 'Some Post Graduate':
-                    return Education.SomePostGrad
+                    return 'SomePostGrad'
                 case 'Graduate Degree':
-                    return Education.PostGradDegree
+                    return 'PostGradDegree'
             }
             throw new IllegalArgumentException("Unknown value ${value}")
         }

@@ -41,6 +41,10 @@
         </g:if>
 
         <dl>
+            <g:if test="${visitReportInstance?.zipCodes}">
+                <dt><g:message code="visitReport.zipCodes.label"/></dt>
+                <dd><f:display bean="${visitReportInstance}" property="zipCodes"/></dd>
+            </g:if>
             <g:if test="${visitReportInstance?.ageRange}">
                 <dt><g:message code="visitReport.ageRange.label"/></dt>
                 <dd><f:display bean="${visitReportInstance}" property="ageRange"/></dd>
@@ -48,12 +52,12 @@
 
             <g:if test="${visitReportInstance?.citizen}">
                 <dt><g:message code="visitReport.citizen.label"/></dt>
-                <dd><g:formatBoolean boolean="${visitReportInstance?.citizen}"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="citizen"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.educations}">
                 <dt><g:message code="visitReport.education.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="educations"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="educations"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.familyIncomeRange}">
@@ -66,49 +70,49 @@
                 <dd><g:fieldValue bean="${visitReportInstance}" field="firstNamePattern"/></dd>
             </g:if>
 
-            <g:if test="${visitReportInstance?.gender}">
+            <g:if test="${visitReportInstance?.genders}">
                 <dt><g:message code="visitReport.gender.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="gender"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="genders"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.languages}">
                 <dt><g:message code="visitReport.language.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="languages"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="languages"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.lastNamePattern}">
                 <dt><g:message code="visitReport.lastNamePattern.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="lastNamePattern"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="lastNamePattern"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.maritalStatuses}">
                 <dt><g:message code="visitReport.maritalStatus.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="maritalStatuses"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="maritalStatuses"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.middleNamePattern}">
                 <dt><g:message code="visitReport.middleNamePattern.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="middleNamePattern"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="middleNamePattern"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.numberOfFamilyRange}">
                 <dt><g:message code="visitReport.numberOfFamilyRange.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="numberOfFamilyRange"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="numberOfFamilyRange"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.patientIdPattern}">
                 <dt><g:message code="visitReport.patientIdPattern.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="patientIdPattern"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="patientIdPattern"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.races}">
-                <dt><g:message code="visitReport.race.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="races"/></dd>
+                <dt><g:message code="patient.race.label"/></dt>
+                <dd><f:display bean="${visitReportInstance}" property="races"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.veteran}">
                 <dt><g:message code="visitReport.veteran.label"/></dt>
-                <dd><g:formatBoolean boolean="${visitReportInstance?.veteran}"/></dd>
+                <dd><f:display bean="${visitReportInstance}" property="veteran"/></dd>
             </g:if>
         </dl>
 

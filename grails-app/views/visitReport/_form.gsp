@@ -4,17 +4,9 @@
 
 <f:field bean="visitReportInstance" property="name" required=""/>
 <f:field bean="visitReportInstance" property="description"/>
+<f:field bean="visitReportInstance" property="zipCodes"/>
 
-<div class="control-group ">
-    <label class="control-label" for="zipCodes">ZIP Codes</label>
 
-    <div class="controls">
-        <g:select name="zipCodes"
-                  multiple="true"
-                  from="${zipcodes}"
-                  value="${visitReportInstance.zipCodes}"/>
-    </div>
-</div>
 
 <g:if test="${counties}">
     <div class="control-group ">
@@ -31,16 +23,16 @@
 
 
 <div class="control-group">
-    <label class="control-label" for="visitType">
+    <label class="control-label" for="visitTypes">
         <g:message code="patientVisit.visitType.label"/>
     </label>
 
     <div class="controls">
-        <g:select name="visitType"
+        <g:select name="visitTypes"
                   multiple="true"
                   value="${visitReportInstance.visitTypes}"
                   valueMessagePrefix="patientVisit.visitType.select"
-                  from="${org.sacredheart.VisitType.values()*.name()}"/>
+                  from="${org.sacredheart.PatientVisit.VISITTYPE}"/>
     </div>
 </div>
 
@@ -60,48 +52,14 @@
 
 <f:field bean="visitReportInstance" property="citizen"/>
 <f:field bean="visitReportInstance" property="veteran"/>
+<f:field bean="visitReportInstance" property="languages"/>
+<f:field bean="visitReportInstance" property="genders"/>
+<f:field bean="visitReportInstance" property="races"/>
 
-<div class="control-group">
-    <label class="control-label" for="gender">
-        <g:message code="patient.gender.label"/>
-    </label>
 
-    <div class="controls">
-        <g:select name="gender"
-                  multiple="true"
-                  value="${fieldValue}"
-                  valueMessagePrefix="patient.gender.select"
-                  from="${org.sacredheart.Gender.values()*.name()}"/>
-    </div>
-</div>
 
-<div class="control-group">
-    <label class="control-label" for="races">
-        <g:message code="patient.race.label"/>
-    </label>
 
-    <div class="controls">
-        <g:select name="races"
-                  multiple="true"
-                  value="${visitReportInstance.races}"
-                  valueMessagePrefix="patient.race.select"
-                  from="${org.sacredheart.Race.values()*.name()}"/>
-    </div>
-</div>
 
-<div class="control-group">
-    <label class="control-label" for="languages">
-        <g:message code="patient.language.label"/>
-    </label>
-
-    <div class="controls">
-        <g:select name="languages"
-                  multiple="true"
-                  value="${visitReportInstance.languages}"
-                  valueMessagePrefix="patient.language.select"
-                  from="${org.sacredheart.Language.values()*.name()}"/>
-    </div>
-</div>
 
 <div class="control-group ">
     <label class="control-label" for="numberOfFamilyRange">Number of Family</label>
@@ -132,7 +90,7 @@
                   multiple="true"
                   value="${visitReportInstance.educations}"
                   valueMessagePrefix="patient.education.select"
-                  from="${org.sacredheart.Education.values()*.name()}"/>
+                  from="${org.sacredheart.Patient.EDUCATION}"/>
     </div>
 </div>
 
@@ -146,7 +104,7 @@
                   multiple="true"
                   value="${visitReportInstance.maritalStatuses}"
                   valueMessagePrefix="patient.maritalStatus.select"
-                  from="${org.sacredheart.MaritalStatus.values()*.name()}"/>
+                  from="${org.sacredheart.Patient.MARITIALSTATUS}"/>
     </div>
 </div>
 

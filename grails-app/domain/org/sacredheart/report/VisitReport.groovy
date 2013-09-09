@@ -1,11 +1,6 @@
 package org.sacredheart.report
 
-import org.sacredheart.Education
-import org.sacredheart.Gender
-import org.sacredheart.Language
-import org.sacredheart.MaritalStatus
-import org.sacredheart.Race
-import org.sacredheart.VisitType
+
 import org.sacredheart.YesNo
 
 /**
@@ -25,8 +20,6 @@ class VisitReport {
 
     YesNo citizen
     YesNo veteran
-    Gender gender
-
 
     SizeRange numberOfFamilyRange
     IncomeRange familyIncomeRange
@@ -35,6 +28,7 @@ class VisitReport {
 
     static hasMany = [
             races: String,
+            genders: String,
             countries:String,
             zipCodes: String,
             languages: String,
@@ -53,7 +47,6 @@ class VisitReport {
 
         citizen nullable: true
         veteran nullable: true
-        gender nullable: true
         ageRange nullable: true
         familyIncomeRange nullable: true
         numberOfFamilyRange nullable: true

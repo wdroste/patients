@@ -138,8 +138,8 @@ class PatientService {
                     eq('veteran', vp.veteran)
                 }
 
-                if (vp.gender) {
-                    eq('gender', vp.gender)
+                if (vp.genders) {
+                    eq('gender', vp.genders)
                 }
 
                 if (vp.races) {

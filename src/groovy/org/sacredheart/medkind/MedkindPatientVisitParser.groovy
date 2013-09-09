@@ -3,7 +3,7 @@ package org.sacredheart.medkind
 import org.apache.commons.lang.StringUtils
 import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
-import org.sacredheart.VisitType
+
 import org.supercsv.cellprocessor.Optional
 import org.supercsv.cellprocessor.ParseDate
 import org.supercsv.cellprocessor.constraint.NotNull
@@ -19,7 +19,6 @@ class MedkindPatientVisitParser {
      * Reader each of the lines and send out patients..
      */
     def parse(Reader reader, Closure<PatientVisit> c) {
-
         ICsvListReader listReader = null
         try {
             listReader = new CsvListReader(reader, CsvPreference.STANDARD_PREFERENCE);
@@ -47,15 +46,11 @@ class MedkindPatientVisitParser {
                 } else {
                     println "Found error: ${listReader.lineNumber}"
                 }
-
             }
-
-            println "Unique List of Visit Types: ${ParseTypeOfVisit.unique}"
+            println "Missing Visit Types: ${ParseTypeOfVisit.missing}"
         }
         finally {
-            if (listReader != null) {
-                listReader.close();
-            }
+            listReader?.close();
         }
     }
 
@@ -73,33 +68,37 @@ class MedkindPatientVisitParser {
     }
 
     static class ParseTypeOfVisit implements CellProcessor {
-        static Set<String> unique = [] as Set
+        static Set<String> missing = [] as Set
         Object execute(Object value, CsvContext context) {
-            unique.add(value)
-            switch (value.toString().toUpperCase()) {
-                case 'WOMEN CANCER SCREENING':
-                    return VisitType.CancerScreening
-                case 'CHRONIC CARE CLINIC':
-                    return VisitType.ChronicCare
-                case 'DM EDUCATION WORKSHOP':
-                    return VisitType.DiabeticEducation
-                case 'PHONE CONSULT WITH MD':
-                    return VisitType.DrPhoneConsult
-                case 'LAB ONLY':
-                    return VisitType.Lab
-                case 'NURSE CONSULT':
-                    return VisitType.NursesVisit
+            switch (value.toString().toUpperCase().replace(' ','')) {
+                case 'WOMENCANCERSCREENING':
+                    return 'CancerScreening'
+                case 'CHRONICCARECLINIC':
+                case 'CHRONICCARECLINC':
+                case "CHRONICCARE/NP":
+                    return 'ChronicCare'
+                case 'DMEDUCATIONWORKSHOP':
+                    return 'DiabeticEducation'
+                case 'PHONECONSULTWITHMD':
+                    return 'DrPhoneConsult'
+                case 'LABONLY':
+                    return 'Lab'
+                case 'NURSECONSULT':
+                    return 'NursesVisit'
+                case 'WALKINCLINIC':
+                case 'SIMPLE':
+                    return 'WalkIn'
+                case 'FLUSHOT':
+                    return 'FluShot'
+                case 'OTHER':
+                    return 'Other'
                 case '':
-                    return VisitType.OtherEducation
+                    return 'OtherEducation'
                 case '':
-                    return VisitType.RegistrationScreening
-                case 'Walk In Clinic':
-                    return VisitType.WalkIn
-                case 'FLU SHOT':
-                    return VisitType.FluShot
-                case 'Other':
+                    return 'RegistrationScreening'
                 default:
-                    return VisitType.Other
+                    missing.add(value)
+                    return 'Other'
             }
         }
     }

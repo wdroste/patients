@@ -20,6 +20,17 @@
                 <input name="lastName" class="span5" type="text" placeholder="Last Name" value="${params.lastName}">
                 <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
             </g:form>
+
+            <g:if test="${false}">
+                <g:form method="get" action="list" class="form-inline">
+                    <label class="checkbox"><input type="checkbox"> Missing Veteran</label>
+                    <label class="checkbox"><input type="checkbox"> Missing Citizenship</label>
+                    <label class="checkbox"><input type="checkbox"> Missing Date of Birth</label>
+                    <label class="checkbox"><input type="checkbox"> Missing Race</label>
+                    <label class="checkbox"><input type="checkbox"> Missing Gender</label>
+                    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
+                </g:form>
+            </g:if>
         </div>
 
         <g:if test="${flash.message}">

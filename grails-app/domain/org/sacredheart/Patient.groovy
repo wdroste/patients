@@ -1,6 +1,18 @@
 package org.sacredheart
 
 class Patient implements Serializable {
+    static GENDER = ['Male', 'Female']
+
+    static LANGUAGE = ['English', 'Spanish', 'Other']
+
+    static RACE = ['White', 'Hispanic', 'Black', 'Asian', 'Other']
+
+    static EDUCATION = [
+            'None', 'GradeSchool', 'SomeHighSchool' ,'GED', 'HighSchoolDegree',
+            'SomeCollege', 'CollegeDegree', 'SomePostGrad', 'PostGradDegree']
+
+    static MARITIALSTATUS = [
+        'ChildUnder5yrs', 'Student', 'Single', 'Married', 'Separated', 'Divorced', 'Widowed' ]
 
     String patientId
     String firstName
@@ -12,15 +24,16 @@ class Patient implements Serializable {
     String county
     YesNo citizen
     YesNo veteran
-    Gender gender
-    Race race
-    Language language
 
     Integer yearlyFamilyIncome
     Integer numberOfFamily
 
-    Education education
-    MaritalStatus maritalStatus
+    // List objects
+    String race
+    String gender
+    String language
+    String education
+    String maritalStatus
 
     String getFullName() { "${lastName}, ${firstName}"}
 
