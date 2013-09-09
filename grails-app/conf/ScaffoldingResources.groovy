@@ -1,6 +1,7 @@
 modules = {
 	scaffolding {
 		dependsOn 'bootstrap'
+        resource url: 'css/main.css'
 		resource url: 'css/scaffolding.css'
         resource url: 'css/datepicker.css'
         resource url: 'css/bootstrap-duallistbox.css'

@@ -74,7 +74,7 @@ class PatientService {
 
     def run(long vpId, Date start, Date end) {
         VisitReport vp = VisitReport.get(vpId)
-        PatientVisit.withCriteria() {
+        def list = PatientVisit.withCriteria() {
 
             projections {
                 property('dateOfVisit', 'dateOfVisit')
@@ -92,7 +92,7 @@ class PatientService {
 
             // only visits of these types
             if (vp.visitTypes) {
-                inList('visitType', vp.visitTypes)
+                inList('typeOfVisit', vp.visitTypes)
             }
 
             // all the patient criteria
@@ -112,10 +112,6 @@ class PatientService {
                 if (StringUtils.isNotBlank(vp.lastNamePattern)) {
                     def propValue = vp.lastNamePattern.replace('*', '%')
                     ilike('lastName', propValue)
-                }
-
-                if (vp.counties) {
-                    inList('county', vp.counties)
                 }
 
                 if (vp.zipCodes) {
@@ -171,6 +167,7 @@ class PatientService {
 
             }
         }
+        ['reportInstanceList':list, 'visitReportInstance': vp, startDate: start, endDate: end]
     }
 
     LoadingCache<String, BlockingQueue<?>> messageQueue = CacheBuilder.newBuilder()

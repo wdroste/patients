@@ -96,6 +96,11 @@ class MedkindPatientVisitParser {
                     return 'OtherEducation'
                 case '':
                     return 'RegistrationScreening'
+                case 'NOSHOW':
+                case 'NO-SHOW':
+                    return 'NoShow'
+                case 'CANCELLED':
+                    return 'Cancelled'
                 default:
                     missing.add(value)
                     return 'Other'

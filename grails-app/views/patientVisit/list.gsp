@@ -20,7 +20,7 @@
             <thead>
             <tr>
                 <g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}"/>
-                <g:sortableColumn property="patientId" title="${message(code: 'patientVisit.patientId.label')}"/>
+                <g:sortableColumn property="patient.lastName" title="${message(code: 'patient.fullName.label')}"/>
                 <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}"/>
                 <th></th>
             </tr>
@@ -29,7 +29,7 @@
             <g:each in="${patientVisitInstanceList}" var="patientVisitInstance">
                 <tr>
                     <td><g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}"/></td>
-                    <td><f:display bean="${patientVisitInstance.patient}" property="patientId"/></td>
+                    <td><f:display bean="${patientVisitInstance.patient}" property="fullName"/></td>
                     <td><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></td>
                     <td class="link">
                         <g:link action="edit" id="${patientVisitInstance.id}" class="btn btn-small">

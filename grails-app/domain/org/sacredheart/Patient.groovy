@@ -8,11 +8,16 @@ class Patient implements Serializable {
     static RACE = ['White', 'Hispanic', 'Black', 'Asian', 'Other']
 
     static EDUCATION = [
-            'None', 'GradeSchool', 'SomeHighSchool' ,'GED', 'HighSchoolDegree',
-            'SomeCollege', 'CollegeDegree', 'SomePostGrad', 'PostGradDegree']
+        'None', 'GradeSchool', 'SomeHighSchool' ,'GED', 'HighSchoolDegree',
+        'SomeCollege', 'CollegeDegree', 'SomePostGrad', 'PostGradDegree']
+
+    static SCREENING_RESULTS = [
+            'CCS', 'PHC', 'WILCO', 'MCHILD', 'MCAREGIVERS', 'MEDICARE', 'OTHER'
+    ]
 
     static MARITIALSTATUS = [
-        'ChildUnder5yrs', 'Student', 'Single', 'Married', 'Separated', 'Divorced', 'Widowed' ]
+        'ChildUnder5yrs', 'Student', 'Single', 'Married', 'Separated', 'Divorced', 'Widowed'
+    ]
 
     String patientId
     String firstName
@@ -34,6 +39,7 @@ class Patient implements Serializable {
     String language
     String education
     String maritalStatus
+    String screeningResults
 
     String getFullName() { "${lastName}, ${firstName}"}
 
@@ -47,16 +53,17 @@ class Patient implements Serializable {
         lastName blank: false, index: 'IDX_PATIENT_LASTNAME'
         middleName nullable: true
         yearlyFamilyIncome nullable: true
-        gender nullable: true
+        gender nullable: true, inList: GENDER
         county nullable: true
-        race nullable: true
-        language nullable: true
-        maritalStatus nullable: true
-        education nullable: true
+        race nullable: true, inList: RACE
+        language nullable: true, inList: LANGUAGE
+        maritalStatus nullable: true, inList: MARITIALSTATUS
+        education nullable: true, inList: EDUCATION
         dateOfBirth nullable: true
         zipcode nullable: true
         citizen nullable: true
         veteran nullable: true
+        screeningResults nullable: true, inList: SCREENING_RESULTS
     }
 
     static mapping = {

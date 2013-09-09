@@ -3,6 +3,7 @@
 <f:field bean="patientInstance" property="patientId" autocomplete="off"/>
 <f:field bean="patientInstance" property="lastName" required="true"/>
 <f:field bean="patientInstance" property="firstName" required="true"/>
+<f:field bean="patientInstance" property="screeningResults" required="true"/>
 <f:field bean="patientInstance" property="gender" required="true"/>
 <f:field bean="patientInstance" property="dateOfBirth" required="true"/>
 <f:field bean="patientInstance" property="zipcode" required="true"/>

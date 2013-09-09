@@ -9,7 +9,7 @@
 <body>
 <div class="row-fluid">
 
-    <div class="span3">
+    <div class="span3 no-print">
         <div class="well">
             <ul class="nav nav-list">
                 <li class="nav-header">${entityName}</li>
@@ -30,9 +30,9 @@
     </div>
 
     <div class="span9">
-
         <div class="page-header">
-            <h1><g:message code="visitReport.run.label"/></h1>
+            <h1><g:message code="visitReport.run.label"
+                           args="${[visitReportInstance.name, startDate, endDate]}"/></h1>
         </div>
 
         <g:if test="${flash.message}">

@@ -1,4 +1,4 @@
-<%@ page import="org.sacredheart.PatientVisit; org.sacredheart.YesNo; org.sacredheart.Patient" %>
+<%@ page import="org.apache.commons.lang.time.DateUtils; org.sacredheart.PatientVisit; org.sacredheart.YesNo; org.sacredheart.Patient" %>
 <!doctype html>
 <html>
 <head>
@@ -45,7 +45,8 @@
         <h1>Community Clinic</h1>
         <p class="lead">SHCC is a FREE "Walk In" Clinic serving the uninsured and underinsured living in Round Rock,TX.
         Our Goal is to be God's hands and feet in our community by taking care of his children. SHCC is staffed by volunteers
-        from the community. The clinic has served ${Patient.count()} patients, with over ${PatientVisit.count()}
+        from the community. The clinic has served ${Patient.count()} patients, with over
+        ${PatientVisit.countByDateOfVisitGreaterThanEquals(DateUtils.truncate(new Date(), Calendar.YEAR))}
         visits year to date.</p>
         <a class="btn btn-large btn-success" href="http://www.sacredheartclinic.org/">More information</a>
     </div>
@@ -112,11 +113,11 @@
         data.addColumn('string', 'Race');
         data.addColumn('number', '#');
         data.addRows([
-            ['Black', ${Patient.countByRace('Black')}],
-            ['White', ${Patient.countByRace('White')}],
+            ['Black',    ${Patient.countByRace('Black')}],
+            ['White',    ${Patient.countByRace('White')}],
             ['Hispanic', ${Patient.countByRace('Hispanic')}],
-            ['Asian', ${Patient.countByRace('Asian')}],
-            ['Other', ${Patient.countByRace('Other')}]
+            ['Asian',    ${Patient.countByRace('Asian')}],
+            ['Other',    ${Patient.countByRace('Other')}]
         ]);
 
         // Set chart options

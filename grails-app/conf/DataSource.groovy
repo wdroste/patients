@@ -1,8 +1,8 @@
 dataSource {
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
     pooled = true
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+    url = "jdbc:mysql://localhost/shcc?useUnicode=yes&characterEncoding=UTF-8"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -13,13 +13,7 @@ hibernate {
 environments {
     development {
         dataSource {
-//            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-//            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            driverClassName = "com.mysql.jdbc.Driver"
-            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-            url = "jdbc:mysql://localhost/shcc?useUnicode=yes&characterEncoding=UTF-8"
             username = "root"
             password = ""
         }
@@ -27,14 +21,16 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            username = "root"
+            password = ""
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-            pooled = true
+
+            username = "root"
+            password = "heartheart"
             properties {
                maxActive = -1
                minEvictableIdleTimeMillis=1800000

@@ -6,7 +6,7 @@
         <g:select
                 required=""
                 name="gender"
-                value="${fieldValue}"
+                value="${value}"
                 noSelection="[null:'']"
                 valueMessagePrefix="patient.gender.select"
                 from="${org.sacredheart.Patient.GENDER}"/>

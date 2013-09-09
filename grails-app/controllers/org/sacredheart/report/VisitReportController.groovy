@@ -90,7 +90,7 @@ class VisitReportController {
      * Run the report.
      */
     def run(RunCommand runCommand) {
-        [reportInstanceList: patientService.run(runCommand.id, runCommand.start, runCommand.end)]
+        patientService.run(runCommand.id, runCommand.start, runCommand.end)
     }
 }
 
@@ -101,7 +101,7 @@ class RunCommand {
     Date start
     Date end
     static constraints = {
-        id nullable: false
+        id nullablTPatiente: false
         start nullable: false
         end nullable: false
     }

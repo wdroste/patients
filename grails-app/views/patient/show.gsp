@@ -13,16 +13,18 @@
     <g:render template="nav"/>
 
     <div class="span9">
-
         <div class="page-header">
             <h1>${patientInstance.patientId}: ${patientInstance.fullName}</h1>
         </div>
-
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
+        <b><g:message code="patient.patientId.label"/></b>
+
+
         <dl>
+
             <g:if test="${patientInstance?.citizen}">
                 <dt><g:message code="patient.citizen.label"/></dt>
                 <dd><f:display bean="${patientInstance}" property="citizen"/></dd>
@@ -79,19 +81,7 @@
                 <dd><f:display bean="${patientInstance}" property="zipcode"/></dd>
             </g:if>
         </dl>
-        <g:form>
-            <g:hiddenField name="id" value="${patientInstance?.id}"/>
-            <div class="form-actions">
-                <g:link class="btn" action="edit" id="${patientInstance?.id}">
-                    <i class="icon-pencil"></i>
-                    <g:message code="default.button.edit.label"/>
-                </g:link>
-                <button class="btn btn-danger" type="submit" name="_action_delete">
-                    <i class="icon-trash icon-white"></i>
-                    <g:message code="default.button.delete.label"/>
-                </button>
-            </div>
-        </g:form>
+
     </div>
 </div>
 </body>

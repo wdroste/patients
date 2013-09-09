@@ -5,7 +5,7 @@
     <div class="controls">
         <g:select name="race"
           required=""
-          value="${fieldValue}"
+          value="${value}"
           noSelection="[null:'']"
           valueMessagePrefix="patient.race.select"
           from="${org.sacredheart.Patient.RACE}"/>

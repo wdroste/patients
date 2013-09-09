@@ -6,7 +6,7 @@
         <g:select
                 required=""
                 name="education"
-                value="${fieldValue}"
+                value="${value}"
                 noSelection="[null:'']"
                 valueMessagePrefix="patient.education.select"
                 from="${org.sacredheart.Patient.EDUCATION}"/>
