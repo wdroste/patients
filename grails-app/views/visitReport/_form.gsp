@@ -7,8 +7,6 @@
 <f:field bean="visitReportInstance" property="screeningResults"/>
 <f:field bean="visitReportInstance" property="zipCodes"/>
 
-
-
 <g:if test="${counties}">
     <div class="control-group ">
         <label class="control-label" for="counties">Counties</label>

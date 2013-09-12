@@ -37,7 +37,7 @@
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
-        <table class="table table-striped">
+        <table class="table table-striped" data-provides="rowlink">
             <thead>
             <tr>
                 <g:sortableColumn property="patientId" title="${message(code: 'patient.patientId.label')}"/>
@@ -50,11 +50,15 @@
             <tbody>
             <g:each in="${patientInstanceList}" var="patientInstance">
                 <tr>
-                    <td><f:display bean="${patientInstance}" property="patientId"/></td>
+                    <td>
+                        <g:link action="show" id="${patientInstance.id}">
+                            <f:display bean="${patientInstance}" property="patientId"/>
+                        </g:link>
+                    </td>
                     <td><f:display bean="${patientInstance}" property="dateOfBirth"/></td>
                     <td><f:display bean="${patientInstance}" property="lastName"/></td>
                     <td><f:display bean="${patientInstance}" property="firstName"/></td>
-                    <td>
+                    <td class="nolink">
                         <g:link action="visit" id="${patientInstance.id}" class="btn btn-small btn-primary">
                             <i class="icon-plus icon-white"></i>
                             <g:message code="patient.visit.label"/>

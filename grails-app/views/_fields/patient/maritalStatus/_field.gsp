@@ -4,10 +4,10 @@
     </label>
     <div class="controls">
         <g:select
-            name="status"
+            name="maritalStatus"
             required=""
-            value="${value}"
             noSelection="[null:'']"
+            value="${bean.maritalStatus}"
             valueMessagePrefix="patient.maritalStatus.select"
             from="${org.sacredheart.Patient.MARITIALSTATUS}"/>
     </div>

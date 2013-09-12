@@ -12,8 +12,6 @@
 <f:field bean="patientInstance" property="race" required="true"/>
 <f:field bean="patientInstance" property="language" required="true"/>
 
-
-
 <div class="control-group">
     <label class="control-label" for="numberOfFamily">
         <g:message code="patient.numberOfFamily.label"/>
@@ -47,19 +45,14 @@
     function PatientViewModel() {
         this.numberOfFamily = ko.observable();
         this.yearlyFamilyIncome = ko.computed(function() {
-            var incomeIndex = this.numberOfFamily() - 1;
-            var incomeTable = [22980, 31020, 39060, 47100, 55140, 63180, 71220, 79260, 8040];
-            if (incomeIndex >= incomeTable.length) {
-
+            var incomeIndex = this.numberOfFamily();
+            var incomeTable = [22980, 31020, 39060, 47100, 55140, 63180, 71220, 79260];
+            if (incomeIndex > incomeTable.length) {
+                return incomeTable[7] + ((incomeIndex - 8) * 8040);
             }
-
-            return incomeTable[this.numberOfFamily()];
-            if (this.numberOfFamily == 1) {
-
-            }
-            return this.firstName() + " " + this.lastName();
+            return incomeTable[this.numberOfFamily() - 1];
         }, this);
     }
-    window.patientViewModel = new PatientViewModel();
+    window.patientViewModel = new PatientViewModel(numberOfFamily:${patientInstance.numberOfFamily});
     ko.applyBindings(window.patientViewModel);
 </r:script>

@@ -37,7 +37,7 @@
                             <g:message code="default.action.edit.label"/>
                         </g:link>
                         <g:link action="delete" id="${patientVisitInstance.id}" class="btn btn-small btn-danger"
-                                onclick="window.confirm('${g.message(code: 'default.confirmation')}')">
+                                onclick="return confirm('${g.message(code: 'default.confirmation')}')">
                             <i class="icon-trash icon-white"></i>
                             <g:message code="default.action.delete.label"/>
                         </g:link>

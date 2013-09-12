@@ -14,7 +14,7 @@
     <div class="span9">
 
         <div class="page-header">
-            <h1><g:message code="visitReport.setup.label"/></h1>
+            <h1><g:message code="visitReport.setup.label" args="[visitReportInstance.name]"/></h1>
         </div>
 
         <g:if test="${flash.message}">

@@ -31,11 +31,16 @@
                     <td><f:display bean="${visitReportInstance}" property="name"/></td>
                     <td><f:display bean="${visitReportInstance}" property="description"/></td>
                     <td><f:display bean="${visitReportInstance}" property="lastUpdated"/></td>
-                    <td class="link">
+                    <td>
+                        <g:link action="setup" id="${visitReportInstance.id}" class="btn btn-small btn-primary">
+                            <i class="icon-tasks icon-white"></i>
+                            <g:message code="visitReport.runlink.label"/>
+                        </g:link>
+
                         <g:link action="edit" id="${visitReportInstance.id}" class="btn btn-small">
+                            <i class="icon-edit"></i>
                             <g:message code="default.action.edit.label"/>
                         </g:link>
-                        <g:link action="setup" id="${visitReportInstance.id}" class="btn btn-small">Run &raquo;</g:link>
                     </td>
                 </tr>
             </g:each>

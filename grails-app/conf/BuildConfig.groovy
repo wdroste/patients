@@ -69,6 +69,5 @@ grails.project.dependency.resolution = {
 
         // security
         compile ":shiro:1.1.4"
-        compile "br.com.geocontrol.grails.plugin.ko:knockoutjs:1.2.1.2"
     }
 }
