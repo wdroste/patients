@@ -50,7 +50,7 @@ class PatientService {
                     ilike(k, "%${v}%")
                 }
             }
-            order("lastName")
+            order(params.sort ?: 'lastName', params.order ?: 'asc')
         }
         [patientInstanceList: results.list, patientInstanceTotal: results.totalCount]
     }
@@ -138,20 +138,24 @@ class PatientService {
                     eq('gender', vp.genders)
                 }
 
-                if (vp.races) {
-                    inList('race', vp.races)
+                if (vp.races.size()) {
+                    'in'('race', vp.races)
                 }
 
-                if (vp.languages) {
-                    inList('language', vp.languages)
+                if (vp.languages.size()) {
+                    'in'('language', vp.languages)
                 }
 
-                if (vp.maritalStatuses) {
-                    inList('maritalStatus', vp.maritalStatuses)
+                if (vp.maritalStatuses.size()) {
+                    'in'('maritalStatus', vp.maritalStatuses)
                 }
 
-                if (vp.educations) {
-                    inList('education', vp.educations)
+                if (vp.screeningResults.size()) {
+                    'in'('screeningResult', vp.screeningResults)
+                }
+
+                if (vp.educations.size()) {
+                    'in'('education', vp.educations)
                 }
 
                 if (vp.numberOfFamilyRange?.start != null

@@ -1,10 +1,10 @@
 <div class="control-group">
-    <label class="control-label" for="screeningResults">
+    <label class="control-label" for="screeningResult">
         <g:message code="patient.screeningResults.label"/>
     </label>
     <div class="controls">
         <g:select
-            name="screeningResults"
+            name="screeningResult"
             required=""
             value="${value}"
             noSelection="[null:'']"

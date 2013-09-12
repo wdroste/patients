@@ -4,6 +4,7 @@
 
 <f:field bean="visitReportInstance" property="name" required=""/>
 <f:field bean="visitReportInstance" property="description"/>
+<f:field bean="visitReportInstance" property="screeningResults"/>
 <f:field bean="visitReportInstance" property="zipCodes"/>
 
 

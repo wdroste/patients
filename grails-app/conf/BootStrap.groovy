@@ -42,7 +42,7 @@ class BootStrap {
                     }
                 }
             } catch (IOException ex) {
-                log.error("Failed to load initialization data.")
+                log.error("Failed to load initialization data.", ex)
             }
         }
     }

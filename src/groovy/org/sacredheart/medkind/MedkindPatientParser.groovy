@@ -142,7 +142,7 @@ class MedkindPatientParser {
                 new NotNull(), // 2 firstName
                 new Optional(), // 3 middleName
                 new Optional(), // 4 SSN
-                new Optional(new ParseDate("yyyy/MM/dd")), // 5 birthDate
+                new Optional(new ParseDate("MM/dd/yyyy")), // 5 birthDate
                 new Optional(new ParseGender()), // 6 Gender
                 new Optional(new ParseRace()), // 7 Race
                 new Optional(), // 8 Address

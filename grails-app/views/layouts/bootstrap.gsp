@@ -25,10 +25,16 @@
 
     <g:layoutHead/>
     <r:layoutResources/>
+
+    <style type="text/css" media="print">
+    .dontprint {
+        display: none;
+    }
+    </style>
 </head>
 
 <body>
-<nav class="navbar navbar-fixed-top">
+<nav class="navbar navbar-fixed-top dontprint">
     <div class="navbar-inner">
         <div class="container-fluid">
 

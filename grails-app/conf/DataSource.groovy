@@ -13,16 +13,18 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            logSql = true
+            dbCreate = "update"
+            //dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             username = "root"
-            password = ""
+            password = "cloud"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
             username = "root"
-            password = ""
+            password = "cloud"
         }
     }
     production {

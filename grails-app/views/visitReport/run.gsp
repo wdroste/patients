@@ -2,37 +2,22 @@
 <!doctype html>
 <html>
 <head>
+    <g:set var="startDateLabel"><g:formatDate date="${startDate}" style="SHORT" type="date"/></g:set>
+    <g:set var="endDateLabel"><g:formatDate date="${endDate}" style="SHORT" type="date"/></g:set>
     <meta name="layout" content="bootstrap">
-    <title><g:message code="visitReport.run.label"/></title>
+    <title><g:message code="visitReport.run.label"
+           args="${[visitReportInstance.name, startDateLabel, endDateLabel]}"/></title>
 </head>
 
 <body>
 <div class="row-fluid">
 
-    <div class="span3 no-print">
-        <div class="well">
-            <ul class="nav nav-list">
-                <li class="nav-header">${entityName}</li>
-                <li class="active">
-                    <g:link class="list" action="list">
-                        <i class="icon-list icon-white"></i>
-                        <g:message code="visitReport.list.label"/>
-                    </g:link>
-                </li>
-                <li>
-                    <g:link class="create" action="create">
-                        <i class="icon-plus"></i>
-                        <g:message code="visitReport.create.label"/>
-                    </g:link>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <g:render template="nav"/>
 
     <div class="span9">
         <div class="page-header">
             <h1><g:message code="visitReport.run.label"
-                           args="${[visitReportInstance.name, startDate, endDate]}"/></h1>
+               args="${[visitReportInstance.name, startDateLabel, endDateLabel]}"/></h1>
         </div>
 
         <g:if test="${flash.message}">

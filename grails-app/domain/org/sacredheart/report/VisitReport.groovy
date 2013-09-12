@@ -34,7 +34,8 @@ class VisitReport {
             languages: String,
             visitTypes: String,
             educations: String,
-            maritalStatuses: String
+            maritalStatuses: String,
+            screeningResults: String
     ]
 
     static constraints = {
@@ -53,6 +54,19 @@ class VisitReport {
     }
 
     static embedded = ['ageRange', 'numberOfFamilyRange', 'familyIncomeRange']
+
+    static mapping = {
+        races lazy: false
+        genders lazy: false
+        countries lazy: false
+        zipCodes lazy: false
+        languages lazy: false
+        visitTypes lazy: false
+        educations lazy: false
+        maritalStatuses lazy: false
+        screeningResults lazy: false
+
+    }
 }
 
 class AgeRange {
