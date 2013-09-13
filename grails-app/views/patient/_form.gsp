@@ -43,7 +43,7 @@
 
 <r:script>
     function PatientViewModel() {
-        this.numberOfFamily = ko.observable();
+        this.numberOfFamily = ko.observable(${patientInstance.numberOfFamily});
         this.yearlyFamilyIncome = ko.computed(function() {
             var incomeIndex = this.numberOfFamily();
             var incomeTable = [22980, 31020, 39060, 47100, 55140, 63180, 71220, 79260];
@@ -53,6 +53,5 @@
             return incomeTable[this.numberOfFamily() - 1];
         }, this);
     }
-    window.patientViewModel = new PatientViewModel(numberOfFamily:${patientInstance.numberOfFamily});
-    ko.applyBindings(window.patientViewModel);
+    ko.applyBindings(new PatientViewModel());
 </r:script>

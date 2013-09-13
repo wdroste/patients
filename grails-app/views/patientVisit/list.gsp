@@ -16,7 +16,7 @@
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
-        <table class="table table-striped">
+        <table class="table table-striped" data-provides="rowlink">
             <thead>
             <tr>
                 <g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}"/>
@@ -28,7 +28,10 @@
             <tbody>
             <g:each in="${patientVisitInstanceList}" var="patientVisitInstance">
                 <tr>
-                    <td><g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}"/></td>
+                    <td>
+                        <g:link action="show" id="${patientVisitInstance.id}">
+                            <g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}"/></td>
+                        </g:link>
                     <td><f:display bean="${patientVisitInstance.patient}" property="fullName"/></td>
                     <td><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></td>
                     <td class="link">

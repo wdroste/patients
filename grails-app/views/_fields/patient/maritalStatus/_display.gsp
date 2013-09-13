@@ -1,1 +1,1 @@
-<g:message code="${'patient.maritalStatus.select.' + value}"/>
+<g:if test="${value}"><g:message code="${'patient.maritalStatus.select.' + value}"/></g:if>
