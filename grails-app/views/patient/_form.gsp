@@ -18,6 +18,7 @@
     </label>
     <div class="controls">
         <g:field type="number"
+                 min="1"
                  required="true"
                  name="numberOfFamily"
                  value="${patientInstance.numberOfFamily}"
@@ -31,10 +32,23 @@
     <div class="controls">
         <g:field type="number"
                  required="true"
-                 readonly=""
                  name="yearlyFamilyIncome"
                  value="${patientInstance.yearlyFamilyIncome}"
                  data-bind="value: yearlyFamilyIncome"/>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="federalPoverty">
+        <g:message code="patient.federalPoverty.label"/>
+    </label>
+    <div class="controls">
+        <g:field type="number"
+                 required="true"
+                 readonly=""
+                 name="federalPoverty"
+                 value="${patientInstance.federalPoverty}"
+                 data-bind="value: federalPoverty"/>
     </div>
 </div>
 
@@ -44,13 +58,19 @@
 <r:script>
     function PatientViewModel() {
         this.numberOfFamily = ko.observable(${patientInstance.numberOfFamily});
-        this.yearlyFamilyIncome = ko.computed(function() {
-            var incomeIndex = this.numberOfFamily();
+        this.yearlyFamilyIncome = ko.observable(${patientInstance.yearlyFamilyIncome});
+
+        this.federalPoverty = ko.computed(function() {
+            var incomeIndex = 0;
+            if (!isNaN(this.numberOfFamily())) {
+                incomeIndex = this.numberOfFamily();
+            }
             var incomeTable = [22980, 31020, 39060, 47100, 55140, 63180, 71220, 79260];
             if (incomeIndex > incomeTable.length) {
                 return incomeTable[7] + ((incomeIndex - 8) * 8040);
             }
-            return incomeTable[this.numberOfFamily() - 1];
+            var val = (this.yearlyFamilyIncome() * 200) / incomeTable[this.numberOfFamily() - 1];
+            return val.toFixed(0);
         }, this);
     }
     ko.applyBindings(new PatientViewModel());

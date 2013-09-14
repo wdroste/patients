@@ -54,17 +54,6 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="education">
-                        <g:message code="patient.education.label"/>
-                    </label>
-
-                    <div class="controls">
-                        <input type="text" id="education" disabled=""
-                               value="${f.display('bean': patientInstance, 'property': 'education')}"/>
-                    </div>
-                </div>
-
-                <div class="control-group">
                     <label class="control-label" for="gender">
                         <g:message code="patient.gender.label"/>
                     </label>
@@ -72,6 +61,17 @@
                     <div class="controls">
                         <input type="text" id="gender" disabled=""
                                value="${f.display('bean': patientInstance, 'property': 'gender')}"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="education">
+                        <g:message code="patient.education.label"/>
+                    </label>
+
+                    <div class="controls">
+                        <input type="text" id="education" disabled=""
+                               value="${f.display('bean': patientInstance, 'property': 'education')}"/>
                     </div>
                 </div>
 
@@ -105,6 +105,17 @@
                     <div class="controls">
                         <input type="text" id="yearlyFamilyIncome" disabled=""
                                value="${f.display('bean': patientInstance, 'property': 'yearlyFamilyIncome')}"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="federalPoverty">
+                        <g:message code="patient.federalPoverty.label"/>
+                    </label>
+
+                    <div class="controls">
+                        <input type="text" id="federalPoverty" disabled=""
+                               value="${f.display('bean': patientInstance, 'property': 'federalPoverty')}%"/>
                     </div>
                 </div>
 

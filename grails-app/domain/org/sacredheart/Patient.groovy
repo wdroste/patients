@@ -32,6 +32,7 @@ class Patient implements Serializable {
 
     Integer yearlyFamilyIncome
     Integer numberOfFamily
+    Integer federalPoverty
 
     // List objects
     String race
@@ -64,6 +65,7 @@ class Patient implements Serializable {
         citizen nullable: true
         veteran nullable: true
         screeningResult nullable: true, inList: SCREENING_RESULTS
+        federalPoverty nullable: true
     }
 
     static mapping = {
