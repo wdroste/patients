@@ -73,6 +73,6 @@ class Patient implements Serializable {
         firstName index: 'first_name_idx'
         patientId index: 'patient_id_idx'
         dateOfBirth index: 'date_of_birth_idx'
-        screeningResult column: 'screeningResults'
+        screeningResult index: 'screening_result_idx'
     }
 }
