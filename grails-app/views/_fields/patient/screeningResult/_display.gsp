@@ -1,1 +1,1 @@
-<g:if test="${value}"><g:message code="${'patient.screeningResults.select.' + value}"/></g:if>
+<g:if test="${bean.screeningResult}"><g:message code="${'patient.screeningResults.select.' + bean.screeningResult}"/></g:if>

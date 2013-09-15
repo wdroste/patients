@@ -6,7 +6,7 @@
         <g:select
             name="screeningResult"
             required=""
-            value="${value}"
+            value="${bean.screeningResult}"
             noSelection="[null:'']"
             valueMessagePrefix="patient.screeningResults.select"
             from="${org.sacredheart.Patient.SCREENING_RESULTS}"/>
