@@ -54,6 +54,7 @@
 
 <f:field bean="patientInstance" property="maritalStatus" required="true"/>
 <f:field bean="patientInstance" property="education" required="true"/>
+<f:field bean="patientInstance" property="reference"/>
 
 <r:script>
     function PatientViewModel() {
@@ -66,10 +67,13 @@
                 incomeIndex = this.numberOfFamily();
             }
             var incomeTable = [22980, 31020, 39060, 47100, 55140, 63180, 71220, 79260];
+            var povertyIncome;
             if (incomeIndex > incomeTable.length) {
-                return incomeTable[7] + ((incomeIndex - 8) * 8040);
+                povertyIncome = incomeTable[7] + ((incomeIndex - 8) * 8040);
+            } else {
+                povertyIncome = incomeTable[this.numberOfFamily() - 1];
             }
-            var val = (this.yearlyFamilyIncome() * 200) / incomeTable[this.numberOfFamily() - 1];
+            var val = (this.yearlyFamilyIncome() * 200) / povertyIncome;
             return val.toFixed(0);
         }, this);
     }

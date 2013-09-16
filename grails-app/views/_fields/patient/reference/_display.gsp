@@ -1,0 +1,1 @@
+<g:if test="${value}"><g:message code="${'patient.reference.select.' + value}"/></g:if>

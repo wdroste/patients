@@ -19,6 +19,13 @@ class Patient implements Serializable {
         'ChildUnder5yrs', 'Student', 'Single', 'Married', 'Separated', 'Divorced', 'Widowed'
     ]
 
+    static REFERENCE = [
+        'Friend', 'StWilliamsChruch', 'LocalChurch', 'School', 'Website', 'Flier',
+        'SHCCVolunteer', 'SHCCPatient', 'RoundRockServingCenter', 'StVincentdePaul',
+        'WILCO', 'LoneStarCircleofCare', 'SetonHospital', 'RoundRockHospital',
+        'Operator211', 'Other'
+    ]
+
     String patientId
     String firstName
     String middleName
@@ -38,6 +45,7 @@ class Patient implements Serializable {
     String race
     String gender
     String language
+    String reference
     String education
     String maritalStatus
     String screeningResult
@@ -65,6 +73,7 @@ class Patient implements Serializable {
         citizen nullable: true
         veteran nullable: true
         screeningResult nullable: true, inList: SCREENING_RESULTS
+        reference nullable: true, inList: REFERENCE
         federalPoverty nullable: true
     }
 

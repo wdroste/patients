@@ -159,6 +159,16 @@
                                value="${f.display('bean': patientInstance, 'property':'zipcode')}"/>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="reference">
+                        <g:message code="patient.reference.label"/>
+                    </label>
+
+                    <div class="controls">
+                        <input type="text" id="reference" disabled=""
+                               value="${f.display('bean': patientInstance, 'property':'reference')}"/>
+                    </div>
+                </div>
             </form>
         </div>
 

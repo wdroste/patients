@@ -15,7 +15,6 @@
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
-
         <table class="table table-striped">
             <thead>
             <tr>
