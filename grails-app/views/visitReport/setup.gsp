@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="bootstrap">
-    <title><g:message code="visitReport.setup.label"/></title>
+    <title><g:message code="visitReport.setup.label" args="[visitReportInstance.name]"/></title>
 </head>
 
 <body>
@@ -24,13 +24,14 @@
             <g:hiddenField name="id" value="${visitReportInstance.id}"/>
 
             <div class="control-group ">
-                <label class="control-label" for="start" >
+                <label class="control-label" for="start">
                     <g:message code="visitReport.setup.startDate"/>
                 </label>
                 <div class="controls">
-                    <g:datePicker id="start" name="start"  value="${new Date() - 14}" precision="day"/>
+                    <g:datePicker id="start" name="start" value="${new Date() - 14}" precision="day"/>
                 </div>
             </div>
+
             <div class="control-group ">
                 <label class="control-label" for="end">
                     <g:message code="visitReport.setup.endDate"/>
@@ -39,14 +40,13 @@
                     <g:datePicker id="end" name="end" value="${new Date()}" precision="day"/>
                 </div>
             </div>
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
                     <i class="icon-ok icon-white"></i>
-                    <g:message code="default.button.cancel.label" default="Run" />
+                    <g:message code="default.button.run.label"/>
                 </button>
-                <button type="submit" class="btn">
-                    <g:message code="default.button.run.label" default="Cancel" />
-                </button>
+                <g:actionSubmit class="btn" value="${g.message(code: 'default.button.cancel.label')}" action="list"/>
             </div>
 
         </g:form>

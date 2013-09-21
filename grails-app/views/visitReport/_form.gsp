@@ -55,11 +55,6 @@
 <f:field bean="visitReportInstance" property="genders"/>
 <f:field bean="visitReportInstance" property="races"/>
 
-
-
-
-
-
 <div class="control-group ">
     <label class="control-label" for="numberOfFamilyRange">Number of Family</label>
 
@@ -131,3 +126,6 @@
 </g:if>
 
 
+<r:script>
+
+</r:script>
