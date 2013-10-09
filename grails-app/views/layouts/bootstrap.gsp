@@ -59,7 +59,10 @@
                             <g:link controller="patientVisit">Visits</g:link>
                         </li>
                         <li<%='report' == controllerName ? ' class="active"' : ''%>>
-                            <g:link controller="visitReport">Reports</g:link>
+                            <g:link controller="report">Base Reports</g:link>
+                        </li>
+                        <li<%='visitReport' == controllerName ? ' class="active"' : ''%>>
+                            <g:link controller="visitReport">Custom Reports</g:link>
                         </li>
                         <li<%='user' == controllerName ? ' class="active"' : ''%>>
                             <g:link controller="user">Users</g:link>

@@ -101,7 +101,7 @@ class RunCommand {
     Date start
     Date end
     static constraints = {
-        id nullablTPatiente: false
+        id nullable: false
         start nullable: false
         end nullable: false
     }
