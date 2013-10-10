@@ -28,7 +28,13 @@ class ReportController {
         PatientVisit.VISITTYPE.each { visitType ->
             map[visitType] = PatientVisit.countByTypeOfVisitAndDateOfVisitBetween(visitType, cmd.start, cmd.end)
         }
-        ['totalVisits':totalPatientVisits(cmd), 'distinctPatientCount':distinctPatientCount(cmd), 'results':map]
+        [
+                'startDate': cmd.start,
+                'endDate': cmd.end,
+                'totalVisits':totalPatientVisits(cmd),
+                'distinctPatientCount':distinctPatientCount(cmd),
+                'results':map
+        ]
     }
 
     /**
@@ -47,7 +53,13 @@ class ReportController {
                 between('dateOfVisit', cmd.start, cmd.end)
             }[0]
         }
-        ['totalVisits':totalPatientVisits(cmd), 'distinctPatientCount':distinctPatientCount(cmd), 'results':map]
+        [
+                'startDate': cmd.start,
+                'endDate': cmd.end,
+                'totalVisits':totalPatientVisits(cmd),
+                'distinctPatientCount':distinctPatientCount(cmd),
+                'results':map
+        ]
     }
 
     def distinctPatientCount(ReportRunCommand cmd) {

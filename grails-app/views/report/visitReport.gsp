@@ -14,7 +14,11 @@
 
     <div class="span9">
         <div class="page-header">
-            <h1><g:message code="report.static.select.visitReport"/></h1>
+            <h1>
+                <g:message code="report.static.select.visitReport"/>:
+                <g:formatDate date="${startDate}" type="date" style="SHORT"/> -
+                <g:formatDate date="${endDate}" type="date" style="SHORT"/>
+            </h1>
             <table>
                 <tr>
                     <td>Total Visits: ${totalVisits}</td>
