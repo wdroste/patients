@@ -38,16 +38,22 @@
     </div>
 </g:if>
 
+
 <shiro:notAuthenticated>
+	<%
+		def c = PatientVisit.createCriteria()
+		visits = c.countDistinct {
+			ge('dateOfVisit', DateUtils.truncate(new Date(), Calendar.YEAR))
+		    not { inList('typeOfVisit', ['Cancelled', 'NoShow']) } 
+		}
+	 %>
     <!-- Jumbotron -->
     <div class="jumbotron">
         <h1>Sacred Heart</h1>
         <h1>Community Clinic</h1>
         <p class="lead">SHCC is a FREE "Walk In" Clinic serving the uninsured and underinsured living in Round Rock,TX.
         Our Goal is to be God's hands and feet in our community by taking care of his children. SHCC is staffed by volunteers
-        from the community. The clinic has served ${Patient.count()} patients, with over
-        ${PatientVisit.countByDateOfVisitGreaterThanEquals(DateUtils.truncate(new Date(), Calendar.YEAR))}
-        visits year to date.</p>
+        from the community. The clinic has served ${Patient.count()} patients, with over <%= visits %> visits year to date.</p>
         <a class="btn btn-large btn-success" href="http://www.sacredheartclinic.org/">More information</a>
     </div>
 </shiro:notAuthenticated>
