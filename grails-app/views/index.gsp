@@ -40,13 +40,13 @@
 
 
 <shiro:notAuthenticated>
-	<%
-		def c = PatientVisit.createCriteria()
-		visits = c.countDistinct {
-			ge('dateOfVisit', DateUtils.truncate(new Date(), Calendar.YEAR))
-		    not { inList('typeOfVisit', ['Cancelled', 'NoShow']) } 
-		}
-	 %>
+    <%
+        def c = PatientVisit.createCriteria()
+        visits = c.count {
+            ge('dateOfVisit', DateUtils.truncate(new Date(), Calendar.YEAR))
+            not { inList('typeOfVisit', ['Cancelled', 'NoShow']) } 
+        }
+    %>
     <!-- Jumbotron -->
     <div class="jumbotron">
         <h1>Sacred Heart</h1>
