@@ -10,8 +10,6 @@ class VisitReport {
 
     static TYPES = ['Simple', 'PIE']
 
-    String type
-
     String name
     String description
 
