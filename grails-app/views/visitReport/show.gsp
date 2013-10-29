@@ -23,13 +23,14 @@
         </g:if>
 
         <dl>
+            <g:if test="${visitReportInstance?.description}">
+                <dt><g:message code="visitReport.description.label"/></dt>
+                <dd><f:display bean="${visitReportInstance}" property="description"/></dd>
+            </g:if>
+
             <g:if test="${visitReportInstance?.zipCodes}">
                 <dt><g:message code="visitReport.zipCodes.label"/></dt>
                 <dd><f:display bean="${visitReportInstance}" property="zipCodes"/></dd>
-            </g:if>
-            <g:if test="${visitReportInstance?.ageRange}">
-                <dt><g:message code="visitReport.ageRange.label"/></dt>
-                <dd><f:display bean="${visitReportInstance}" property="ageRange"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.citizen}">
@@ -40,11 +41,6 @@
             <g:if test="${visitReportInstance?.educations}">
                 <dt><g:message code="visitReport.education.label"/></dt>
                 <dd><f:display bean="${visitReportInstance}" property="educations"/></dd>
-            </g:if>
-
-            <g:if test="${visitReportInstance?.familyIncomeRange}">
-                <dt><g:message code="visitReport.familyIncomeRange.label"/></dt>
-                <dd><g:fieldValue bean="${visitReportInstance}" field="familyIncomeRange"/></dd>
             </g:if>
 
             <g:if test="${visitReportInstance?.firstNamePattern}">
@@ -77,11 +73,6 @@
                 <dd><f:display bean="${visitReportInstance}" property="middleNamePattern"/></dd>
             </g:if>
 
-            <g:if test="${visitReportInstance?.numberOfFamilyRange}">
-                <dt><g:message code="visitReport.numberOfFamilyRange.label"/></dt>
-                <dd><f:display bean="${visitReportInstance}" property="numberOfFamilyRange"/></dd>
-            </g:if>
-
             <g:if test="${visitReportInstance?.patientIdPattern}">
                 <dt><g:message code="visitReport.patientIdPattern.label"/></dt>
                 <dd><f:display bean="${visitReportInstance}" property="patientIdPattern"/></dd>
@@ -96,6 +87,35 @@
                 <dt><g:message code="visitReport.veteran.label"/></dt>
                 <dd><f:display bean="${visitReportInstance}" property="veteran"/></dd>
             </g:if>
+
+            <g:if test="${visitReportInstance?.ageRange}">
+                <dt><g:message code="visitReport.ageRange.label"/></dt>
+                <dd>
+                    <f:display bean="${visitReportInstance.ageRange}" property="start"/>
+                    -
+                    <f:display bean="${visitReportInstance.ageRange}" property="end"/>
+                </dd>
+            </g:if>
+
+            <g:if test="${visitReportInstance?.numberOfFamilyRange}">
+                <dt><g:message code="visitReport.numberOfFamilyRange.label"/></dt>
+                <dd>
+                    <f:display bean="${visitReportInstance.numberOfFamilyRange}" property="start"/>
+                    -
+                    <f:display bean="${visitReportInstance.numberOfFamilyRange}" property="end"/>
+                </dd>
+            </g:if>
+
+
+            <g:if test="${visitReportInstance?.familyIncomeRange}">
+                <dt><g:message code="visitReport.familyIncomeRange.label"/></dt>
+                <dd>
+                    $<f:display bean="${visitReportInstance.familyIncomeRange}" property="start"/>
+                    -
+                    $<f:display bean="${visitReportInstance.familyIncomeRange}" property="end"/>
+                </dd>
+            </g:if>
+
         </dl>
 
         <g:form>

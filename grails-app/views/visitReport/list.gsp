@@ -15,7 +15,7 @@
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
-        <table class="table table-striped">
+        <table class="table table-striped" data-provides="rowlink">
             <thead>
             <tr>
                 <g:sortableColumn property="name" title="${message(code: 'visitReport.name.label')}"/>
@@ -27,7 +27,11 @@
             <tbody>
             <g:each in="${visitReportInstanceList}" var="visitReportInstance">
                 <tr>
-                    <td><f:display bean="${visitReportInstance}" property="name"/></td>
+                    <td>
+                        <g:link action="show" id="${visitReportInstance.id}">
+                            <f:display bean="${visitReportInstance}" property="name"/>
+                        </g:link>
+                    </td>
                     <td><f:display bean="${visitReportInstance}" property="description"/></td>
                     <td><f:display bean="${visitReportInstance}" property="lastUpdated"/></td>
                     <td>

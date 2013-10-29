@@ -40,14 +40,6 @@
 <f:field bean="visitReportInstance" property="middleNamePattern"/>
 <f:field bean="visitReportInstance" property="lastNamePattern"/>
 
-<div class="control-group ">
-    <label class="control-label" for="ageRange">Age Range</label>
-
-    <div id="ageRange" class="controls">
-        <input type="number" name="ageRange.start" value="" id="ageRange.start">
-        <input type="number" name="ageRange.end" value="" id="ageRange.end">
-    </div>
-</div>
 
 <f:field bean="visitReportInstance" property="citizen"/>
 <f:field bean="visitReportInstance" property="veteran"/>
@@ -55,23 +47,6 @@
 <f:field bean="visitReportInstance" property="genders"/>
 <f:field bean="visitReportInstance" property="races"/>
 
-<div class="control-group ">
-    <label class="control-label" for="numberOfFamilyRange">Number of Family</label>
-
-    <div id="numberOfFamilyRange" class="controls">
-        <input type="number" name="numberOfFamilyRange.start" value="" id="numberOfFamilyRange.start">
-        <input type="number" name="numberOfFamilyRange.end" value="" id="numberOfFamilyRange.end">
-    </div>
-</div>
-
-<div class="control-group ">
-    <label class="control-label" for="familyIncomeRange">Family Income Range</label>
-
-    <div id="familyIncomeRange" class="controls">
-        <input type="number" name="familyIncomeRange.start" value="" id="familyIncomeRange.start">
-        <input type="number" name="familyIncomeRange.end" value="" id="familyIncomeRange.end">
-    </div>
-</div>
 
 
 <div class="control-group">
@@ -101,6 +76,25 @@
                   from="${org.sacredheart.Patient.MARITIALSTATUS}"/>
     </div>
 </div>
+
+<fieldset class="embedded ageRange">
+    <legend>Age Range</legend>
+    <f:field bean="visitReportInstance" property="ageRange.start"/>
+    <f:field bean="visitReportInstance" property="ageRange.end"/>
+</fieldset>
+
+<fieldset class="embedded numberOfFamilyRange">
+    <legend>Family Size Range</legend>
+    <f:field bean="visitReportInstance" property="numberOfFamilyRange.start"/>
+    <f:field bean="visitReportInstance" property="numberOfFamilyRange.end"/>
+</fieldset>
+
+<fieldset class="embedded familyIncomeRange">
+    <legend>Family Income Range</legend>
+    <f:field bean="visitReportInstance" property="familyIncomeRange.start"/>
+    <f:field bean="visitReportInstance" property="familyIncomeRange.end"/>
+</fieldset>
+
 
 
 <g:if test="${false}">

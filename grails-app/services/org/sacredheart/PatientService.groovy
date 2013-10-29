@@ -118,14 +118,6 @@ class PatientService {
                     inList('zipcode', vp.zipCodes)
                 }
 
-                if (vp.ageRange?.start != null && vp.ageRange?.end != null) {
-                    Calendar startCalendar = Calendar.getInstance()
-                    startCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.end)
-                    Calendar endCalendar = Calendar.getInstance()
-                    endCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.start)
-                    between('dateOfBirth', startCalendar.getTime(), endCalendar.getTime())
-                }
-
                 if (vp.citizen) {
                     eq('citizen', vp.citizen)
                 }
@@ -156,6 +148,14 @@ class PatientService {
 
                 if (vp.educations.size()) {
                     'in'('education', vp.educations)
+                }
+
+                if (vp.ageRange?.start != null && vp.ageRange?.end != null) {
+                    Calendar startCalendar = Calendar.getInstance()
+                    startCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.end)
+                    Calendar endCalendar = Calendar.getInstance()
+                    endCalendar.add(Calendar.YEAR, (-1) * vp.ageRange.start)
+                    between('dateOfBirth', startCalendar.time, endCalendar.time)
                 }
 
                 if (vp.numberOfFamilyRange?.start != null
