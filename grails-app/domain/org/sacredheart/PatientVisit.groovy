@@ -13,8 +13,10 @@ class PatientVisit implements Serializable {
 
     String diagnosisCode
 
+    static mapping = {
+        provider ignoreNotFound: true
+    }
 
-    static mappedBy = [provider: 'none']
     static belongsTo = [patient: Patient]
 
     static constraints = {

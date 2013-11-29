@@ -37,6 +37,11 @@
                 <dt><g:message code="patientVisit.typeOfVisit.label"/></dt>
                 <dd><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></dd>
             </g:if>
+
+            <g:if test="${patientVisitInstance?.provider}">
+                <dt><g:message code="patientVisit.provider.label"/></dt>
+                <dd><f:display bean="${patientVisitInstance}" property="provider"/></dd>
+            </g:if>
         </dl>
         <g:form>
             <g:hiddenField name="id" value="${patientVisitInstance?.id}"/>

@@ -1,1 +1,1 @@
-${patientVisit.provider.title}
+${bean.provider?.title}
