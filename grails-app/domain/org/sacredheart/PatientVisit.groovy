@@ -8,7 +8,18 @@ class PatientVisit implements Serializable {
     ]
 
     String typeOfVisit
+    Provider provider
     Date dateOfVisit = new Date()
 
+    String diagnosisCode
+
+
+    static mappedBy = [provider: 'none']
     static belongsTo = [patient: Patient]
+
+    static constraints = {
+        provider nullable: true
+        typeOfVisit blank: false
+        diagnosisCode nullable: true
+    }
 }
