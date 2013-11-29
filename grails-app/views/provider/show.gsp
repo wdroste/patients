@@ -41,7 +41,9 @@
 				</g:if>
 
 				<dl>
-                    <dt><g:message code="provider.providerId.label" /></dt>
+                    <dt><g:message code="provider.title.label" /></dt>
+                        <dd><g:fieldValue bean="${providerInstance}" field="title"/></dd>
+                    <dt><g:message code="provider.license.label" /></dt>
                         <dd><g:fieldValue bean="${providerInstance}" field="license"/></dd>
                     <dt><g:message code="provider.lastName.label" /></dt>
                         <dd><g:fieldValue bean="${providerInstance}" field="lastName"/></dd>
@@ -49,8 +51,6 @@
                         <dd><g:fieldValue bean="${providerInstance}" field="firstName"/></dd>
                     <dt><g:message code="provider.middleName.label" /></dt>
                         <dd><g:fieldValue bean="${providerInstance}" field="middleName"/></dd>
-                    <dt><g:message code="provider.title.label" /></dt>
-                        <dd><g:fieldValue bean="${providerInstance}" field="title"/></dd>
 				</dl>
 
 				<g:form>
