@@ -1,0 +1,1 @@
+<g:if test="${value}"><g:message code="state.${value}"/></g:if>

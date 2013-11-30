@@ -12,7 +12,7 @@ class Patient implements Serializable {
         'SomeCollege', 'CollegeDegree', 'SomePostGrad', 'PostGradDegree']
 
     static SCREENING_RESULTS = [
-            'CCS', 'PHC', 'WILCO', 'MCHILD', 'MCAREGIVERS', 'MEDICARE', 'OTHER'
+            'A2C', 'CCS', 'PHC', 'WILCO', 'MCHILD', 'MCAREGIVERS', 'MEDICARE', 'OTHER'
     ]
 
     static MARITIALSTATUS = [
@@ -50,6 +50,27 @@ class Patient implements Serializable {
     String maritalStatus
     String screeningResult
 
+
+    //
+    String ssn
+    String streetAddress
+    String city
+    String state
+
+    String homePhoneNumber
+    String mobilePhoneNumber
+    String emailAddress
+
+    YesNo ethnicity
+
+    YesNo transportation
+
+    String nextOfKinLastName
+    String nextOfKinFirstName
+    String nextOfKinRelationshipCode
+    String nextOfKinPhoneNumber
+
+
     String getFullName() { "${lastName}, ${firstName}"}
 
     static transients = ['fullName']
@@ -75,6 +96,25 @@ class Patient implements Serializable {
         screeningResult nullable: true, inList: SCREENING_RESULTS
         reference nullable: true, inList: REFERENCE
         federalPoverty nullable: true
+
+
+        ssn nullable: true, matches: "^(\\d{3}-?\\d{2}-?\\d{4}|XXX-XX-XXXX)\$"
+        streetAddress blank: false, nullable: true
+        city blank: false, nullable: true
+        state blank: false, nullable: true
+
+        homePhoneNumber blank: false, nullable: true
+        mobilePhoneNumber blank: true, nullable: true
+        emailAddress email: true, nullable: true
+
+        ethnicity nullable: true
+        transportation nullable: true
+
+        nextOfKinLastName nullable: true
+        nextOfKinFirstName nullable: true
+        nextOfKinRelationshipCode nullable: true
+        nextOfKinPhoneNumber nullable: true
+
     }
 
     static mapping = {

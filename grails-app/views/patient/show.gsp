@@ -22,6 +22,7 @@
         <div class="span6">
 
             <form class="form-horizontal">
+
                 <div class="control-group">
                     <label class="control-label" for="citizen">
                         <g:message code="patient.citizen.label"/>
@@ -130,6 +131,24 @@
                     </div>
                 </div>
                 <div class="control-group">
+                    <label class="control-label" for="ethnicity">
+                        <g:message code="patient.ethnicity.label"/>
+                    </label>
+
+                    <div class="controls">
+                        <ui:yesno id="ethnicity" bean="${patientInstance}" property="ethnicity"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="transportation">
+                        <g:message code="patient.transportation.label"/>
+                    </label>
+
+                    <div class="controls">
+                        <ui:yesno id="transportation" bean="${patientInstance}" property="transportation"/>
+                    </div>
+                </div>
+                <div class="control-group">
                     <label class="control-label" for="screeningResult">
                         <g:message code="patient.screeningResults.label"/>
                     </label>
@@ -150,16 +169,6 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="zipcode">
-                        <g:message code="patient.zipcode.label"/>
-                    </label>
-
-                    <div class="controls">
-                        <input type="text" id="zipcode" disabled=""
-                               value="${f.display('bean': patientInstance, 'property':'zipcode')}"/>
-                    </div>
-                </div>
-                <div class="control-group">
                     <label class="control-label" for="reference">
                         <g:message code="patient.reference.label"/>
                     </label>
@@ -169,6 +178,78 @@
                                value="${f.display('bean': patientInstance, 'property':'reference')}"/>
                     </div>
                 </div>
+
+                <fieldset>
+                    <legend>Contact Info</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="streetAddress">
+                            <g:message code="patient.streetAddress.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <input type="text" id="streetAddress" disabled=""
+                                   value="${f.display('bean': patientInstance, 'property':'streetAddress')}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="city">
+                            <g:message code="patient.city.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <input type="text" id="city" disabled=""
+                                   value="${f.display('bean': patientInstance, 'property':'city')}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="state">
+                            <g:message code="patient.state.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <input type="text" id="state" disabled=""
+                                   value="${f.display('bean': patientInstance, 'property':'state')}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="zipcode">
+                            <g:message code="patient.zipcode.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <input type="text" id="zipcode" disabled=""
+                                   value="${f.display('bean': patientInstance, 'property':'zipcode')}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="homePhoneNumber">
+                            <g:message code="patient.homePhoneNumber.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <f:display id="homePhoneNumber" bean="patientInstance"  property="homePhoneNumber" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="mobilePhoneNumber">
+                            <g:message code="patient.mobilePhoneNumber.label"/>
+                        </label>
+
+                        <div class="controls">
+                           <f:display id="mobilePhoneNumber" bean="patientInstance"  property="mobilePhoneNumber" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="emailAddress">
+                            <g:message code="patient.emailAddress.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <input type="text" id="emailAddress" disabled=""
+                                   value="${f.display('bean': patientInstance, 'property':'emailAddress')}"/>
+                        </div>
+                    </div>
+                </fieldset>
             </form>
         </div>
 

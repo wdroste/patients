@@ -9,5 +9,9 @@ modules = {
         resource url: 'js/bootstrap-datepicker.js'
         resource url: 'js/knockout-2.3.0.js'
         resource url: 'js/bootstrap-rowlink.min.js'
+
+        // bootstrap helper
+        resource url: 'js/bootstrap-formhelpers.js'
+        resource url: 'css/bootstrap-formhelpers.css'
 	}
 }
