@@ -74,8 +74,7 @@ class PatientService {
 
     def run(long vpId, Date start, Date end) {
         VisitReport vp = VisitReport.get(vpId)
-        def list = PatientVisit.withCriteria() {
-
+        def list = query(vp, start, end) {
             projections {
                 property('dateOfVisit', 'dateOfVisit')
                 property('typeOfVisit', 'typeOfVisit')
@@ -84,12 +83,19 @@ class PatientService {
                     property('firstName', 'firstName')
                 }
             }
+        }
+        ['reportInstanceList':list, 'visitReportInstance': vp, startDate: start, endDate: end]
+    }
+
+    def query(VisitReport vp, Date start, Date end, Closure theProjections) {
+        return PatientVisit.withCriteria() {
+            // add any projections..
+            theProjections.delegate = delegate
+            theProjections()
 
             between('dateOfVisit', start, end)
-
             // determine ordering..
             order('dateOfVisit')
-
             // only visits of these types
             if (vp.visitTypes) {
                 inList('typeOfVisit', vp.visitTypes)
@@ -165,13 +171,8 @@ class PatientService {
                             vp.numberOfFamilyRange.end)
 
                 }
-
-//                Integer yearlyFamilyIncome
-//                IncomeRange familyIncomeRange
-
             }
         }
-        ['reportInstanceList':list, 'visitReportInstance': vp, startDate: start, endDate: end]
     }
 
     LoadingCache<String, BlockingQueue<?>> messageQueue = CacheBuilder.newBuilder()

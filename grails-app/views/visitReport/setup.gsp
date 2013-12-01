@@ -20,7 +20,7 @@
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
-        <g:form action="run" class="form-horizontal">
+        <g:form action="run" class="form-horizontal" method="GET">
             <g:hiddenField name="id" value="${visitReportInstance.id}"/>
 
             <div class="control-group ">

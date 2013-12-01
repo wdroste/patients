@@ -24,7 +24,20 @@
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
-        Count: ${reportInstanceList.size()}
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <g:set var="endTime" value="${endDate.time}"/>
+                <g:set var="startTime" value="${startDate.time}"/>
+                <g:set var="linkParams" value="${['id':params.id, 'start':startTime, 'end':endTime]}"/>
+                <g:link action="exportCSV" class="btn" params="${linkParams}">
+                    <i class="icon-download-alt"></i> Download
+                </g:link>
+                <g:link action="ftpUpload" class="btn"  params="${linkParams}">
+                    <i class="icon-upload"></i> FTP Upload
+                </g:link>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>

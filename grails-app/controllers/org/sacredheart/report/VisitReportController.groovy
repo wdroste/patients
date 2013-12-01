@@ -4,6 +4,7 @@ class VisitReportController {
 
     static scaffold = true
 
+    def exportService
     def patientService
 
     def create() {
@@ -92,8 +93,36 @@ class VisitReportController {
     def run(RunCommand runCommand) {
         patientService.run(runCommand.id, runCommand.start, runCommand.end)
     }
-}
 
+    /**
+     * Export the report as CSV.
+     */
+    def exportCSV(RunCommandTime cmd) {
+        // create the export file..
+        def f = exportService.exportCSV(cmd.id, new Date(cmd.start), new Date(cmd.end))
+
+        // set the response headers..
+        response.setContentType('text/csv')
+        response.setHeader('Content-disposition', "attachment; filename=\"${f.name}\"")
+
+        // send the file to the client..
+        f.withInputStream { ins ->
+            response.outputStream << ins
+        }
+
+    }
+}
+@grails.validation.Validateable
+class RunCommandTime {
+    long id
+    long start
+    long end
+    static constraints = {
+        id nullable: false
+        start nullable: false
+        end nullable: false
+    }
+}
 
 @grails.validation.Validateable
 class RunCommand {
