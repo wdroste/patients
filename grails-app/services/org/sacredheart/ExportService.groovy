@@ -1,6 +1,7 @@
 package org.sacredheart
 
 import org.sacredheart.report.VisitReport
+import org.springframework.context.NoSuchMessageException
 import org.supercsv.cellprocessor.FmtDate
 import org.supercsv.cellprocessor.Optional
 import org.supercsv.cellprocessor.constraint.NotNull
@@ -12,7 +13,9 @@ import org.supercsv.quote.QuoteMode
 
 class ExportService {
 
+    def messageSource
     def patientService
+
 
     String[] headers = [
             'Unique Patient ID',
@@ -106,7 +109,7 @@ class ExportService {
         map['Primary Language Code'] = patient.language
         map['Marital Status Code'] = patient.maritalStatus
         map['SSN'] = patient.ssn
-        map['Ethnic Group Code'] = patient.ethnicity
+        map['Ethnic Group Code'] = getMessage("patient.ethnicity.${patient.ethnicity}")
         map['Citizenship'] = patient.citizen
         map['Veteran'] = patient.veteran
         // Next of Kin
@@ -131,6 +134,13 @@ class ExportService {
         return map
     }
 
+    String getMessage(String code) {
+        try {
+            messageSource.getMessage(code, [] as Object[], Locale.getDefault())
+        } catch (NoSuchMessageException ex) {
+            return ''
+        }
+    }
 
     CellProcessor[] buildProcessors() {
         [
