@@ -147,7 +147,7 @@ class ExportService {
                 new Optional(), //'Unique Patient ID',
                 new Optional(), //'Last Name',
                 new Optional(), //'First Name & Middle Name',
-                new Optional(FmtDate('MM-dd-yy')), //'Date of Birth',
+                new Optional(new FmtDate('MM-dd-yy')), //'Date of Birth',
                 new Optional(), //'Gender Code',
                 new Optional(), //'Race Code',
                 new Optional(), //'Street Address',
