@@ -144,12 +144,12 @@ class ExportService {
 
     CellProcessor[] buildProcessors() {
         [
-                new NotNull(), //'Unique Patient ID',
-                new NotNull(), //'Last Name',
-                new NotNull(), //'First Name & Middle Name',
-                new FmtDate('dd-MMM-yy'), //'Date of Birth',
-                new NotNull(), //'Gender Code',
-                new NotNull(), //'Race Code',
+                new Optional(), //'Unique Patient ID',
+                new Optional(), //'Last Name',
+                new Optional(), //'First Name & Middle Name',
+                new Optional(FmtDate('MM-dd-yy')), //'Date of Birth',
+                new Optional(), //'Gender Code',
+                new Optional(), //'Race Code',
                 new Optional(), //'Street Address',
                 new Optional(), //'City',
                 new Optional(), //'State Abbrev',
@@ -176,12 +176,12 @@ class ExportService {
                 new Optional(), //'Visit Date/Time',
                 // Funding
                 new Optional(), //'FPL',
-                new NotNull(), //'Screening Results',
+                new Optional(), //'Screening Results',
                 new Optional(), //'Primary Diagnosis Code',
                 new Optional(), //'Primary Diagnosis Description',
                 new Optional(), //'Secondary Diagnosis Code',
                 new Optional(), //'Secondary Diagnosis Description',
-                new NotNull(), //'Type of Visit'
+                new Optional(), //'Type of Visit'
         ] as CellProcessor[]
     }
 
