@@ -13,6 +13,65 @@ class PatientVisitService {
 
     static transactional = true
 
+    def establishedPatientVisitReport(Date start, Date end) {
+        // all the patients for the month..
+        def patients = Patient.withCriteria {
+            projections {
+                distinct()
+            }
+            visits {
+                between('dateOfVisit', start, end)
+            }
+        }
+
+        // determine the established patients..
+        def estPatients = PatientVisit.withCriteria {
+            projections {
+                distinct('patient')
+            }
+            lt('dateOfVisit', start)
+            inList('patient', patients)
+        }
+
+        // determine the new patients..
+        def newPatients = PatientVisit.withCriteria {
+            projections {
+                distinct('patient')
+            }
+            not {
+                lt('dateOfVisit', start)
+                inList('patient', estPatients)
+            }
+        }
+
+        // determine the number of visits by est
+        def estVisits = PatientVisit.withCriteria {
+            projections {
+                count()
+            }
+            inList('patient', estPatients)
+            between('dateOfVisit', start, end)
+        }
+
+        def newVisits = PatientVisit.withCriteria {
+            projections {
+                count()
+            }
+            inList('patient', newPatients)
+            between('dateOfVisit', start, end)
+        }
+
+        [
+                'startDate':start,
+                'endDate':end,
+                'patients':patients,
+                'estPatients':estPatients,
+                'newPatients':newPatients,
+                'estVisits':estVisits[0],
+                'newVisits':newVisits[0]
+        ]
+    }
+
     /**
      * Import CSV data from Medkind.
      */

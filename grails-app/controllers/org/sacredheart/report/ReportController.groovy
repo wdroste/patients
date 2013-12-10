@@ -8,8 +8,10 @@ import org.sacredheart.PatientVisit
  */
 class ReportController {
 
+    def patientVisitService
+
     def index() {
-        [reports: ['visitReport', 'screeningResultsReport']]
+        [reports: ['visitReport', 'screeningResultsReport', 'establishedReport']]
     }
 
     def run(ReportRunCommand cmd) {
@@ -18,6 +20,11 @@ class ReportController {
         }
         // internally forward to the proper report action..
         forward(action:cmd.reportId, params:params)
+    }
+
+    def establishedReport(ReportRunCommand cmd) {
+        def map = patientVisitService.establishedPatientVisitReport(cmd.start, cmd.end)
+        return map
     }
 
     /**
@@ -29,11 +36,11 @@ class ReportController {
             map[visitType] = PatientVisit.countByTypeOfVisitAndDateOfVisitBetween(visitType, cmd.start, cmd.end)
         }
         [
-                'startDate': cmd.start,
-                'endDate': cmd.end,
-                'totalVisits':totalPatientVisits(cmd),
-                'distinctPatientCount':distinctPatientCount(cmd),
-                'results':map
+            'startDate': cmd.start,
+            'endDate': cmd.end,
+            'totalVisits':totalPatientVisits(cmd),
+            'distinctPatientCount':distinctPatientCount(cmd),
+            'results':map
         ]
     }
 
@@ -42,23 +49,20 @@ class ReportController {
      */
     def screeningResultsReport(ReportRunCommand cmd) {
         def map = [:]
-        Patient.SCREENING_RESULTS.each { result ->
-            map[result] = PatientVisit.withCriteria {
-                projections {
-                    countDistinct('patient')
-                }
-                patient {
-                    eq('screeningResult', result)
-                }
-                between('dateOfVisit', cmd.start, cmd.end)
-            }[0]
+
+        // make a map of patients that are before and after start date..
+        def visits = PatientVisit.withCriteria {
+
+
+
         }
+
         [
-                'startDate': cmd.start,
-                'endDate': cmd.end,
-                'totalVisits':totalPatientVisits(cmd),
-                'distinctPatientCount':distinctPatientCount(cmd),
-                'results':map
+            'startDate': cmd.start,
+            'endDate': cmd.end,
+            'totalVisits':totalPatientVisits(cmd),
+            'distinctPatientCount':distinctPatientCount(cmd),
+            'results':map
         ]
     }
 

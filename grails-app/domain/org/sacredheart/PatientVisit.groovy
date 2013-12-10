@@ -15,6 +15,7 @@ class PatientVisit implements Serializable {
 
     static mapping = {
         provider ignoreNotFound: true
+        sort 'dateOfVisit':'desc'
     }
 
     static belongsTo = [patient: Patient]

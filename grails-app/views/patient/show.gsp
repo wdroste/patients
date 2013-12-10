@@ -262,7 +262,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <g:each in="${patientInstance.visits}" var="patientVisitInstance">
+                <g:each in="${patientInstance.visits.sort{new Date() - it.dateOfVisit}}" var="patientVisitInstance">
                     <tr>
                         <td>
                             <g:link action="edit" controller="patientVisit" id="${patientVisitInstance.id}">
