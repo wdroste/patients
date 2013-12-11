@@ -72,7 +72,7 @@
             <div id="race_chart"></div>
         </div>
         <div class="span6">
-            <div id="veteran_chart"></div>
+            <div id="language_chart"></div>
         </div>
     </div>
     <!--Load the AJAX API-->
@@ -88,27 +88,7 @@
             genderChart();
             citizenChart();
             raceChart();
-            veteranChart();
-        }
-
-        function veteranChart() {
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Population of Veterans');
-            data.addColumn('number', '#');
-            data.addRows([
-                ['Veteran', ${Patient.countByVeteran(YesNo.Yes)}],
-                ['Civilian', ${Patient.countByVeteran(YesNo.No)}]
-            ]);
-
-            // Set chart options
-            var options = {'title':'Population of Veterans',
-                'width':400,
-                'height':300};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('veteran_chart'));
-            chart.draw(data, options);
+            languageChart();
         }
 
         function raceChart() {
@@ -172,6 +152,21 @@
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('gender_chart'));
+            chart.draw(data, options);
+        }
+
+        function languageChart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Language');
+            data.addColumn('number', '#');
+            data.addRows(${g.include(controller:'dashboard', action:'languageData')});
+
+            // Set chart options
+            var options = {'title':'Language', 'width':400, 'height':300};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('language_chart'));
             chart.draw(data, options);
         }
     </r:script>
