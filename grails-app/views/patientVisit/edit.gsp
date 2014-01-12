@@ -76,6 +76,7 @@
                             <f:field bean="patientVisitInstance" property="dateOfVisit"/>
                             <f:field bean="patientVisitInstance" property="typeOfVisit"/>
                             <f:field bean="patientVisitInstance" property="provider"/>
+                            <f:field bean="patientVisitInstance" property="diagnosisCode"/>
 
                             <div class="form-actions">
 								<button type="submit" class="btn btn-primary">
