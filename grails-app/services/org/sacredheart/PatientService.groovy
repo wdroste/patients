@@ -82,6 +82,9 @@ class PatientService {
                     property('lastName', 'lastName')
                     property('firstName', 'firstName')
                 }
+                provider {
+                    property('title', 'title')
+                }
             }
         }
         ['reportInstanceList':list, 'visitReportInstance': vp, startDate: start, endDate: end]

@@ -44,6 +44,7 @@
                 <th class="header"><g:message code="patientVisit.dateOfVisit.label"/></th>
                 <th class="header"><g:message code="patientVisit.typeOfVisit.label"/></th>
                 <th class="header"><g:message code="patient.fullName.label"/></th>
+                <th class="header"><g:message code="provider.title.label"/></th>
                 <th></th>
             </tr>
             </thead>
@@ -56,11 +57,12 @@
                     <td>
                         <%=reportInstance[2]%>,<%=reportInstance[3]%>
                     </td>
+                    <td><%= reportInstance[4] %></td>
                 </tr>
             </g:each>
             <tr class="success">
                 <td>Total:</td>
-                <td colspan="2">${reportInstanceList.size()}</td>
+                <td colspan="3">${reportInstanceList.size()}</td>
             </tr>
             </tbody>
         </table>
