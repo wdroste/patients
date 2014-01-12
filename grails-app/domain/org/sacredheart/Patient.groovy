@@ -12,7 +12,7 @@ class Patient implements Serializable {
         'SomeCollege', 'CollegeDegree', 'SomePostGrad', 'PostGradDegree']
 
     static SCREENING_RESULTS = [
-            'A2C', 'CCS', 'PHC', 'WILCO', 'MCHILD', 'MCAREGIVERS', 'MEDICARE', 'OTHER'
+            'A2C', 'CCS', 'PHC', 'WILCO', 'MCHILD', 'MCAREGIVERS', 'MEDICARE', 'MDSSI', 'A2C-CC', 'OTHER'
     ]
 
     static MARITIALSTATUS = [
