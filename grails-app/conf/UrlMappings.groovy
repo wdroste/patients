@@ -7,6 +7,8 @@ class UrlMappings {
 			}
 		}
 
+        "/patients/v1"(resources:"patient", namespace:'v1')
+
 		"/"(view:"/index")
 		"500"(view:'/error')
 	}

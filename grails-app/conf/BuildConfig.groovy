@@ -47,27 +47,28 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":war-exec:1.0.3"
-        runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.8.3"
-        runtime ":resources:1.2"
 
-        compile ":cache-headers:1.1.5"
-        runtime ":cached-resources:1.0"
-        runtime ":yui-minify-resources:0.1.5"
+        // plugins for the build system only
+        build ":tomcat:7.0.50"
+
+        // plugins for the compile step
+        compile ":scaffolding:2.0.1"
+        compile ':cache:1.1.1'
+
+        // plugins needed at runtime but not for compilation
+        runtime ":hibernate:3.6.10.7" // or ":hibernate4:4.1.11.6"
+        runtime ":database-migration:1.3.8"
+        runtime ":jquery:1.10.2.2"
+        runtime ":resources:1.2.1"
+        // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
+        //runtime ":cached-resources:1.1"
+        //runtime ":yui-minify-resources:0.1.5"
 
-        build ":tomcat:$grailsVersion"
-
-        runtime ":database-migration:1.3.2"
-
-        //compile ':cache:1.0.1'
-
+        // my plugins
+        runtime ":war-exec:1.0.3"
         runtime ":fields:1.3"
         compile ":twitter-bootstrap:2.3.2"
-        //compile ":twitter-typeahead:0.9.3.1"
-
-        // security
-        compile ":shiro:1.1.4"
+        compile ":shiro:1.2.0"
     }
 }
