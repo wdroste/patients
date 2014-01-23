@@ -99,7 +99,7 @@ class VisitReportController {
      */
     def exportCSV(RunCommandTime cmd) {
         // create the export file..
-        def f = exportService.exportCSV(cmd.id, new Date(cmd.start), new Date(cmd.end))
+        def f = exportService.exportCSV(cmd.id, '.txt', new Date(cmd.start), new Date(cmd.end))
 
         // set the response headers..
         response.setContentType('text/csv')

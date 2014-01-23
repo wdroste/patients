@@ -58,13 +58,13 @@ class ExportService {
     /**
      * Exports the report data to a file to be used for transfer.
      */
-    File exportCSV(long id, Date start, Date end) {
+    File exportCSV(long id, String prefix, Date start, Date end) {
         // run the query
         ICsvMapWriter writer = null
         try {
             def report = VisitReport.get(id)
             def data = patientService.query(report, start, end, {})
-            File f = File.createTempFile(report.name + "-", ".csv")
+            File f = File.createTempFile(report.name + "-", prefix)
 
             CsvPreference pref = new CsvPreference.Builder(CsvPreference.TAB_PREFERENCE).surroundingSpacesNeedQuotes(true).build()
             writer = new CsvMapWriter(new FileWriter(f), pref)
