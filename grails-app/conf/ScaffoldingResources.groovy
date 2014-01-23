@@ -10,10 +10,6 @@ modules = {
         resource url: 'js/knockout-2.3.0.js'
         resource url: 'js/bootstrap-rowlink.min.js'
 
-        // ember JS
-        resource url: 'js/handlebars-1.1.2.js'
-        resource url: 'js/ember-1.3.1.js'
-
         // bootstrap helper
         resource url: 'js/bootstrap-formhelpers.js'
         resource url: 'css/bootstrap-formhelpers.css'
