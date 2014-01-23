@@ -3,9 +3,12 @@ package org.sacredheart
 import grails.converters.JSON
 
 class PatientController {
+    static namespace = 'default'
     static scaffold = true
 
     def patientService
+
+    def index() { redirect action: 'list' }
 
     def list() {
         params.offset = params.int('offset') ?: 0
