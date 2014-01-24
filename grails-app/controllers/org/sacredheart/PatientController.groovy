@@ -3,15 +3,14 @@ package org.sacredheart
 import grails.converters.JSON
 
 class PatientController {
+    static namespace = 'default'
     static scaffold = true
 
     def patientService
 
-    def list() {
-        params.offset = params.int('offset') ?: 0
-        params.max = Math.min(params.max ? params.int('max') : 10, 1000)
-        patientService.list(params)
-    }
+    def index() { render view: 'list' }
+
+    def list() {    }
 
     def visit() {
         def patientVisit = new PatientVisit()
