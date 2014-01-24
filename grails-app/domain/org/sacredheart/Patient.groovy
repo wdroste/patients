@@ -1,6 +1,8 @@
 package org.sacredheart
 
 class Patient implements Serializable {
+    static searchable = true
+
     static GENDER = ['Male', 'Female']
 
     static LANGUAGE = ['English', 'Spanish', 'Other']

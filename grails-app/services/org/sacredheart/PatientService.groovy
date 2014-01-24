@@ -52,7 +52,7 @@ class PatientService {
             }
             order(params.sort ?: 'lastName', params.order ?: 'asc')
         }
-        [patientInstanceList: results.list, patientInstanceTotal: results.totalCount]
+        [results.list, results.totalCount]
     }
 
     List<?> getAllZipCodes() {

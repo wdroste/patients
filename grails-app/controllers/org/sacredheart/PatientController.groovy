@@ -8,13 +8,9 @@ class PatientController {
 
     def patientService
 
-    def index() { redirect action: 'list' }
+    def index() { render view: 'list' }
 
-    def list() {
-        params.offset = params.int('offset') ?: 0
-        params.max = Math.min(params.max ? params.int('max') : 10, 1000)
-        patientService.list(params)
-    }
+    def list() {    }
 
     def visit() {
         def patientVisit = new PatientVisit()

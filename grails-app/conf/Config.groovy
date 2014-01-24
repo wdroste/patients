@@ -120,3 +120,9 @@ grails {
     }
 }
 remove this line */
+
+
+searchable {
+    // use faster in-memory index
+    compassConnection = "ram://app-index"
+}
