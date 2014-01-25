@@ -277,5 +277,58 @@
         </div>
     </div>
 </div>
+<r:script>
+    var PagedGridModel = function(items) {
+        var self = this;
+
+        self.items = ko.observableArray(items);
+
+
+        var dateTransform = function(item) {
+            var m = moment(item.dateOfBirth);
+            return m.isValid() ?  m.calendar() : "";
+        }
+
+        self.toggle = true;
+        this.gridViewModel = new ko.simpleGrid.viewModel({
+            data: self.items,
+            columns: [
+                { headerText: "${message(code: 'patientVisit.dateOfVisit.label')}", rowText: dateTransform },
+                { headerText: "${message(code: 'patientVisit.typeOfVisit.label')}", rowText: dateTransform },
+            ],
+            pageSize: 100,
+            linkFx: function(item) {
+                window.location = "/patient/show/" + item.id;
+            },
+            sortBy : function(column) {
+                self.items.sort(function(o1, o2) {
+                    var oo1 = self.toggle ? o1 : o2;
+                    var oo2 = self.toggle ? o2 : o1;
+                    var b = oo1[column.rowText];
+                    var a = oo2[column.rowText];
+                    return a>b ? -1 : a<b ? 1 : 0;
+                });
+                self.toggle = !self.toggle;
+            },
+            processRow : function(item, bindingContext) {
+                return (item.rowText == "id") ? "ko_simpleGrid_td_action" : "ko_simpleGrid_td";
+            }
+        });
+    };
+
+    var query = "";
+    if (window.location.hash != "" || window.location.hash != "#") {
+        query = window.location.hash.substr(1);
+        // initial data
+        $.getJSON("/rest/v1/patients",
+            $.param({max:"100", offset:"0", q:query}),
+            function(data) {
+                ko.applyBindings(new PagedGridModel(query, data));
+            });
+    } else {
+        ko.applyBindings(new PagedGridModel(query, []));
+    }
+</r:script>
+
 </body>
 </html>

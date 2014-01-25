@@ -56,6 +56,7 @@ grails.project.dependency.resolution = {
         runtime ':resources:1.2.1'
         runtime ':yui-minify-resources:0.1.5'
 
+
         // my plugins
         runtime ':war-exec:1.0.3'
         runtime ':fields:1.3'

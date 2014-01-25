@@ -8,9 +8,23 @@ class PatientController {
 
     def patientService
 
-    def index() { render view: 'list' }
+    def index() { redirect(action:'list') }
 
-    def list() {    }
+    def list() {
+        params.offset = params.int('offset') ?: 0
+        params.max = Math.min(params.max ? params.int('max') : 25, 1000)
+        def results, total
+        if (params?.q) {
+            // because search needs a query..
+            def search = Patient.search(params.q, params)
+            results = search.results
+            total = search.total
+        } else {
+            results = Patient.list(params)
+            total = Patient.count()
+        }
+        [patientInstanceList: results, patientInstanceTotal: total]
+    }
 
     def visit() {
         def patientVisit = new PatientVisit()

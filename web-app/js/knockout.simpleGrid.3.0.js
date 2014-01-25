@@ -19,6 +19,7 @@
             this.pageSize = configuration.pageSize || 5;
             this.linkFx = configuration.linkFx;
             this.sortBy = configuration.sortBy;
+            this.processRow = configuration.processRow;
 
             // If you don't specify columns configuration, we'll use scaffolding
             this.columns = configuration.columns || getColumnsForScaffolding(ko.unwrap(this.data));
