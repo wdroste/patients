@@ -23,6 +23,7 @@
                 <g:sortableColumn property="patient.lastName" title="${message(code: 'patient.fullName.label')}"/>
                 <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}"/>
                 <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.provider.label')}"/>
+                <g:sortableColumn property="diagnosisCode" title="${message(code: 'patientVisit.diagnosisCode.label')}"/>
                 <th></th>
             </tr>
             </thead>
@@ -36,6 +37,7 @@
                     <td><f:display bean="${patientVisitInstance.patient}" property="fullName"/></td>
                     <td><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></td>
                     <td><f:display bean="${patientVisitInstance}" property="provider"/></td>
+                    <td><f:display bean="${patientVisitInstance}" property="diagnosisCode"/></td>
                     <td class="link">
                         <g:link action="edit" id="${patientVisitInstance.id}" class="btn btn-small">
                             <i class="icon-edit"></i>

@@ -59,8 +59,7 @@
                         </div>
                     </div>
 
-                    <f:field bean="${patientVisitInstance}" property="typeOfVisit"/>
-                    <f:field bean="${patientVisitInstance}" property="dateOfVisit"/>
+                    <g:render template="/patientVisit/form"/>
 
 <%--
                     <div class="input-append date" id="dp3" data-date-format="mm/dd/yyyy">
