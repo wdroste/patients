@@ -4,7 +4,7 @@ class PatientVisit implements Serializable {
     static VISITTYPE = [
         'WalkIn', 'ChronicCare', 'CancerScreening', 'Lab', 'NursesVisit', 'DrPhoneConsult',
         'DiabeticEducation', 'RegistrationScreening', 'OtherEducation', 'Other', 'FluShot',
-        'NoShow', 'Cancelled'
+        'NoShow', 'Cancelled', 'Dentist'
     ]
 
     String typeOfVisit
