@@ -259,6 +259,7 @@
                 <tr>
                     <th><g:message code="patientVisit.dateOfVisit.label"/></th>
                     <th><g:message code="patientVisit.typeOfVisit.label"/></th>
+                    <th><g:message code="patientVisit.diagnosisCode.label"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -270,6 +271,7 @@
                             </g:link>
                         </td>
                         <td><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></td>
+                        <td><f:display bean="${patientVisitInstance}" property="diagnosisCode"/></td>
                     </tr>
                 </g:each>
                 </tbody>
