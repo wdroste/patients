@@ -1,4 +1,5 @@
 import org.apache.shiro.crypto.hash.Sha256Hash
+import org.sacredheart.Provider
 import org.sacredheart.User
 
 class BootStrap {
@@ -22,6 +23,15 @@ class BootStrap {
             u.save(failOnError: true)
             println "Created user: ${u.email}, ${password}"
         }
+
+        // create NA provider..
+        Provider na = new Provider()
+        na.title = "NA"
+        na.license = "NA"
+        na.lastName = "NA"
+        na.firstName = "NA"
+        na.middleName = "NA"
+        na.save(failOnError: true)
 
         // load sacred heart data..
         Thread.start {
