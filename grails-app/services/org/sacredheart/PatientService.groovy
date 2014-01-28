@@ -76,14 +76,15 @@ class PatientService {
         VisitReport vp = VisitReport.get(vpId)
         def list = query(vp, start, end) {
             projections {
-                property('dateOfVisit', 'dateOfVisit')
-                property('typeOfVisit', 'typeOfVisit')
+                property 'id'
+                property 'dateOfVisit'
+                property 'typeOfVisit'
                 patient {
-                    property('lastName', 'lastName')
-                    property('firstName', 'firstName')
+                    property 'lastName'
+                    property 'firstName'
                 }
                 provider {
-                    property('title', 'title')
+                    property 'title'
                 }
             }
         }
