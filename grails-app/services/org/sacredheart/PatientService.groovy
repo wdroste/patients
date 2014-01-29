@@ -105,6 +105,13 @@ class PatientService {
                 inList('typeOfVisit', vp.visitTypes)
             }
 
+            // check the providers
+            if (vp.providers) {
+                provider {
+                    inList('id', vp.providers*.id)
+                }
+            }
+
             // all the patient criteria
             patient {
                 if (StringUtils.isNotBlank(vp.patientIdPattern)) {

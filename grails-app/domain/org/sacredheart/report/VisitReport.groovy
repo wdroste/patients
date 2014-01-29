@@ -1,6 +1,6 @@
 package org.sacredheart.report
 
-
+import org.sacredheart.Provider
 import org.sacredheart.YesNo
 
 /**
@@ -37,7 +37,8 @@ class VisitReport {
             visitTypes: String,
             educations: String,
             maritalStatuses: String,
-            screeningResults: String
+            screeningResults: String,
+            providers: Provider
     ]
 
     static constraints = {

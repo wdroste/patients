@@ -35,6 +35,20 @@
     </div>
 </div>
 
+<div class="control-group">
+    <label class="control-label" for="providers">
+        <g:message code="visitReport.providers.label"/>
+    </label>
+
+    <div class="controls">
+        <g:select name="providers"
+                  multiple="true"
+                  optionKey="id" optionValue="title"
+                  value="${visitReportInstance.providers}"
+                  from="${org.sacredheart.Provider.list()}"/>
+    </div>
+</div>
+
 <f:field bean="visitReportInstance" property="patientIdPattern"/>
 <f:field bean="visitReportInstance" property="firstNamePattern"/>
 <f:field bean="visitReportInstance" property="middleNamePattern"/>
