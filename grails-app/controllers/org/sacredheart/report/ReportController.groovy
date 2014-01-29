@@ -2,6 +2,7 @@ package org.sacredheart.report
 
 import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
+import org.sacredheart.Provider
 
 /**
  * Used for static based reports.
@@ -11,7 +12,14 @@ class ReportController {
     def patientVisitService
 
     def index() {
-        [reports: ['visitReport', 'screeningResultsReport', 'establishedReport']]
+        [
+                reports: [
+                        'visitReport',
+                        'screeningResultsReport',
+                        'establishedReport',
+                        'visitsByProviderReport'
+                ]
+        ]
     }
 
     def run(ReportRunCommand cmd) {
@@ -19,7 +27,7 @@ class ReportController {
             throw new IllegalStateException('End date is before start date.')
         }
         // internally forward to the proper report action..
-        forward(action:cmd.reportId, params:params)
+        forward(action: cmd.reportId, params: params)
     }
 
     def establishedReport(ReportRunCommand cmd) {
@@ -36,11 +44,11 @@ class ReportController {
             map[visitType] = PatientVisit.countByTypeOfVisitAndDateOfVisitBetween(visitType, cmd.start, cmd.end)
         }
         [
-            'startDate': cmd.start,
-            'endDate': cmd.end,
-            'totalVisits':totalPatientVisits(cmd),
-            'distinctPatientCount':distinctPatientCount(cmd),
-            'results':map
+                'startDate': cmd.start,
+                'endDate': cmd.end,
+                'totalVisits': totalPatientVisits(cmd),
+                'distinctPatientCount': distinctPatientCount(cmd),
+                'results': map
         ]
     }
 
@@ -49,20 +57,23 @@ class ReportController {
      */
     def screeningResultsReport(ReportRunCommand cmd) {
         def map = [:]
-
-        // make a map of patients that are before and after start date..
-        def visits = PatientVisit.withCriteria {
-
-
-
+        Patient.SCREENING_RESULTS.each { result ->
+            map[result] = PatientVisit.withCriteria {
+                projections {
+                    countDistinct('patient')
+                }
+                patient {
+                    eq('screeningResult', result)
+                }
+                between('dateOfVisit', cmd.start, cmd.end)
+            }[0]
         }
-
         [
-            'startDate': cmd.start,
-            'endDate': cmd.end,
-            'totalVisits':totalPatientVisits(cmd),
-            'distinctPatientCount':distinctPatientCount(cmd),
-            'results':map
+                'startDate': cmd.start,
+                'endDate': cmd.end,
+                'totalVisits': totalPatientVisits(cmd),
+                'distinctPatientCount': distinctPatientCount(cmd),
+                'results': map
         ]
     }
 
@@ -78,6 +89,39 @@ class ReportController {
     def totalPatientVisits(ReportRunCommand cmd) {
         PatientVisit.countByDateOfVisitBetween(cmd.start, cmd.end)
     }
+
+    /**
+     * Determine the count for each screening result.
+     */
+    def visitsByProviderReport(ReportRunCommand cmd) {
+        def map = [:]
+        Provider.list().each { theProvider ->
+            if (null == theProvider || theProvider.license == 'NA') {
+                return;
+            }
+            def count = PatientVisit.withCriteria {
+                projections {
+                    countDistinct('patient')
+                }
+                provider {
+                    idEq(theProvider.id)
+                }
+                between('dateOfVisit', cmd.start, cmd.end)
+            }[0]
+            // only those providers w/ visits..
+            if (count > 0) {
+                map[theProvider.title] = count;
+            }
+        }
+        [
+                'startDate': cmd.start,
+                'endDate': cmd.end,
+                'totalVisits': totalPatientVisits(cmd),
+                'distinctPatientCount': distinctPatientCount(cmd),
+                'results': map.sort() { !it.value }
+        ]
+    }
+
 }
 
 @grails.validation.Validateable

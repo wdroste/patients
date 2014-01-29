@@ -1,7 +1,7 @@
 package org.sacredheart
 
 class Patient implements Serializable {
-    static searchable = [only: ['lastName', 'firstName', 'patientId',
+    static searchable = [only: ['lastName', 'firstName', 'patientId', 'dateOfBirth',
             'ssn', 'homePhoneNumber', 'mobilePhoneNumber', 'emailAddress']]
 
     static GENDER = ['Male', 'Female']
