@@ -16,11 +16,16 @@
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
+        <g:form method="get" action="list" class="form-inline">
+            <input name="q" class="span5" type="text" placeholder="Search" value="${params.q}">
+            <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
+        </g:form>
+
         <table class="table table-striped" data-provides="rowlink">
             <thead>
             <tr>
                 <g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}"/>
-                <g:sortableColumn property="patient.lastName" title="${message(code: 'patient.fullName.label')}"/>
+                <g:sortableColumn property="fullName" title="${message(code: 'patient.fullName.label')}"/>
                 <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}"/>
                 <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.provider.label')}"/>
                 <g:sortableColumn property="diagnosisCode" title="${message(code: 'patientVisit.diagnosisCode.label')}"/>
@@ -34,10 +39,10 @@
                         <g:link action="show" id="${patientVisitInstance.id}">
                             <g:formatDate type="date" style="MEDIUM" date="${patientVisitInstance.dateOfVisit}"/></td>
                         </g:link>
-                    <td><f:display bean="${patientVisitInstance.patient}" property="fullName"/></td>
-                    <td><f:display bean="${patientVisitInstance}" property="typeOfVisit"/></td>
-                    <td><f:display bean="${patientVisitInstance}" property="provider"/></td>
-                    <td><f:display bean="${patientVisitInstance}" property="diagnosisCode"/></td>
+                    <td><%= patientVisitInstance.fullName  %></td>
+                    <td><%= patientVisitInstance.typeOfVisit  %></td>
+                    <td><%= patientVisitInstance.provider  %></td>
+                    <td><%= patientVisitInstance.diagnosisCode  %></td>
                     <td class="link">
                         <g:link action="edit" id="${patientVisitInstance.id}" class="btn btn-small">
                             <i class="icon-edit"></i>

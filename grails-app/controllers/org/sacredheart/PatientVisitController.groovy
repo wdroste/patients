@@ -7,6 +7,12 @@ class PatientVisitController {
 
     def patientVisitService
 
+    def index() { redirect(action:'list') }
+
+    def list() {
+        patientVisitService.list(params)
+    }
+
     def uploadProgress() {
         String transactionId = params.get('id')
         def results = patientVisitService.progress(transactionId).collect { map ->

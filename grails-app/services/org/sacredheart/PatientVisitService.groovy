@@ -135,4 +135,58 @@ class PatientVisitService {
         }
         ret
     }
+
+    def list(Map params) {
+        params.offset = params.int('offset') ?: 0
+        params.max = Math.min(params.max ? params.int('max') : 25, 1000)
+        def results, total
+        if (params?.q) {
+            // because search needs a query..
+            def search = PatientVisit.search(params.q, params)
+            total = search.total
+            // transform the results..
+            results = search.results.collect {
+                [
+                        id:it.id,
+                        typeOfVisit: it.typeOfVisit,
+                        dateOfVisit : it.dateOfVisit,
+                        diagnosisCode : it.diagnosisCode,
+                        provider : it.provider.title,
+                        fullName: it.patient.fullName
+                ]
+            }
+        } else {
+            def c = PatientVisit.createCriteria()
+            def list = c.list(max: params.max, offset: params.offset) {
+                projections {
+                    property('id')
+                    property('typeOfVisit')
+                    property('dateOfVisit')
+                    property('diagnosisCode')
+                    provider {
+                        property('title')
+                    }
+                    patient {
+                        property('lastName')
+                        property('firstName')
+                    }
+                }
+                order(params.sort ?: 'dateOfVisit', params.order ?: 'desc')
+            }
+            // transform the results..
+            results = list.collect {
+                [
+                        id:it[0],
+                        typeOfVisit: it[1],
+                        dateOfVisit : it[2],
+                        diagnosisCode : it[3],
+                        provider : it[4],
+                        fullName: [it[5], it[6]].join(', ')
+                ]
+            }
+            total = Patient.count()
+        }
+
+        [patientVisitInstanceList: results, patientVisitInstanceTotal: total]
+    }
 }

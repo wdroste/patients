@@ -1,24 +1,42 @@
 package org.sacredheart
 
+import org.compass.annotations.Searchable
+import org.compass.annotations.SearchableComponent
+import org.compass.annotations.SearchableId
+import org.compass.annotations.SearchableProperty
+
+@Searchable
 class PatientVisit implements Serializable {
+
     static VISITTYPE = [
         'WalkIn', 'ChronicCare', 'CancerScreening', 'Lab', 'NursesVisit', 'DrPhoneConsult',
         'DiabeticEducation', 'RegistrationScreening', 'OtherEducation', 'Other', 'FluShot',
         'NoShow', 'Cancelled', 'Dentist'
     ]
 
-    String typeOfVisit
-    Provider provider
-    Date dateOfVisit = new Date()
+    @SearchableId
+    Long id
 
+    @SearchableComponent
+    Provider provider
+
+    @SearchableProperty
+    String typeOfVisit
+
+    @SearchableProperty
     String diagnosisCode
 
-    static mapping = {
-        provider ignoreNotFound: true
-        sort 'dateOfVisit':'desc'
-    }
+    @SearchableProperty
+    Date dateOfVisit = new Date()
+
+    @SearchableComponent
+    Patient patient
 
     static belongsTo = [patient: Patient]
+
+    static mapping = {
+        sort 'dateOfVisit':'desc'
+    }
 
     static constraints = {
         provider nullable: true
