@@ -37,6 +37,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         runtime 'mysql:mysql-connector-java:5.1.22'
+        runtime 'com.h2database:h2:1.3.175'
         runtime 'net.sf.supercsv:super-csv:2.1.0'
         runtime 'com.google.guava:guava:14.0.1'
     }
