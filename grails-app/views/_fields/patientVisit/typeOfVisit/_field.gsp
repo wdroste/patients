@@ -8,6 +8,6 @@
             name="${property}"
             value="${value}"
             valueMessagePrefix="patientVisit.visitType.select"
-            from="${org.sacredheart.PatientVisit.VISITTYPE}"/>
+            from="${grailsApplication.config.app.visitTypes}"/>
     </div>
 </div>

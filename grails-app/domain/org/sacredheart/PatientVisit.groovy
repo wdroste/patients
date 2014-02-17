@@ -8,12 +8,6 @@ import org.compass.annotations.SearchableProperty
 @Searchable
 class PatientVisit implements Serializable {
 
-    static VISITTYPE = [
-        'WalkIn', 'ChronicCare', 'CancerScreening', 'Lab', 'NursesVisit', 'DrPhoneConsult',
-        'DiabeticEducation', 'RegistrationScreening', 'OtherEducation', 'Other', 'FluShot',
-        'NoShow', 'Cancelled', 'Dentist'
-    ]
-
     @SearchableId
     Long id
 

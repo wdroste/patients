@@ -9,6 +9,7 @@ import org.sacredheart.Provider
  */
 class ReportController {
 
+    def grailsApplication
     def patientVisitService
 
     def index() {
@@ -40,7 +41,7 @@ class ReportController {
      */
     def visitReport(ReportRunCommand cmd) {
         def map = [:]
-        PatientVisit.VISITTYPE.each { visitType ->
+        grailsApplication.config.app.visitTypes.each { visitType ->
             map[visitType] = PatientVisit.countByTypeOfVisitAndDateOfVisitBetween(visitType, cmd.start, cmd.end)
         }
         [

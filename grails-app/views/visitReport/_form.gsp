@@ -31,7 +31,7 @@
                   multiple="true"
                   value="${visitReportInstance.visitTypes}"
                   valueMessagePrefix="patientVisit.visitType.select"
-                  from="${org.sacredheart.PatientVisit.VISITTYPE}"/>
+                  from="${grailsApplication.config.app.visitTypes}"/>
     </div>
 </div>
 
