@@ -24,11 +24,11 @@
         <table class="table table-striped" data-provides="rowlink">
             <thead>
             <tr>
-                <g:sortableColumn property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}"/>
-                <g:sortableColumn property="fullName" title="${message(code: 'patient.fullName.label')}"/>
-                <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}"/>
-                <g:sortableColumn property="typeOfVisit" title="${message(code: 'patientVisit.provider.label')}"/>
-                <g:sortableColumn property="diagnosisCode" title="${message(code: 'patientVisit.diagnosisCode.label')}"/>
+                <g:sortableColumn params="${['q':params.q]}" property="dateOfVisit" title="${message(code: 'patientVisit.dateOfVisit.label')}"/>
+                <th>${message(code: 'patient.fullName.label')}</th>
+                <g:sortableColumn params="${['q':params.q]}" property="typeOfVisit" title="${message(code: 'patientVisit.typeOfVisit.label')}"/>
+                <g:sortableColumn params="${['q':params.q]}" property="typeOfVisit" title="${message(code: 'patientVisit.provider.label')}"/>
+                <g:sortableColumn params="${['q':params.q]}" property="diagnosisCode" title="${message(code: 'patientVisit.diagnosisCode.label')}"/>
                 <th></th>
             </tr>
             </thead>
@@ -60,7 +60,7 @@
         </table>
 
         <div class="pagination">
-            <bootstrap:paginate total="${patientVisitInstanceTotal}"/>
+            <bootstrap:paginate total="${patientVisitInstanceTotal}" params="${['q':params.q]}"/>
         </div>
     </div>
 

@@ -138,6 +138,8 @@ class PatientVisitService {
 
     def list(Map params) {
         params.offset = params.int('offset') ?: 0
+        params.order = params.order ?: 'desc'
+        params.sort = params.sort ?: 'dateOfVisit'
         params.max = Math.min(params.max ? params.int('max') : 25, 1000)
         def results, total
         if (params?.q) {
@@ -171,7 +173,7 @@ class PatientVisitService {
                         property('firstName')
                     }
                 }
-                order(params.sort ?: 'dateOfVisit', params.order ?: 'desc')
+                order(params.sort, params.order)
             }
             // transform the results..
             results = list.collect {
