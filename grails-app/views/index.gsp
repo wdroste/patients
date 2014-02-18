@@ -61,98 +61,15 @@
     </div>
     <!--Load the AJAX API-->
     <r:script>
-
         // Load the Visualization API and the piechart package.
         google.load('visualization', '1.0', {'packages':['corechart']});
-
         // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawCharts);
-
-        function drawCharts() {
-            genderChart();
-            citizenChart();
-            raceChart();
-            languageChart();
-        }
-
-        function raceChart() {
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Race');
-            data.addColumn('number', '#');
-            data.addRows([
-                ['Black',    ${Patient.countByRace('Black')}],
-                ['White',    ${Patient.countByRace('White')}],
-                ['Hispanic', ${Patient.countByRace('Hispanic')}],
-                ['Asian',    ${Patient.countByRace('Asian')}],
-                ['Other',    ${Patient.countByRace('Other')}]
-            ]);
-
-            // Set chart options
-            var options = {'title':'Population Race',
-                'width':400,
-                'height':300};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('race_chart'));
-            chart.draw(data, options);
-        }
-
-
-        function citizenChart() {
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'US Citizen');
-            data.addColumn('number', '#');
-            data.addRows([
-                ['Yes', ${Patient.countByCitizen(YesNo.Yes)}],
-                ['No', ${Patient.countByCitizen(YesNo.No)}]
-            ]);
-
-            // Set chart options
-            var options = {'title':'Population Citizenship',
-                'width':400,
-                'height':300};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('citizen_chart'));
-            chart.draw(data, options);
-        }
-
-        function genderChart() {
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Gender');
-            data.addColumn('number', '#');
-            data.addRows([
-                ['Male', ${Patient.countByGender('Male')}],
-                ['Female', ${Patient.countByGender('Female')}]
-            ]);
-
-            // Set chart options
-            var options = {'title':'Population Gender',
-                'width':400,
-                'height':300};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('gender_chart'));
-            chart.draw(data, options);
-        }
-
-        function languageChart() {
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Language');
-            data.addColumn('number', '#');
-            data.addRows(${g.include(controller:'dashboard', action:'languageData')});
-
-            // Set chart options
-            var options = {'title':'Language', 'width':400, 'height':300};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('language_chart'));
-            chart.draw(data, options);
-        }
+        google.setOnLoadCallback(function () {
+            $( "#language_chart" ).load("dashboard/languageChart");
+            $( "#citizen_chart" ).load("dashboard/citizenChart");
+            $( "#gender_chart" ).load("dashboard/genderChart");
+            $( "#race_chart" ).load("dashboard/raceChart");
+        });
     </r:script>
 </shiro:authenticated>
 
