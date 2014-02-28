@@ -26,6 +26,11 @@ class PatientVisit implements Serializable {
     @SearchableComponent
     Patient patient
 
+    // auto-timestamped
+    //@SearchableProperty
+    //Date dateCreated
+    //Date lastUpdated
+
     static belongsTo = [patient: Patient]
 
     static mapping = {
@@ -36,5 +41,8 @@ class PatientVisit implements Serializable {
         provider nullable: true
         typeOfVisit blank: false
         diagnosisCode nullable: true
+
+        //dateCreated nullable: true
+        //lastUpdated nullable: true
     }
 }

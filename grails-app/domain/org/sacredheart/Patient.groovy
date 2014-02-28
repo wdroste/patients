@@ -1,8 +1,11 @@
 package org.sacredheart
 
+import org.compass.annotations.Searchable
+import org.compass.annotations.SearchableId
+import org.compass.annotations.SearchableProperty
+
+@Searchable
 class Patient implements Serializable {
-    static searchable = [only: ['lastName', 'firstName', 'patientId', 'dateOfBirth',
-            'ssn', 'homePhoneNumber', 'mobilePhoneNumber', 'emailAddress']]
 
     static GENDER = ['Male', 'Female']
 
@@ -29,11 +32,22 @@ class Patient implements Serializable {
         'Operator211', 'Other'
     ]
 
+    @SearchableId
+    Long id
+
+//    static searchable = [only: ['lastName', 'firstName', 'patientId', 'dateOfBirth',
+//            'ssn', 'homePhoneNumber', 'mobilePhoneNumber', 'emailAddress']]
+
+    @SearchableProperty
     String patientId
+    @SearchableProperty
     String firstName
+    @SearchableProperty
     String middleName
+    @SearchableProperty
     String lastName
 
+    @SearchableProperty
     Date dateOfBirth
     String zipcode
     String county
@@ -55,13 +69,17 @@ class Patient implements Serializable {
 
 
     //
+    @SearchableProperty
     String ssn
     String streetAddress
     String city
     String state
 
+    @SearchableProperty
     String homePhoneNumber
+    @SearchableProperty
     String mobilePhoneNumber
+    @SearchableProperty
     String emailAddress
 
     YesNo ethnicity
@@ -73,6 +91,9 @@ class Patient implements Serializable {
     String nextOfKinRelationshipCode
     String nextOfKinPhoneNumber
 
+    // auto-timestamped
+    //Date dateCreated
+    //Date lastUpdated
 
     String getFullName() { "${lastName}, ${firstName}"}
 
@@ -100,7 +121,6 @@ class Patient implements Serializable {
         reference nullable: true, inList: REFERENCE
         federalPoverty nullable: true
 
-
         ssn nullable: true, matches: "^(\\d{3}-?\\d{2}-?\\d{4}|XXX-XX-XXXX)\$"
         streetAddress blank: false, nullable: true
         city blank: false, nullable: true
@@ -118,9 +138,12 @@ class Patient implements Serializable {
         nextOfKinRelationshipCode nullable: true
         nextOfKinPhoneNumber nullable: true
 
+        //dateCreated nullable:true
+        //lastUpdated nullable: true
     }
 
     static mapping = {
+        dateCreated index: 'date_created_idx'
         lastName index: 'last_name_idx'
         firstName index: 'first_name_idx'
         patientId index: 'patient_id_idx'

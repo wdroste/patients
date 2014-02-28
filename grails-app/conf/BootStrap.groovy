@@ -2,27 +2,36 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 import org.sacredheart.Provider
 import org.sacredheart.User
 
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
+
 class BootStrap {
 
+    def backupService
     def patientService
     def patientVisitService
-    def sessionFactory
+
+    ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
 
     def init = { servletContext ->
         def password = 'heart'
         def email = 'super@shcc.org'
         def fullName = 'Super User'
 
+        // setup the backup runner..
+        scheduledExecutorService.scheduleAtFixedRate({ backupService.backup() } as Runnable, 10, 10, TimeUnit.SECONDS)
+
         if (User.findByEmail(email)) {
             // exit bootstrap has already ran..
             return;
-        } else {
-            def ph = new Sha256Hash(password).toHex()
-            def u = new User('email': email, 'passwordHash': ph, 'fullName': fullName)
-            u.addToPermissions("*:*")
-            u.save(failOnError: true)
-            println "Created user: ${u.email}, ${password}"
         }
+
+        def ph = new Sha256Hash(password).toHex()
+        def u = new User('email': email, 'passwordHash': ph, 'fullName': fullName)
+        u.addToPermissions("*:*")
+        u.save(failOnError: true)
+        println "Created user: ${u.email}, ${password}"
 
         // create NA provider..
         Provider na = new Provider()
@@ -58,5 +67,6 @@ class BootStrap {
     }
 
     def destroy = {
+        scheduledExecutorService.shutdown()
     }
 }
