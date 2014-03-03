@@ -92,8 +92,9 @@ class Patient implements Serializable {
     String nextOfKinPhoneNumber
 
     // auto-timestamped
-    //Date dateCreated
-    //Date lastUpdated
+    @SearchableProperty
+    Date dateCreated
+    Date lastUpdated
 
     String getFullName() { "${lastName}, ${firstName}"}
 
@@ -138,8 +139,8 @@ class Patient implements Serializable {
         nextOfKinRelationshipCode nullable: true
         nextOfKinPhoneNumber nullable: true
 
-        //dateCreated nullable:true
-        //lastUpdated nullable: true
+        dateCreated nullable:true
+        lastUpdated nullable: true
     }
 
     static mapping = {

@@ -1,8 +1,12 @@
 package org.sacredheart.report
 
+import org.apache.commons.lang.time.DateUtils
+import org.apache.commons.lang.time.FastDateFormat
 import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
 import org.sacredheart.Provider
+
+import java.text.SimpleDateFormat
 
 /**
  * Used for static based reports.
@@ -127,12 +131,23 @@ class ReportController {
 
 @grails.validation.Validateable
 class ReportRunCommand {
+    def dateFormat = new SimpleDateFormat("yy-MM-dd")
+
     String reportId
-    Date start
-    Date end
+    String start_submit
+    String end_submit
+
+    Date getStart() {
+        dateFormat.parse(start_submit)
+    }
+
+    Date getEnd() {
+        dateFormat.parse(end_submit)
+    }
+
     static constraints = {
         reportId blank: false
-        start nullable: false
-        end nullable: false
+        start_submit blank: false
+        end_submit blank: false
     }
 }

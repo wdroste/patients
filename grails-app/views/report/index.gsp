@@ -40,7 +40,8 @@
                     <g:message code="visitReport.setup.startDate"/>
                 </label>
                 <div class="controls">
-                    <g:datePicker id="start" name="start" value="${new Date() - 14}" precision="day"/>
+                    <%-- g:datePicker id="start" name="start" value="${new Date() - 14}" precision="day"/ --%>
+                    <input id="start" name="start" class="datepicker" data-value="${(new Date() -14).format("yyyy-MM-dd")}"/>
                 </div>
             </div>
 
@@ -49,7 +50,7 @@
                     <g:message code="visitReport.setup.endDate"/>
                 </label>
                 <div class="controls">
-                    <g:datePicker id="end" name="end" value="${new Date()}" precision="day"/>
+                    <input id="end" name="end" class="datepicker" data-value="${new Date()}"/>
                 </div>
             </div>
 
@@ -64,5 +65,12 @@
         </g:form>
     </div>
 </div>
+<r:script>
+    $('.datepicker').pickadate({
+        editable: true,
+        max: true,
+        formatSubmit:'yyyy-mm-dd'
+    });
+</r:script>
 </body>
 </html>

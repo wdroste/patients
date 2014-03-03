@@ -8,6 +8,13 @@ modules = {
         resource url: 'js/bootstrap-duallistbox.js'
         resource url: 'js/bootstrap-datepicker.js'
 
+        // pick a date
+        resource url: 'js/picker.js'
+        resource url: 'js/picker.date.js'
+
+        resource url: 'css/themes/default.css'
+        resource url: 'css/themes/default.date.css'
+
         resource url: 'js/knockout-3.0.0.debug.js'
         resource url: 'js/knockout.simpleGrid.3.0.js'
 

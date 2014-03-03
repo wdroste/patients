@@ -27,9 +27,9 @@ class PatientVisit implements Serializable {
     Patient patient
 
     // auto-timestamped
-    //@SearchableProperty
-    //Date dateCreated
-    //Date lastUpdated
+    @SearchableProperty
+    Date dateCreated
+    Date lastUpdated
 
     static belongsTo = [patient: Patient]
 
@@ -42,7 +42,7 @@ class PatientVisit implements Serializable {
         typeOfVisit blank: false
         diagnosisCode nullable: true
 
-        //dateCreated nullable: true
-        //lastUpdated nullable: true
+        dateCreated nullable: true
+        lastUpdated nullable: true
     }
 }
