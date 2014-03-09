@@ -1,5 +1,7 @@
 package org.sacredheart.report
 
+import java.text.SimpleDateFormat
+
 class VisitReportController {
 
     static scaffold = true
@@ -126,12 +128,23 @@ class RunCommandTime {
 
 @grails.validation.Validateable
 class RunCommand {
-    long id
-    Date start
-    Date end
+    def dateFormat = new SimpleDateFormat("yy-MM-dd")
+
+    Long id
+    String start_submit
+    String end_submit
+
+    Date getStart() {
+        dateFormat.parse(start_submit)
+    }
+
+    Date getEnd() {
+        dateFormat.parse(end_submit)
+    }
+
     static constraints = {
-        id nullable: false
-        start nullable: false
-        end nullable: false
+        id blank: false
+        start_submit blank: false
+        end_submit blank: false
     }
 }
