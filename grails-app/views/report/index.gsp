@@ -5,18 +5,13 @@
     <meta name="layout" content="bootstrap">
     <title><g:message code="report.setup.label"/></title>
 </head>
-
 <body>
 <div class="row-fluid">
-
     <g:render template="nav"/>
-
     <div class="span9">
-
         <div class="page-header">
             <h1><g:message code="report.setup.label"/></h1>
         </div>
-
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
@@ -33,15 +28,13 @@
                             from="${reports}"/>
                 </div>
             </div>
-
-
             <div class="control-group ">
                 <label class="control-label" for="start">
                     <g:message code="visitReport.setup.startDate"/>
                 </label>
                 <div class="controls">
-                    <%-- g:datePicker id="start" name="start" value="${new Date() - 14}" precision="day"/ --%>
-                    <input id="start" name="start" class="datepicker" data-value="${(new Date() -14).format("yyyy-MM-dd")}"/>
+                    <input id="start" name="start" class="datepicker"
+                           data-value="${(new Date() -14).format("yyyy-MM-dd")}"/>
                 </div>
             </div>
 
@@ -61,7 +54,6 @@
                 </button>
                 <g:actionSubmit class="btn" value="${g.message(code: 'default.button.cancel.label')}" action="list"/>
             </div>
-
         </g:form>
     </div>
 </div>

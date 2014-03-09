@@ -9,33 +9,35 @@ class AppTagLib {
     def grailsApplication
 
     def appHome = { attrs, body ->
-        // total patient count..
-        def count = Patient.count()
+        def ytd = truncate(new Date(), Calendar.YEAR)
 
         // total visits for the year..
         def c = PatientVisit.createCriteria()
         def visits = c.count {
-            ge('dateOfVisit', truncate(new Date(), Calendar.YEAR))
+            ge('dateOfVisit', ytd)
             not { inList('typeOfVisit', ['Cancelled', 'NoShow']) }
         }
 
         // distinct patients for the year..
+        newPatientCountYtd = Patient.countByDateCreatedGreaterThan(ytd)
+
         c = PatientVisit.createCriteria()
         def distinctPatientsYtd = c.get{
             projections {
                 countDistinct('patient')
             }
-            ge('dateOfVisit', truncate(new Date(), Calendar.YEAR))
+            ge('dateOfVisit', ytd)
             not { inList('typeOfVisit', ['Cancelled', 'NoShow']) }
         }
 
         // define the model
         def model = [
-            'patientCount':count,
-            'ytdVisits':visits,
-            'distinctPatientsYtd': distinctPatientsYtd
+                'patientCount': Patient.count(),
+                'ytdVisits': visits,
+                'newPatientCountYtd': newPatientCountYtd,
+                'distinctPatientsYtd': distinctPatientsYtd
         ]
         def appName = grailsApplication.config.app.homeTemplate ?: '/shcc'
-        out << g.render('template':appName, 'model':model)
+        out << g.render('template': appName, 'model': model)
     }
 }
