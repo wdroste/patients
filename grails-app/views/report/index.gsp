@@ -52,7 +52,7 @@
                     <i class="icon-ok icon-white"></i>
                     <g:message code="default.button.run.label"/>
                 </button>
-                <g:actionSubmit class="btn" value="${g.message(code: 'default.button.cancel.label')}" action="list"/>
+                <g:link class="btn"><g:message code="default.button.cancel.label"/></g:link>
             </div>
         </g:form>
     </div>

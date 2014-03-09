@@ -18,9 +18,16 @@ class AppTagLib {
             not { inList('typeOfVisit', ['Cancelled', 'NoShow']) }
         }
 
-        // distinct patients for the year..
-        newPatientCountYtd = Patient.countByDateCreatedGreaterThan(ytd)
+        // new patients for the year..
+        c = Patient.createCriteria()
+        def newPatientCountYtd = c.get {
+            projections {
+                count('id')
+            }
+            ge('dateCreated', ytd)
+        }
 
+        // number of patients that have visited the client this year
         c = PatientVisit.createCriteria()
         def distinctPatientsYtd = c.get{
             projections {
