@@ -45,7 +45,12 @@ class BootStrap {
         // load sacred heart data..
         Thread.start {
             try {
-                new File("/tmp/patients.csv").withReader { rdr ->
+                def f = new File("/tmp/patients.csv")
+                if (!f.isFile()) {
+                    log.debug("No patient bootstrap files found.")
+                    return
+                }
+                f.withReader { rdr ->
                     patientService.importCSVData(rdr) { success, patientId, message ->
                         if (!success) {
                             log.error("Failed to process patient ${patientId}: ${message}")
@@ -53,7 +58,8 @@ class BootStrap {
                     }
                 }
 
-                new File("/tmp/patient_visits.csv").withReader { rdr ->
+                f = new File("/tmp/patient_visits.csv")
+                f.withReader { rdr ->
                     patientVisitService.importCSVData(rdr) { success, patientId, message ->
                         if (!success) {
                             log.error("Failed to import patient visits.")
