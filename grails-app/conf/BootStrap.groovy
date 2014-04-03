@@ -20,7 +20,7 @@ class BootStrap {
         def fullName = 'Super User'
 
         // setup the backup runner..
-        scheduledExecutorService.scheduleAtFixedRate({ backupService.backup() } as Runnable, 10, 10, TimeUnit.SECONDS)
+        //scheduledExecutorService.scheduleAtFixedRate({ backupService.backup() } as Runnable, 10, 10, TimeUnit.SECONDS)
 
         if (User.findByEmail(email)) {
             // exit bootstrap has already ran..
@@ -67,6 +67,6 @@ class BootStrap {
     }
 
     def destroy = {
-        scheduledExecutorService.shutdown()
+        scheduledExecutorService?.shutdown()
     }
 }
