@@ -1,49 +1,45 @@
 dataSource {
     pooled = true
-    driverClassName = "com.mysql.jdbc.Driver"
-    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-    url = "jdbc:mysql://localhost/shcc?useUnicode=yes&characterEncoding=UTF-8"
-
-    properties {
-        maxActive = 10
-        maxIdle = 2
-        minIdle = 1
-        initialSize = 3
-        testOnBorrow = true
-        minEvictableIdleTimeMillis = 60000
-        timeBetweenEvictionRunsMillis = 60000
-        maxWait = 10000
-        validationQuery = '/* ping */'
-    }
+    driverClassName = "org.h2.Driver"
+    username = "sa"
+    password = "sacred heart"
 }
 hibernate {
     cache.use_second_level_cache = true
-    cache.use_query_cache = true
-    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
+    cache.use_query_cache = false
+    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
+//    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 }
+
 // environment specific settings
 environments {
     development {
         dataSource {
-            logSql = true
-            dbCreate = "update"
-            //dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            username = "root"
-            password = "cloud"
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;CIPHER=AES"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            username = "root"
-            password = "cloud"
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            username = "root"
-            password = "heartheart"
+            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;CIPHER=AES"
+            properties {
+               maxActive = -1
+               minEvictableIdleTimeMillis=1800000
+               timeBetweenEvictionRunsMillis=1800000
+               numTestsPerEvictionRun=3
+               testOnBorrow=true
+               testWhileIdle=true
+               testOnReturn=false
+               validationQuery="SELECT 1"
+               jdbcInterceptors="ConnectionState"
+            }
         }
     }
 }

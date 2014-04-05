@@ -4,13 +4,25 @@ class BackupService {
 
     def jdbcTemplate
 
-    def backup() {
+    /**
+     * Default backup method.
+     */
+    boolean backup() {
         try {
-            log.debug("Starting backup..")
-            //jdbcTemplate.execute('BACKUP TO \'backup.zip\'')
-            log.debug("Finished backup..")
+            backup('backup.zip')
+            return true
         } catch (Exception ex) {
             log.error("Failed to backup.", ex)
         }
+        return false
+    }
+
+    /**
+     * Backup the database to a file that can be sent to S3.
+     */
+    boolean backup(String fileName) {
+        log.debug("Starting backup..")
+        jdbcTemplate.execute("BACKUP TO \'${fileName}\'")
+        log.debug("Finished backup..")
     }
 }
