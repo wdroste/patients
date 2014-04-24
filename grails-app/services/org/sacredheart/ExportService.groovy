@@ -1,15 +1,19 @@
 package org.sacredheart
 
+import org.apache.commons.lang.StringUtils
 import org.sacredheart.report.VisitReport
 import org.springframework.context.NoSuchMessageException
 import org.supercsv.cellprocessor.FmtDate
 import org.supercsv.cellprocessor.Optional
-import org.supercsv.cellprocessor.constraint.NotNull
 import org.supercsv.cellprocessor.ift.CellProcessor
-import org.supercsv.io.CsvMapWriter
+import org.supercsv.io.CsvListWriter
+import org.supercsv.io.ICsvListWriter
 import org.supercsv.io.ICsvMapWriter
 import org.supercsv.prefs.CsvPreference
-import org.supercsv.quote.QuoteMode
+
+import static org.apache.commons.lang.StringUtils.defaultIfBlank
+import static org.apache.commons.lang.StringUtils.isBlank
+import static org.apache.commons.lang.StringUtils.isNotBlank
 
 class ExportService {
 
@@ -60,14 +64,16 @@ class ExportService {
      */
     File exportCSV(long id, String prefix, Date start, Date end) {
         // run the query
-        ICsvMapWriter writer = null
+        ICsvListWriter writer = null
         try {
             def report = VisitReport.get(id)
             def data = patientService.query(report, start, end, {})
             File f = File.createTempFile(report.name + "-", prefix)
 
-            CsvPreference pref = new CsvPreference.Builder(CsvPreference.TAB_PREFERENCE).surroundingSpacesNeedQuotes(true).build()
-            writer = new CsvMapWriter(new FileWriter(f), pref)
+            CsvPreference pref = new CsvPreference.Builder(CsvPreference.TAB_PREFERENCE)
+                    .surroundingSpacesNeedQuotes(true)
+                    .build()
+            writer = new CsvListWriter(new FileWriter(f), pref)
 
             // write the header
             writer.writeHeader(headers)
@@ -75,7 +81,7 @@ class ExportService {
             // write the customer maps
             CellProcessor[] processors = buildProcessors()
             for (PatientVisit pv : data) {
-                writer.write(toMap(pv), headers, processors)
+                writer.write(toList(pv), processors)
             }
 
             // return the file for download
@@ -83,55 +89,66 @@ class ExportService {
         } catch (IOException ioe) {
             throw new IllegalStateException(ioe)
         } finally {
+            writer?.flush()
             writer?.close()
         }
     }
 
-    Map toMap(PatientVisit visit) {
+    List<String> toList(PatientVisit visit) {
         Patient patient = visit.patient
         Provider provider = visit.provider
+        return [
+            // Patients
+            patient.patientId
+            ,patient.lastName
+            ,firstAndMiddle(patient)
+            ,patient.dateOfBirth
+            ,patient.gender
+            ,patient.race
+            ,patient.streetAddress
+            ,patient.city
+            ,fixNull(patient.state)
+            ,patient.zipcode
+            ,patient.county
+            ,patient.homePhoneNumber
+            ,patient.emailAddress
+            ,patient.mobilePhoneNumber
+            ,patient.language
+            ,patient.maritalStatus
+            ,patient.ssn
+            ,getMessage("patient.ethnicity.${patient.ethnicity}")
+            ,patient.citizen
+            ,patient.veteran
+            // Next of Kin
+            ,patient.nextOfKinLastName
+            ,patient.nextOfKinFirstName
+            ,patient.nextOfKinRelationshipCode
+            ,patient.nextOfKinPhoneNumber
+            // provider
+            ,provider?.license
+            ,provider?.lastName
+            ,provider?.firstName
+            // Visit Details
+            ,visit.dateOfVisit
+            ,''
+            ,patient.screeningResult
+            ,visit.diagnosisCode
+            ,''
+            ,''
+            ,''
+            ,visit.typeOfVisit
+        ]
+    }
 
-        def map = [:]
-        map['Unique Patient ID'] = patient.patientId
-        map['Last Name' ] = patient.lastName
-        map['First Name & Middle Name'] = "${patient.firstName} ${patient.middleName}"
-        map['Date of Birth'] = patient.dateOfBirth
-        map['Gender Code'] = patient.gender
-        map['Race Code'] = patient.race
-        map['Street Address'] = patient.streetAddress
-        map['City'] = patient.city
-        map['State Abbrev'] = patient.state
-        map['Zip'] = patient.zipcode
-        map['County'] = patient.county
-        map['Home Phone Number'] = patient.homePhoneNumber
-        map['Email address'] = patient.emailAddress
-        map['Cell Phone Number'] = patient.mobilePhoneNumber
-        map['Primary Language Code'] = patient.language
-        map['Marital Status Code'] = patient.maritalStatus
-        map['SSN'] = patient.ssn
-        map['Ethnic Group Code'] = getMessage("patient.ethnicity.${patient.ethnicity}")
-        map['Citizenship'] = patient.citizen
-        map['Veteran'] = patient.veteran
-        // Next of Kin
-        map['Last Name'] = patient.nextOfKinLastName
-        map['First Name'] = patient.nextOfKinFirstName
-        map['Relationship Code'] = patient.nextOfKinRelationshipCode
-        map['Phone Number'] = patient.nextOfKinPhoneNumber
-        // provider
-        map['Clinician NPI or ID'] = provider?.license
-        map['Clinician Last Name'] = provider?.lastName
-        map['Clinician First Name'] = provider?.firstName
-        // Visit Details
-        map['Visit Date/Time'] = visit.dateOfVisit
-        map['FPL'] = ""
-        map['Screening Results'] = patient.screeningResult
-        map['Primary Diagnosis Code'] = visit.diagnosisCode
-        map['Primary Diagnosis Description'] = ""
-        map['Secondary Diagnosis Code'] = ""
-        map['Secondary Diagnosis Description'] = ""
-        map['Type of Visit'] = visit.typeOfVisit
+    String fixNull(String val, String dflt = '') {
+        ('null'.equals(val)) ? dflt : defaultIfBlank(val, dflt)
+    }
 
-        return map
+    String firstAndMiddle(Patient p) {
+        if (isNotBlank(p.middleName)) {
+            return "${p.firstName} ${p.middleName}"
+        }
+        return defaultIfBlank(p.firstName, '')
     }
 
     String getMessage(String code) {
@@ -184,7 +201,6 @@ class ExportService {
                 new Optional(), //'Type of Visit'
         ] as CellProcessor[]
     }
-
 }
 
 /*
