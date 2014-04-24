@@ -38,7 +38,7 @@ class PatientService {
         }
     }
 
-    def list(params) {
+    Map list(params) {
         def ignoreCaseLike = [
             lastName: params.lastName,
             patientId: params.patientId
@@ -72,7 +72,7 @@ class PatientService {
         }
     }
 
-    def run(long vpId, Date start, Date end) {
+    Map run(long vpId, Date start, Date end) {
         VisitReport vp = VisitReport.get(vpId)
         def list = query(vp, start, end) {
             projections {
@@ -197,7 +197,7 @@ class PatientService {
             }
     )
 
-    def processFile(File tmpFile) {
+    String processFile(File tmpFile) {
         def tx = UUID.randomUUID().toString()
         // asynchronous do not expect may calls..
         Thread.start {
@@ -218,7 +218,7 @@ class PatientService {
         tx
     }
 
-    def progress(String tx) {
+    Map progress(String tx) {
         def ret = []
         def q = messageQueue.get(tx)
         if (q) {

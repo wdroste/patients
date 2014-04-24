@@ -34,14 +34,8 @@ class PatientVisitService {
         }
 
         // determine the new patients..
-        def newPatients = PatientVisit.withCriteria {
-            projections {
-                distinct('patient')
-            }
-            not {
-                lt('dateOfVisit', start)
-                inList('patient', estPatients)
-            }
+        def newPatients = patients.findAll { Patient p ->
+            !estPatients.contains(p)
         }
 
         // determine the number of visits by est

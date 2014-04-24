@@ -9,6 +9,10 @@ class FtpService {
 
     def grailsApplication
 
+    boolean getEnabled() {
+        null != grailsApplication.config.app.ftp
+    }
+
     /**
      * Upload the specified file to the ftp server.
      */
