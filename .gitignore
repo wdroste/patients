@@ -20,3 +20,4 @@ stacktrace.log
 .idea
 *.iml
 *.ipr
+tmp
