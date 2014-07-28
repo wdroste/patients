@@ -2,25 +2,16 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 import org.sacredheart.Provider
 import org.sacredheart.User
 
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
-
 class BootStrap {
 
     def backupService
     def patientService
     def patientVisitService
 
-    ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
-
     def init = { servletContext ->
         def password = 'heart'
         def email = 'super@shcc.org'
         def fullName = 'Super User'
-
-        // setup the backup runner..
-        scheduledExecutorService.scheduleAtFixedRate({ backupService.backup() } as Runnable, 10, 10, TimeUnit.SECONDS)
 
         if (User.findByEmail(email)) {
             // exit bootstrap has already ran..
@@ -45,7 +36,12 @@ class BootStrap {
         // load sacred heart data..
         Thread.start {
             try {
-                new File("/tmp/patients.csv").withReader { rdr ->
+                def f = new File("/tmp/patients.csv")
+                if (!f.isFile()) {
+                    log.debug("No patient bootstrap files found.")
+                    return
+                }
+                f.withReader { rdr ->
                     patientService.importCSVData(rdr) { success, patientId, message ->
                         if (!success) {
                             log.error("Failed to process patient ${patientId}: ${message}")
@@ -53,7 +49,8 @@ class BootStrap {
                     }
                 }
 
-                new File("/tmp/patient_visits.csv").withReader { rdr ->
+                f = new File("/tmp/patient_visits.csv")
+                f.withReader { rdr ->
                     patientVisitService.importCSVData(rdr) { success, patientId, message ->
                         if (!success) {
                             log.error("Failed to import patient visits.")
@@ -67,6 +64,5 @@ class BootStrap {
     }
 
     def destroy = {
-        scheduledExecutorService.shutdown()
     }
 }

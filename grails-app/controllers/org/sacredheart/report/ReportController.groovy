@@ -1,7 +1,5 @@
 package org.sacredheart.report
 
-import org.apache.commons.lang.time.DateUtils
-import org.apache.commons.lang.time.FastDateFormat
 import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
 import org.sacredheart.Provider

@@ -33,9 +33,11 @@
                     <g:link action="exportCSV" class="btn" params="${linkParams}">
                         <i class="icon-download-alt"></i> Download
                     </g:link>
-                    <g:link action="ftpUpload" class="btn"  params="${linkParams}">
-                        <i class="icon-upload"></i> FTP Upload
-                    </g:link>
+                    <g:if test="${ftpSupport}">
+                        <g:link action="ftpUpload" class="btn"  params="${linkParams}">
+                            <i class="icon-upload"></i> FTP Upload
+                        </g:link>
+                    </g:if>
                 </div>
             </div>
         </div>

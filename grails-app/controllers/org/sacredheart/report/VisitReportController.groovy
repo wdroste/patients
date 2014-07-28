@@ -6,6 +6,7 @@ class VisitReportController {
 
     static scaffold = true
 
+    def ftpService
     def exportService
     def patientService
 
@@ -93,7 +94,9 @@ class VisitReportController {
      * Run the report.
      */
     def run(RunCommand runCommand) {
-        patientService.run(runCommand.id, runCommand.start, runCommand.end)
+        def model = patientService.run(runCommand.id, runCommand.start, runCommand.end)
+        model['ftpSupport'] = ftpService.enabled
+        return model
     }
 
     /**
