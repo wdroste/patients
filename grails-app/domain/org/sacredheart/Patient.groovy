@@ -3,8 +3,10 @@ package org.sacredheart
 import org.compass.annotations.Searchable
 import org.compass.annotations.SearchableId
 import org.compass.annotations.SearchableProperty
+import grails.rest.*
 
 @Searchable
+@Resource(uri='/books')
 class Patient implements Serializable {
 
     static GENDER = ['Male', 'Female']

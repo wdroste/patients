@@ -25,5 +25,9 @@ modules = {
         // bootstrap helper
         resource url: 'js/bootstrap-formhelpers.js'
         resource url: 'css/bootstrap-formhelpers.css'
+
+        // use for scrolling
+        resource url: 'js/ng-infinite-scoll.min.js'
+        resource url: 'js/angular.min.js'
     }
 }
