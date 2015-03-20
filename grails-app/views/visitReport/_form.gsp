@@ -56,6 +56,7 @@
 
 
 <f:field bean="visitReportInstance" property="citizen"/>
+<f:field bean="visitReportInstance" property="transportation"/>
 <f:field bean="visitReportInstance" property="veteran"/>
 <f:field bean="visitReportInstance" property="languages"/>
 <f:field bean="visitReportInstance" property="genders"/>

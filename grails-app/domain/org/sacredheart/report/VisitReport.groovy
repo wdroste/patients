@@ -23,6 +23,8 @@ class VisitReport {
     YesNo citizen
     YesNo veteran
 
+    YesNo transportation
+
     SizeRange numberOfFamilyRange
     IncomeRange familyIncomeRange
 
@@ -51,6 +53,8 @@ class VisitReport {
 
         citizen nullable: true
         veteran nullable: true
+        transportation nullable: true
+
         ageRange nullable: true
         familyIncomeRange nullable: true
         numberOfFamilyRange nullable: true

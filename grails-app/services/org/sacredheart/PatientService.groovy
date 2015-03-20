@@ -182,6 +182,10 @@ class PatientService {
                             vp.numberOfFamilyRange.end)
 
                 }
+
+                if (vp.transportation) {
+                    eq('transportation', vp.transportation)
+                }
             }
         }
     }
