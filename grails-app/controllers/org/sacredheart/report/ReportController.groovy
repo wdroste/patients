@@ -1,10 +1,9 @@
 package org.sacredheart.report
 
-import org.apache.commons.lang.time.DateUtils
-import org.apache.commons.lang.time.FastDateFormat
 import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
 import org.sacredheart.Provider
+import org.sacredheart.YesNo
 
 import java.text.SimpleDateFormat
 
@@ -22,7 +21,8 @@ class ReportController {
                         'visitReport',
                         'screeningResultsReport',
                         'establishedReport',
-                        'visitsByProviderReport'
+                        'visitsByProviderReport',
+                        'transportationReport'
                 ]
         ]
     }
@@ -49,11 +49,11 @@ class ReportController {
             map[visitType] = PatientVisit.countByTypeOfVisitAndDateOfVisitBetween(visitType, cmd.start, cmd.end)
         }
         [
-                'startDate': cmd.start,
-                'endDate': cmd.end,
-                'totalVisits': totalPatientVisits(cmd),
+                'startDate'           : cmd.start,
+                'endDate'             : cmd.end,
+                'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
-                'results': map
+                'results'             : map
         ]
     }
 
@@ -74,11 +74,11 @@ class ReportController {
             }[0]
         }
         [
-                'startDate': cmd.start,
-                'endDate': cmd.end,
-                'totalVisits': totalPatientVisits(cmd),
+                'startDate'           : cmd.start,
+                'endDate'             : cmd.end,
+                'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
-                'results': map
+                'results'             : map
         ]
     }
 
@@ -119,14 +119,28 @@ class ReportController {
             }
         }
         [
-                'startDate': cmd.start,
-                'endDate': cmd.end,
-                'totalVisits': totalPatientVisits(cmd),
+                'startDate'           : cmd.start,
+                'endDate'             : cmd.end,
+                'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
-                'results': map.sort() { !it.value }
+                'results'             : map.sort() { !it.value }
         ]
     }
 
+    def transportationReport(ReportRunCommand cmd) {
+        def q = { yesOrNo ->
+            between('dateOfVisit', cmd.start, cmd.end)
+            patient {
+                eq('transportation', yesOrNo)
+            }
+            projections {
+                distinct('patient')
+            }
+        }
+        def yesResult = PatientVisit.createCriteria().count(q.curry(YesNo.Yes))
+        def noResult = PatientVisit.createCriteria().count(q.curry(YesNo.No))
+        ['startDate': cmd.start, 'endDate': cmd.end, 'yes': yesResult, 'no': noResult]
+    }
 }
 
 @grails.validation.Validateable
