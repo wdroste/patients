@@ -82,6 +82,11 @@ grails.project.dependency.resolution = {
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
-        compile ":handlebars-asset-pipeline:1.3.0.3"
+        //compile ":handlebars-asset-pipeline:1.3.0.3"
+
+        runtime ':resources:1.2.14'
+        runtime ':yui-minify-resources:0.1.5'
+        runtime ':fields:1.3'
+        compile ':twitter-bootstrap:2.3.2'
     }
 }
