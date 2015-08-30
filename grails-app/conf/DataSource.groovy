@@ -29,7 +29,7 @@ environments {
             dbCreate = "update"
             //dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             username = "root"
-            password = "cloud"
+            //password = "cloud"
         }
     }
     test {
