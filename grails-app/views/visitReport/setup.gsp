@@ -51,12 +51,12 @@
         </g:form>
     </div>
 </div>
-<r:script>
+<script>
     $('.datepicker').pickadate({
         editable: true,
         max: true,
         formatSubmit:'yyyy-mm-dd'
     });
-</r:script>
+</script>
 </body>
 </html>

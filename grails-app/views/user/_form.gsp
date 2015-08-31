@@ -17,7 +17,3 @@
         <g:passwordField name="confirmPassword" label="user.confirmPassword.label" value="********"/>
     </div>
 </div>
-
-<r:script>
-
-</r:script>

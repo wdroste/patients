@@ -43,7 +43,7 @@ environments {
         dataSource {
             dbCreate = "update"
             username = "root"
-            password = "heartheart"
+            //password = "heartheart"
         }
     }
 }

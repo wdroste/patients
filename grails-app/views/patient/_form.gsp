@@ -78,7 +78,7 @@
 
 </f:with>
 
-<r:script>
+<script>
     function PatientViewModel() {
         this.numberOfFamily = ko.observable(${patientInstance.numberOfFamily});
         this.yearlyFamilyIncome = ko.observable(${patientInstance.yearlyFamilyIncome});
@@ -100,4 +100,4 @@
         }, this);
     }
     ko.applyBindings(new PatientViewModel());
-</r:script>
+</script>

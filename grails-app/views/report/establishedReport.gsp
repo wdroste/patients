@@ -55,7 +55,7 @@
 <g:render template="patientList" model="${[tableHeader:'Established Patients', patients:estPatients]}"/>
 
 <!--Load the AJAX API-->
-<r:script>
+<script>
     // Load the Visualization API and the piechart package.
     google.load('visualization', '1.0', {'packages':['corechart']});
 
@@ -71,18 +71,18 @@
 
       var options = { width: '100%', height: 200,
         legend: {
-            position: 'top',
-            maxLines: 3
+          position: 'top',
+          maxLines: 3
         },
-	    bar: {
-	        groupWidth: '75%'
-	    },
+        bar: {
+          groupWidth: '75%'
+        },
         isStacked: true
       };
     // Instantiate and draw our chart, passing in some options.
     var chart =  new google.visualization.BarChart(document.getElementById('chart'));
     chart.draw(data, options);
 }
-</r:script>
+</script>
 </body>
 </html>

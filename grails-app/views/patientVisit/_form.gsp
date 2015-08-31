@@ -3,7 +3,8 @@
 <f:field bean="patientVisitInstance" property="provider" />
 <f:field bean="patientVisitInstance" property="diagnosisCode"/>
 
-<r:script>
+<script>
+$(function() {
     $("#typeOfVisit").change(function () {
         var key = $("#typeOfVisit").val();
 
@@ -19,4 +20,5 @@
         }
         $("#diagnosisCode").val(value);
     }).change();
-</r:script>
+});
+</script>

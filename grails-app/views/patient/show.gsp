@@ -279,7 +279,7 @@
         </div>
     </div>
 </div>
-<r:script>
+<script>
     var PagedGridModel = function(items) {
         var self = this;
 
@@ -330,7 +330,7 @@
     } else {
         ko.applyBindings(new PagedGridModel(query, []));
     }
-</r:script>
+</script>
 
 </body>
 </html>

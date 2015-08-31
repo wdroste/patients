@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<r:script>
+<script>
     var patients = {};
     var patientLabels = [];
 
@@ -42,8 +42,8 @@
                 //return the display array
                 process( patientLabels );
             });
-        }
-        , updater: function (item) {
+        },
+        updater: function (item) {
             //save the id value into the hidden field
             $( "#patient.id" ).val( patients[ item ] );
 
@@ -51,4 +51,4 @@
             return item;
         }
     });
- </r:script>
+ </script>

@@ -113,28 +113,23 @@
 
 
 <g:if test="${false}">
-    <r:script>
+    <script>
         $('#zipCodes').bootstrapDualListbox({
             nonselectedlistlabel: 'Non-selected',
             selectedlistlabel: 'Selected',
             preserveselectiononmove: 'moved',
             moveonselect: true
         });
-    </r:script>
+    </script>
 </g:if>
 
 <g:if test="${counties}">
-    <r:script>
+    <script>
         $('#counties').bootstrapDualListbox({
             nonselectedlistlabel: 'Non-selected',
             selectedlistlabel: 'Selected',
             preserveselectiononmove: 'moved',
             moveonselect: true
         });
-    </r:script>
+    </script>
 </g:if>
-
-
-<r:script>
-
-</r:script>

@@ -68,7 +68,7 @@
 </div>
 </script>
 
-<r:script>
+<script>
     var PagedGridModel = function(q, items) {
         var self = this;
         self.q = ko.observable(q);
@@ -145,7 +145,7 @@
     } else {
         ko.applyBindings(new PagedGridModel(query, []));
     }
-</r:script>
+</script>
 
 </body>
 </html>

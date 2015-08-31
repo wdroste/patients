@@ -39,7 +39,7 @@
 </div>
 
 <g:if test="${transactionId}">
-    <r:script>
+    <script>
 
 function refreshUploadStatus() {
     $.ajax({
@@ -67,7 +67,7 @@ function refreshUploadStatus() {
     });
 }
 setTimeout(refreshUploadStatus, 100);
-    </r:script>
+    </script>
 </g:if>
 
 </body>

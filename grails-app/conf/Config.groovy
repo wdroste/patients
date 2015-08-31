@@ -13,6 +13,8 @@ grails.config.locations = [
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+grails.assets.less.compiler = 'less4j'
+
 grails.project.fork.run=true
 grails.app.context = '/'
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
@@ -81,7 +83,7 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
-    debug  'org.hibernate',
+    warn  'org.hibernate',
            'org.sacredheart'
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers

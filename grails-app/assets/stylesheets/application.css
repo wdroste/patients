@@ -1,0 +1,41 @@
+/*
+*= require bootstrap
+*= require bootstrap-responsive
+*= require datepicker
+*= require bootstrap-duallistbox
+*= require bootstrap-rowlink.min
+*= require bootstrap-formhelpers
+*= require themes/default
+*= require themes/default.date
+*= require themes/default.time
+*= encoding UTF-8
+*/
+
+
+body {
+        -webkit-text-size-adjust: none;
+}
+
+@media (min-width:980px) {
+        body {
+                padding-top: 60px;
+        }
+}
+
+@media (max-width: 768px) {
+        /* prevent the brand name wrapping or overlapping the menu toggle */
+        .navbar .brand {
+                max-width: 75%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+        }
+
+        .hero-unit {
+                padding: 20px;
+        }
+
+        #application-status {
+                display: none;
+        }
+}

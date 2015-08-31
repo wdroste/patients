@@ -53,6 +53,8 @@ grails.project.dependency.resolution = {
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
 
+        runtime 'com.twilio.sdk:twilio-java-sdk:3.3.15'
+
         runtime 'com.h2database:h2:1.3.175'
         runtime 'net.sf.supercsv:super-csv:2.1.0'
         runtime 'com.google.guava:guava:16.0.1'
@@ -83,10 +85,5 @@ grails.project.dependency.resolution = {
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
-
-        runtime ':resources:1.2.14'
-        runtime ':yui-minify-resources:0.1.5'
-        runtime ':fields:1.3'
-        compile ':twitter-bootstrap:2.3.2'
     }
 }

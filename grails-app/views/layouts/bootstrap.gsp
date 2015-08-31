@@ -13,18 +13,18 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <r:require modules="scaffolding"/>
+    <asset:javascript src="application.js"/>
+    <asset:stylesheet src="application.css"/>
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
-    <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
+    <link rel="shortcut icon" href="${assetPath(src: 'images/favicon.ico')}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="${assetPath(src: 'images/apple-touch-icon.png')}">
+    <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'images/apple-touch-icon-retina.png')}">
 
     <g:layoutHead/>
-    <r:layoutResources/>
 
     <style type="text/css" media="print">
     .dontprint {
@@ -90,13 +90,11 @@
 </nav>
 
 <div class="container-fluid">
-
     <g:layoutBody/>
     <hr>
     <footer>
         <p>&copy; NSquard 2013</p>
     </footer>
 </div>
-<r:layoutResources/>
 </body>
 </html>

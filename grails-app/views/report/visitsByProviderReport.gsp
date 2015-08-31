@@ -34,7 +34,7 @@
 </div>
 
 <!--Load the AJAX API-->
-<r:script>
+<script>
     // Load the Visualization API and the piechart package.
     google.load('visualization', '1.0', {'packages':['corechart']});
 
@@ -56,6 +56,6 @@
         var chart = new google.visualization.PieChart(document.getElementById('chart'));
         chart.draw(data, options);
     }
-</r:script>
+</script>
 </body>
 </html>

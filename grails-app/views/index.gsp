@@ -60,7 +60,7 @@
         </div>
     </div>
     <!--Load the AJAX API-->
-    <r:script>
+    <script  type="text/javascript">
         // Load the Visualization API and the piechart package.
         google.load('visualization', '1.0', {'packages':['corechart']});
         // Set a callback to run when the Google Visualization API is loaded.
@@ -70,7 +70,7 @@
             $( "#gender_chart" ).load("dashboard/genderChart");
             $( "#race_chart" ).load("dashboard/raceChart");
         });
-    </r:script>
+    </script>
 </shiro:authenticated>
 
 </body>

@@ -69,7 +69,7 @@
         ['id': p.id, 'patientId': "${p.patientId} | ${p.fullName} | ${dt}"]
     } as JSON
 %>
-<r:script>
+<script>
     $('#search').typeahead({
         source: function (query, process) {
             patients = [];
@@ -101,6 +101,6 @@
             return item.replace( regex, "<strong>$1</strong>" );
         }
     });
-</r:script>
+</script>
 </body>
 </html>
