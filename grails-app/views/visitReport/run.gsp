@@ -24,7 +24,7 @@
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
-        <div class="donotprint">
+        <div class="hidden-print">
             <div class="btn-toolbar ">
                 <div class="btn-groug">
                     <g:set var="endTime" value="${endDate.time}"/>

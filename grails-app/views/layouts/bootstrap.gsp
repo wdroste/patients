@@ -11,12 +11,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <asset:javascript src="application.js"/>
     <asset:stylesheet src="application.css"/>
 
     <!-- Le fav and touch icons -->
@@ -24,17 +18,18 @@
     <link rel="apple-touch-icon" href="${assetPath(src: 'images/apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'images/apple-touch-icon-retina.png')}">
 
-    <g:layoutHead/>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <style type="text/css" media="print">
-    .dontprint {
-        display: none;
-    }
-    </style>
+    <asset:javascript src="application.js"/>
+
+    <g:layoutHead/>
 </head>
 
 <body>
-<nav class="navbar navbar-fixed-top dontprint">
+<nav class="navbar navbar-fixed-top hidden-print">
     <div class="navbar-inner">
         <div class="container-fluid">
 

@@ -1,4 +1,4 @@
-<div class="span3 dontprint">
+<div class="span3 hidden-print">
     <div class="well">
         <ul class="nav nav-list">
             <li class="nav-header">${entityName}</li>
