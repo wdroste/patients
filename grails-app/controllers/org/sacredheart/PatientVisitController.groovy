@@ -1,6 +1,7 @@
 package org.sacredheart
 
 import grails.converters.JSON
+import org.springframework.dao.DataIntegrityViolationException
 
 class PatientVisitController {
     static scaffold = true
@@ -49,4 +50,24 @@ class PatientVisitController {
                 break
         }
     }
+
+    def delete() {
+        def instance = PatientVisit.get(params.id)
+        if (!instance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'patient.visit.label'), params.id])
+            redirect action: 'list'
+            return
+        }
+
+        try {
+            instance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'patient.visit.label'), params.id])
+            redirect action: 'list'
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'patient.visit.label'), params.id])
+            redirect action: 'show', id: params.id
+        }
+    }
+
 }
