@@ -8,7 +8,11 @@ class PatientVisitController {
 
     def patientVisitService
 
-    def index() { redirect(action:'list') }
+    static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
+
+    def index() {
+        forward(action: 'list', params: params)
+    }
 
     def list() {
         patientVisitService.list(params)

@@ -3,13 +3,16 @@ package org.sacredheart
 import grails.converters.JSON
 
 class PatientController {
-    static namespace = 'default'
+
     static scaffold = true
 
     def patientService
 
-    def index() { redirect(action:'list') }
+    static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
 
+    def index() {
+        forward(action: 'list', params: params)
+    }
     def list() {
         params.offset = params.int('offset') ?: 0
         params.max = Math.min(params.max ? params.int('max') : 25, 1000)
