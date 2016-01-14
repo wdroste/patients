@@ -1,6 +1,5 @@
 package org.sacredheart
 
-import org.apache.commons.lang.StringUtils
 import org.sacredheart.report.VisitReport
 import org.springframework.context.NoSuchMessageException
 import org.supercsv.cellprocessor.FmtDate
@@ -8,11 +7,9 @@ import org.supercsv.cellprocessor.Optional
 import org.supercsv.cellprocessor.ift.CellProcessor
 import org.supercsv.io.CsvListWriter
 import org.supercsv.io.ICsvListWriter
-import org.supercsv.io.ICsvMapWriter
 import org.supercsv.prefs.CsvPreference
 
 import static org.apache.commons.lang.StringUtils.defaultIfBlank
-import static org.apache.commons.lang.StringUtils.isBlank
 import static org.apache.commons.lang.StringUtils.isNotBlank
 
 class ExportService {
@@ -56,7 +53,9 @@ class ExportService {
             'Primary Diagnosis Description',
             'Secondary Diagnosis Code',
             'Secondary Diagnosis Description',
-            'Type of Visit'] as String[]
+            'Type of Visit',
+            'Yearly Family Income'
+    ] as String[]
 
 
     /**
@@ -137,6 +136,7 @@ class ExportService {
             ,''
             ,''
             ,visit.typeOfVisit
+            ,patient.yearlyFamilyIncome
         ]
     }
 
@@ -199,6 +199,7 @@ class ExportService {
                 new Optional(), //'Secondary Diagnosis Code',
                 new Optional(), //'Secondary Diagnosis Description',
                 new Optional(), //'Type of Visit'
+                new Optional() // Income
         ] as CellProcessor[]
     }
 }
