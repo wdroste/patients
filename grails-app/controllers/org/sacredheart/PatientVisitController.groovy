@@ -15,7 +15,13 @@ class PatientVisitController {
     }
 
     def list() {
-        patientVisitService.list(params)
+        try {
+            patientVisitService.list(params)
+        } catch (Exception ex) {
+            log.error('Failed to execute query: ' + ex.message)
+            flash.message = ex.localizedMessage.replaceAll(/.*ParseException: /, '')
+            [patientVisitInstanceList: [], patientVisitInstanceTotal: 0]
+        }
     }
 
     def uploadProgress() {

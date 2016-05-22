@@ -13,15 +13,26 @@ class PatientController {
     def index() {
         forward(action: 'list', params: params)
     }
+
     def list() {
         params.offset = params.int('offset') ?: 0
         params.max = Math.min(params.max ? params.int('max') : 25, 1000)
+
+        // clear flash message
+        flash.message = ''
         def results, total
         if (params?.q) {
             // because search needs a query..
-            def search = Patient.search(params.q, params)
-            results = search.results
-            total = search.total
+            try {
+                def search = Patient.search(params.q, params)
+                results = search.results
+                total = search.total
+            } catch (Exception ex) {
+                log.error('Failed to execute query: ' + ex.message)
+                flash.message = ex.localizedMessage.replaceAll(/.*ParseException: /, '')
+                results = []
+                total = 0
+            }
         } else {
             results = Patient.list(params)
             total = Patient.count()

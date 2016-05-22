@@ -1,11 +1,12 @@
 package org.sacredheart
 
 import org.compass.annotations.Searchable
+import org.compass.annotations.SearchableId
 import org.compass.annotations.SearchableProperty
 
 @Searchable
 class User {
-    @SearchableProperty
+    @SearchableId
     String email
     @SearchableProperty
     String fullName

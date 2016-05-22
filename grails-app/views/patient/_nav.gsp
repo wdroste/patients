@@ -23,13 +23,22 @@
         </ul>
     </div>
     <div class="well">
+        <h4>Example Searches:</h4>
         <dl>
-            <lh>Example Searches:</lh>
-            <dt>*:*  -diagnosisCode:[* TO *]</dt>
-            <dd>All visits without a diagnostic code</dd>
+            <dt>dateCreated:[2015-12-01 TO 2015-12-30]</dt>
+            <dd>All new patients in December 2015.</dd>
 
-            <dt>dateOfVisit:[2015-12-01 TO 2015-12-20]</dt>
-            <dd>All visits between these dates</dd>
+            <dt>*:* -ssn:[* TO *]</dt>
+            <dd>All patients without a SSN</dd>
+
+            <dt>firstName:Joe</dt>
+            <dd>First name is equal to 'Joe'</dd>
+
+            <dt>lastName:Smith</dt>
+            <dd>Last name is equal to 'Smith'</dd>
+
+            <dt>firstName:Jo*</dt>
+            <dd>First name starts with 'Jo'</dd>
         </dl>
     </div>
 </div>

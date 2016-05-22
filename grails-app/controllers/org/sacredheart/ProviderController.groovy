@@ -11,8 +11,15 @@ class ProviderController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [providerInstanceList: Provider.list(params), providerInstanceTotal: Provider.count()]
+        flash.message = ''
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		try {
+			[providerInstanceList: Provider.list(params), providerInstanceTotal: Provider.count()]
+		} catch (Exception ex) {
+            log.error('Failed to execute query: ' + ex.message)
+            flash.message = ex.localizedMessage.replaceAll(/.*ParseException: /, '')
+			[providerInstanceList: [], providerInstanceTotal: 0]
+		}
     }
 
     def create() {
