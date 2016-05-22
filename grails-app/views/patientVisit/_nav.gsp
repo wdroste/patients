@@ -22,4 +22,14 @@
             </li>
         </ul>
     </div>
+    <div class="well">
+        <dl>
+            <lh>Example Searches:</lh>
+            <dt>lastName:smith*</dt>
+            <dd>All patients with a last name that starts with 'smith'</dd>
+
+            <dt>dateOfBirth:[2015-12-01 TO 2015-12-20]</dt>
+            <dd>All patients with birth dates between these dates</dd>
+        </dl>
+    </div>
 </div>

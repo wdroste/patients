@@ -1,7 +1,13 @@
 package org.sacredheart
 
+import org.compass.annotations.Searchable
+import org.compass.annotations.SearchableProperty
+
+@Searchable
 class User {
+    @SearchableProperty
     String email
+    @SearchableProperty
     String fullName
     String passwordHash
     

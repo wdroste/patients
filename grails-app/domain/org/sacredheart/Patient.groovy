@@ -51,7 +51,9 @@ class Patient implements Serializable {
 
     @SearchableProperty
     Date dateOfBirth
+    @SearchableProperty
     String zipcode
+    @SearchableProperty
     String county
     YesNo citizen
     YesNo veteran
@@ -67,14 +69,18 @@ class Patient implements Serializable {
     String reference
     String education
     String maritalStatus
+    @SearchableProperty
     String screeningResult
 
 
     //
     @SearchableProperty
     String ssn
+    @SearchableProperty
     String streetAddress
+    @SearchableProperty
     String city
+    @SearchableProperty
     String state
 
     @SearchableProperty

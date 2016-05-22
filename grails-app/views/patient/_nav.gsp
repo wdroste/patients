@@ -22,4 +22,14 @@
             </li>
         </ul>
     </div>
+    <div class="well">
+        <dl>
+            <lh>Example Searches:</lh>
+            <dt>*:*  -diagnosisCode:[* TO *]</dt>
+            <dd>All visits without a diagnostic code</dd>
+
+            <dt>dateOfVisit:[2015-12-01 TO 2015-12-20]</dt>
+            <dd>All visits between these dates</dd>
+        </dl>
+    </div>
 </div>

@@ -11,7 +11,7 @@ class PatientVisit implements Serializable {
     @SearchableId
     Long id
 
-    @SearchableComponent
+    @SearchableComponent(prefix = "provider_")
     Provider provider
 
     @SearchableProperty
@@ -23,7 +23,7 @@ class PatientVisit implements Serializable {
     @SearchableProperty
     Date dateOfVisit = new Date()
 
-    @SearchableComponent
+    @SearchableComponent(prefix = "patient_")
     Patient patient
 
     // auto-timestamped
