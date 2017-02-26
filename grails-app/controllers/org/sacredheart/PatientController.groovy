@@ -14,7 +14,7 @@ class PatientController {
         forward(action: 'list', params: params)
     }
 
-    def list() {
+    private getPatients() {
         params.offset = params.int('offset') ?: 0
         params.max = Math.min(params.max ? params.int('max') : 25, 1000)
 
@@ -26,18 +26,23 @@ class PatientController {
             try {
                 def search = Patient.search(params.q, params)
                 results = search.results
-                total = search.total
             } catch (Exception ex) {
                 log.error('Failed to execute query: ' + ex.message)
                 flash.message = ex.localizedMessage.replaceAll(/.*ParseException: /, '')
                 results = []
-                total = 0
             }
         } else {
             results = Patient.list(params)
-            total = Patient.count()
         }
-        [patientInstanceList: results, patientInstanceTotal: total]
+        results
+    }
+
+    def list() {
+        [patientInstanceList: getPatients()]
+    }
+
+    def infiniteList() {
+        [patientInstanceList: getPatients()]
     }
 
     def visit() {
