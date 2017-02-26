@@ -4,6 +4,7 @@ import org.sacredheart.Patient
 import org.sacredheart.PatientVisit
 import org.sacredheart.Provider
 import org.sacredheart.YesNo
+import grails.converters.JSON
 
 import java.text.SimpleDateFormat
 
@@ -53,7 +54,8 @@ class ReportController {
                 'endDate'             : cmd.end,
                 'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
-                'results'             : map
+                'results'             : map,
+                'resultsJson'         : map as JSON
         ]
     }
 
@@ -78,7 +80,8 @@ class ReportController {
                 'endDate'             : cmd.end,
                 'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
-                'results'             : map
+                'results'             : map,
+                'resultsJson'         : map as JSON
         ]
     }
 
@@ -102,7 +105,7 @@ class ReportController {
         def map = [:]
         Provider.list().each { theProvider ->
             if (null == theProvider || theProvider.license == 'NA') {
-                return;
+                return
             }
             def count = PatientVisit.withCriteria {
                 projections {
@@ -123,7 +126,8 @@ class ReportController {
                 'endDate'             : cmd.end,
                 'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
-                'results'             : map.sort() { !it.value }
+                'results'             : map.sort() { !it.value },
+                'resultsJson'         : map as JSON
         ]
     }
 

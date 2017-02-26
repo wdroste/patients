@@ -28,7 +28,8 @@
                 </tr>
             </table>
         </div>
-        <div class="span3">
+        <div class="row-fluid">
+          <div class="span3">
             <table>
                 <g:each in="${results}" var="result">
                     <tr>
@@ -37,9 +38,8 @@
                     </tr>
                 </g:each>
             </table>
-        </div>
-        <div class="span6">
-            <div id="chart"></div>
+          </div>
+          <div class="span6" id="chart"></div>
         </div>
     </div>
 </div>
