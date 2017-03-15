@@ -9,10 +9,8 @@
 <body>
 
 <div class="row-fluid">
-    <div class="span3 hidden-print">
-        <g:render template="nav"/>
-    </div>
-    <div class="span10">
+    <g:render template="nav"/>
+    <div class="span9">
         <div class="page-header">
             <h1>
                 <g:message code="report.static.select.visitsByProviderReport"/>:
@@ -24,22 +22,18 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span9">
-
-        <div class="span3">
-            <table>
-                <g:each in="${results}" var="result">
-                    <tr>
-                        <td><%= result.key  %></td>
-                        <td><%= result.value %></td>
-                    </tr>
-                </g:each>
-            </table>
-        </div>
-        <div class="span6">
-            <div id="chart"></div>
-        </div>
+    <div class="span3 hidden-print"></div>
+    <div class="span3">
+      <table>
+        <g:each in="${results}" var="result">
+          <tr>
+            <td><%= result.key  %></td>
+            <td><%= result.value %></td>
+          </tr>
+        </g:each>
+      </table>
     </div>
+    <div class="span6" id="chart"></div>
 </div>
 
 <!--Load the AJAX API-->
