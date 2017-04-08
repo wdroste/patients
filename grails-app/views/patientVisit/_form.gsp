@@ -17,6 +17,10 @@ $(function() {
             value = 'V72.3';
         } else if ('DiabeticEducation' == key) {
             value = 'V623';
+        } else if ('Counseling' == key) {
+            value = 'Z71.9';
+        } else if ('PhysicalTherapy' == key) {
+            value = 'V57.1';
         }
         $("#diagnosisCode").val(value);
     }).change();
