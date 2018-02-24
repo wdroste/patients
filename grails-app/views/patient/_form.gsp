@@ -88,7 +88,7 @@
             if (!isNaN(this.numberOfFamily())) {
                 incomeIndex = this.numberOfFamily();
             }
-            var incomeTable = [22980, 31020, 39060, 47100, 55140, 63180, 71220, 79260];
+            var incomeTable = [24280, 32920, 41560, 50200, 58840, 67480, 76120, 84760];
             var povertyIncome;
             if (incomeIndex > incomeTable.length) {
                 povertyIncome = incomeTable[7] + ((incomeIndex - 8) * 8040);
