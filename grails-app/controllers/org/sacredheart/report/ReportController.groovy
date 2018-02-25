@@ -23,7 +23,8 @@ class ReportController {
                         'screeningResultsReport',
                         'establishedReport',
                         'visitsByProviderReport',
-                        'transportationReport'
+                        'transportationReport',
+                        'a2cReport'
                 ]
         ]
     }
@@ -144,6 +145,33 @@ class ReportController {
         def yesResult = PatientVisit.createCriteria().count(q.curry(YesNo.Yes))
         def noResult = PatientVisit.createCriteria().count(q.curry(YesNo.No))
         ['startDate': cmd.start, 'endDate': cmd.end, 'yes': yesResult, 'no': noResult]
+    }
+
+    def a2cReport(ReportRunCommand cmd) {
+        def results = PatientVisit.withCriteria {
+            projections {
+                patient {
+                    property('patientId')
+                    property('lastName')
+                    property('firstName')
+                    property('dateOfBirth')
+                }
+                property('dateOfVisit')
+                property('diagnosisCode')
+            }
+            between('dateOfVisit', cmd.start, cmd.end)
+        }
+        
+        [visits: results.collect({ 
+            [
+                patientId      : it[0],
+                lastName       : it[1],
+                firstName      : it[2],
+                dateOfBirth    : it[3],
+                dateOfVisit    : it[4],
+                diagnosisCode  : it[5]
+            ]
+        })]
     }
 }
 

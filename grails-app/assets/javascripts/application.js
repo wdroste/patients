@@ -13,20 +13,20 @@
 
 
 if (typeof jQuery !== 'undefined') {
-	(function($) {
-		$('#spinner').ajaxStart(function() {
-			$(this).fadeIn();
-		}).ajaxStop(function() {
-			$(this).fadeOut();
-		});
-	})(jQuery);
+    (function ($) {
+        $('#spinner').ajaxStart(function () {
+            $(this).fadeIn();
+        }).ajaxStop(function () {
+            $(this).fadeOut();
+        });
+    })(jQuery);
 }
 
 ko.bindingHandlers.clickAndStop = {
-    init: function(element, valueAccessor, allBindingsAccessor, viewModel, context) {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel, context) {
         var handler = ko.utils.unwrapObservable(valueAccessor()),
-            newValueAccessor = function() {
-                return function(data, event) {
+            newValueAccessor = function () {
+                return function (data, event) {
                     handler.call(viewModel, data, event);
                     event.cancelBubble = true;
                     if (event.stopPropagation) event.stopPropagation();
@@ -36,3 +36,11 @@ ko.bindingHandlers.clickAndStop = {
         ko.bindingHandlers.click.init(element, newValueAccessor, allBindingsAccessor, viewModel, context);
     }
 };
+
+
+function dataTable(id) {
+    $(id).DataTable({
+        dom: 'Bfrtip',
+        buttons: ['excelHtml5', 'pdfHtml5']
+    });
+}
