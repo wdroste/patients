@@ -4,7 +4,8 @@
 <head>
     <meta name="layout" content="bootstrap">
     <title><g:message code="report.setup.label"/></title>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/tinygradient@0.3.1/tinygradient.min.js"></script>
 </head>
 <body>
 
@@ -22,46 +23,35 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span3 hidden-print"></div>
-    <div class="span3">
-      <table>
-        <g:each in="${results}" var="result">
-          <tr>
-            <td><%= result.key  %></td>
-            <td><%= result.value %></td>
-          </tr>
-        </g:each>
-      </table>
+    <div class="span3"></div>
+    <div class="span9">
+        <canvas id="myChart"></canvas>
     </div>
-    <div class="span6" id="chart"></div>
 </div>
 
-<!--Load the AJAX API-->
-<script type="text/javascript">
-    var results = ${resultsJson};
 
-    // Load the Visualization API and the piechart package.
-    google.load('visualization', '1.0', {'packages':['corechart']});
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.0/dist/patternomaly.min.js"></script>
 
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawChart);
+<script>
+var providers = ${providers}
+var patientVisitCounts = ${patientVisitCounts}
+var gradient = tinygradient('red', 'green', 'blue');
+var ctx = document.getElementById("myChart").getContext('2d');
 
-    function drawChart() {
-        // Create the data table...
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Provider');
-        data.addColumn('number', '#');
-        for (var key in results) {
-          data.addRow([key, results[key]]);
-        }
-
-        // Set chart options
-        var options = { 'title': 'By Provider', 'width':400, 'height':300};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart'));
-        chart.draw(data, options);
+var backgroundColors = gradient.rgb(providers.length);
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: providers,
+        datasets: [{
+            label: '# of Visits',
+            data: patientVisitCounts,
+            backgroundColor: backgroundColors
+        }]
     }
+});
 </script>
+
 </body>
 </html>

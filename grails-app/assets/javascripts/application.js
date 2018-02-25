@@ -10,6 +10,9 @@
 //= require picker.date.js
 //= require knockout-3.0.0.debug.js
 //= require moment-with-langs.js
+//= require tinycolor.js
+//= require tinygradient.js
+
 
 
 if (typeof jQuery !== 'undefined') {

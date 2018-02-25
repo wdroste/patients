@@ -122,13 +122,17 @@ class ReportController {
                 map[theProvider.title] = count;
             }
         }
+        def sorted = map.sort{ a, b -> -1 * (a.value <=> b.value) }
+        def providers = sorted.collect({ k,v -> k}) as JSON
+        def patientVisitCounts = sorted.collect({ k,v -> v}) as JSON
         [
                 'startDate'           : cmd.start,
                 'endDate'             : cmd.end,
                 'totalVisits'         : totalPatientVisits(cmd),
                 'distinctPatientCount': distinctPatientCount(cmd),
                 'results'             : map.sort() { !it.value },
-                'resultsJson'         : map as JSON
+                'providers'           : providers,
+                'patientVisitCounts'  : patientVisitCounts
         ]
     }
 
