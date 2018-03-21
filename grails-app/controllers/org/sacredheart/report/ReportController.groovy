@@ -24,7 +24,8 @@ class ReportController {
                         'establishedReport',
                         'visitsByProviderReport',
                         'transportationReport',
-                        'a2cReport'
+                        'a2cReport',
+                        'unitedWayReport'
                 ]
         ]
     }
@@ -176,6 +177,67 @@ class ReportController {
                 diagnosisCode  : it[5]
             ]
         })]
+    }
+
+    def calculateDate(subYears) {
+        def cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(java.util.Calendar.YEAR, -1 * subYears);
+        cal.getTime()
+    }
+
+    def unitedWayReport(ReportRunCommand cmd) {
+        // distinct query by property, for a range of visits
+        def c = { f ->
+            between('dateOfVisit', cmd.start, cmd.end)
+            projections {
+                patient {
+                    groupProperty(f)
+                    countDistinct('id')
+                }
+            }
+        }
+        // by zipcode
+        def zipCodeData = PatientVisit.withCriteria(c.curry('zipcode'))
+        // by gender
+        def genderData = PatientVisit.withCriteria(c.curry('gender'))
+        // by ethnicity
+        def ethnicityData = PatientVisit.withCriteria(c.curry('race'))
+
+        // distinct query by property, for a range of visits
+        def dateRanges = [
+          [0, 5],
+          [6,18],
+          [19,54],
+          [55,200]
+        ]
+
+        def ageRangeData = dateRanges.collect { r ->
+            def start = calculateDate(r[1])
+            def end = calculateDate(r[0])
+            println("Start Date: $start -> $end")
+            def results = PatientVisit.withCriteria {
+                between('dateOfVisit', cmd.start, cmd.end)
+                projections {
+                    patient {
+                        countDistinct('id')
+                    }
+                }
+                patient {
+                    between('dateOfBirth', start, end)
+                }
+            }
+            ["${r[0]}-${r[1]}", results[0]]
+        }
+
+        [
+            'startDate': cmd.start,
+            'endDate': cmd.end,
+            'zipCodeData': zipCodeData,
+            'genderData' : genderData,
+            'ethnicityData': ethnicityData,
+            'ageRangeData': ageRangeData
+        ]
     }
 }
 
