@@ -154,6 +154,10 @@ class ReportController {
 
     def a2cReport(ReportRunCommand cmd) {
         def results = PatientVisit.withCriteria {
+            between('dateOfVisit', cmd.start, cmd.end)
+            patient {
+                'in'('screeningResult', ["A2C – Clinic Card", "A2C-1x"])
+            }
             projections {
                 patient {
                     property('patientId')
@@ -164,7 +168,6 @@ class ReportController {
                 property('dateOfVisit')
                 property('diagnosisCode')
             }
-            between('dateOfVisit', cmd.start, cmd.end)
         }
         
         [visits: results.collect({ 
