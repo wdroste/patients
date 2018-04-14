@@ -156,7 +156,7 @@ class ReportController {
         def results = PatientVisit.withCriteria {
             between('dateOfVisit', cmd.start, cmd.end)
             patient {
-                'in'('screeningResult', ["A2C – Clinic Card", "A2C-1x"])
+                'in'('screeningResult', ["A2C-CC", "A2C-1x"])
             }
             projections {
                 patient {
