@@ -50,7 +50,7 @@
 				</g:hasErrors>
 
 				<fieldset>
-					<g:form class="form-horizontal" action="create" >
+					<g:form useToken="true" class="form-horizontal" action="create" >
 						<fieldset>
 							<g:render template="form"/>
 							<div class="form-actions">

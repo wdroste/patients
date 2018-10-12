@@ -32,7 +32,7 @@
 				</g:hasErrors>
 
 				<fieldset>
-					<g:form class="form-horizontal" action="edit" id="${visitReportInstance?.id}" >
+					<g:form useToken="true" class="form-horizontal" action="edit" id="${visitReportInstance?.id}" >
 						<g:hiddenField name="version" value="${visitReportInstance?.version}" />
 						<fieldset>
                             <g:render template="form"/>

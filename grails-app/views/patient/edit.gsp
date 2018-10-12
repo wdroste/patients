@@ -33,7 +33,7 @@
         </g:hasErrors>
 
         <fieldset>
-            <g:form class="form-horizontal" action="edit" id="${patientInstance?.id}">
+            <g:form useToken="true" class="form-horizontal" action="edit" id="${patientInstance?.id}">
                 <g:hiddenField name="version" value="${patientInstance?.version}"/>
                 <fieldset>
                     <g:render template="form" bean="patientInstance"/>

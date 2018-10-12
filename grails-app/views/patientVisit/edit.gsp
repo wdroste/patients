@@ -28,7 +28,7 @@
       </g:hasErrors>
 
       <fieldset>
-        <g:form class="form-horizontal" action="edit" id="${patientVisitInstance?.id}" >
+        <g:form useToken="true" class="form-horizontal" action="edit" id="${patientVisitInstance?.id}" >
           <g:hiddenField name="version" value="${patientVisitInstance?.version}" />
           <fieldset>
             <g:set var="patient" value="${patientVisitInstance.patient}"/>

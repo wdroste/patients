@@ -34,7 +34,7 @@
         </g:hasErrors>
 
         <fieldset>
-            <g:form class="form-horizontal" action="create">
+            <g:form useToken="true" class="form-horizontal" action="create">
                 <fieldset>
                     <div class="control-group ">
                         <label class="control-label" for="search">

@@ -68,14 +68,14 @@
                     </ul>
                 </shiro:authenticated>
                 <shiro:notAuthenticated>
-                    <g:form id="login" class="navbar-form pull-right" action="signIn" controller="auth">
+                    <g:form useToken="true" id="login" class="navbar-form pull-right" action="signIn" controller="auth">
                         <input class="span2" type="text" placeholder="Email" name="email">
                         <input class="span2" type="password" placeholder="Password" name="password">
                         <button type="submit" class="btn">Sign in</button>
                     </g:form>
                 </shiro:notAuthenticated>
                 <shiro:authenticated>
-                    <g:form id="loginout" class="navbar-form pull-right" action="signOut" controller="auth">
+                    <g:form useToken="true" id="loginout" class="navbar-form pull-right" action="signOut" controller="auth">
                         <button type="submit" class="btn">Sign Out</button>
                     </g:form>
                 </shiro:authenticated>

@@ -15,7 +15,7 @@
     <div class="span9">
 
         <div class="row-fluid">
-            <g:form method="get" action="list" class="form-inline">
+            <g:form useToken="true" method="get" action="list" class="form-inline">
                 <input name="q" data-bind="value: q" class="span5" type="text" placeholder="Search" required="">
                 <button type="submit" class="btn btn-primary" data-bind="click: search">
                     <i class="icon-search icon-white"></i>

@@ -15,13 +15,13 @@
     <div class="span9">
 
         <div class="row-fluid">
-            <g:form method="get" action="list" class="form-inline">
+            <g:form useToken="true" method="get" action="list" class="form-inline">
                 <input name="q" class="span5" type="text" placeholder="Search" value="${params.q}">
                 <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
             </g:form>
 
             <g:if test="${false}">
-                <g:form method="get" action="list" class="form-inline">
+                <g:form useToken="true" method="get" action="list" class="form-inline">
                     <label class="checkbox"><input type="checkbox"> Missing Veteran</label>
                     <label class="checkbox"><input type="checkbox"> Missing Citizenship</label>
                     <label class="checkbox"><input type="checkbox"> Missing Date of Birth</label>

@@ -15,7 +15,7 @@
         <g:if test="${flash.message}">
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
-        <g:form action="run" class="form-horizontal" method="GET">
+        <g:form useToken="true" action="run" class="form-horizontal" method="GET">
             <div class="control-group">
                 <label class="control-label" for="${property}">
                     <g:message code="report.index.label"/>

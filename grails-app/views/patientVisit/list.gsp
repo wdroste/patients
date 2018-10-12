@@ -16,7 +16,7 @@
             <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
         </g:if>
 
-        <g:form method="get" action="list" class="form-inline">
+        <g:form useToken="true" method="get" action="list" class="form-inline">
             <input name="q" class="span5" type="text" placeholder="Search" value="${params.q}">
             <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
         </g:form>

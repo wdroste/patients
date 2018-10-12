@@ -50,7 +50,7 @@
 				</g:hasErrors>
 
 				<fieldset>
-					<g:form class="form-horizontal" action="edit" id="${providerInstance?.id}" >
+					<g:form useToken="true" class="form-horizontal" action="edit" id="${providerInstance?.id}" >
 						<g:hiddenField name="version" value="${providerInstance?.version}" />
 						<fieldset>
                             <g:render template="form" bean="providerInstance"/>

@@ -17,63 +17,67 @@ class AuthController {
     }
 
     def signIn = {
-        def authToken = new UsernamePasswordToken(params.email as String, params.password as String)
+        withForm {
+            def authToken = new UsernamePasswordToken(params.email as String, params.password as String)
 
-        // Support for "remember me"
-        if (params.rememberMe) {
-            authToken.rememberMe = true
-        }
-
-        // If a controller redirected to this page, redirect back
-        // to it. Otherwise redirect to the root URI.
-        def targetUri = params.targetUri ?: "/"
-
-        // Handle requests saved by Shiro filters.
-        SavedRequest savedRequest = WebUtils.getSavedRequest(request)
-        if (savedRequest) {
-            targetUri = savedRequest.requestURI - request.contextPath
-            if (savedRequest.queryString) targetUri = targetUri + '?' + savedRequest.queryString
-        }
-
-        try{
-            // Perform the actual login. An AuthenticationException
-            // will be thrown if the email is unrecognised or the
-            // password is incorrect.
-            SecurityUtils.subject.login(authToken)
-
-            log.info "Redirecting to '${targetUri}'."
-            redirect(uri: targetUri)
-        }
-        catch (AuthenticationException ex){
-            // Authentication failed, so display the appropriate message
-            // on the login page.
-            log.info "Authentication failure for user '${params.email}'."
-            flash.message = message(code: "login.failed")
-
-            // Keep the email and "remember me" setting so that the
-            // user doesn't have to enter them again.
-            def m = [ email: params.email ]
+            // Support for "remember me"
             if (params.rememberMe) {
-                m["rememberMe"] = true
+                authToken.rememberMe = true
             }
 
-            // Remember the target URI too.
-            if (params.targetUri) {
-                m["targetUri"] = params.targetUri
+            // If a controller redirected to this page, redirect back
+            // to it. Otherwise redirect to the root URI.
+            def targetUri = params.targetUri ?: "/"
+
+            // Handle requests saved by Shiro filters.
+            SavedRequest savedRequest = WebUtils.getSavedRequest(request)
+            if (savedRequest) {
+                targetUri = savedRequest.requestURI - request.contextPath
+                if (savedRequest.queryString) targetUri = targetUri + '?' + savedRequest.queryString
             }
 
-            // Now redirect back to the login page.
-            redirect(action: "login", params: m)
+            try{
+                // Perform the actual login. An AuthenticationException
+                // will be thrown if the email is unrecognised or the
+                // password is incorrect.
+                SecurityUtils.subject.login(authToken)
+
+                log.info "Redirecting to '${targetUri}'."
+                redirect(uri: targetUri)
+            }
+            catch (AuthenticationException ex){
+                // Authentication failed, so display the appropriate message
+                // on the login page.
+                log.info "Authentication failure for user '${params.email}'."
+                flash.message = message(code: "login.failed")
+
+                // Keep the email and "remember me" setting so that the
+                // user doesn't have to enter them again.
+                def m = [ email: params.email ]
+                if (params.rememberMe) {
+                    m["rememberMe"] = true
+                }
+
+                // Remember the target URI too.
+                if (params.targetUri) {
+                    m["targetUri"] = params.targetUri
+                }
+
+                // Now redirect back to the login page.
+                redirect(action: "login", params: m)
+            }
         }
     }
 
     def signOut = {
-        // Log the user out of the application.
-        SecurityUtils.subject?.logout()
-        webRequest.getCurrentRequest().session = null
+        withForm {
+            // Log the user out of the application.
+            SecurityUtils.subject?.logout()
+            webRequest.getCurrentRequest().session = null
 
-        // For now, redirect back to the home page.
-        redirect(uri: "/")
+            // For now, redirect back to the home page.
+            redirect(uri: "/")
+        }
     }
 
     def unauthorized = {

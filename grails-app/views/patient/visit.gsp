@@ -34,7 +34,7 @@
         </g:hasErrors>
 
         <fieldset>
-            <g:form class="form-horizontal" action="addVisit">
+            <g:form useToken="true" class="form-horizontal" action="addVisit">
                 <fieldset>
                     <g:field type="hidden" name="patient.id" value="${patientVisitInstance.patient.id}"/>
 

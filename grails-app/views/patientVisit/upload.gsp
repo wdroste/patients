@@ -26,7 +26,7 @@
             </table>
         </g:if>
         <g:else>
-            <g:uploadForm action="upload" class="form-search">
+            <g:uploadForm useToken="true" action="upload" class="form-search">
                 <p>Please only select CSV export files from Medkind.</p>
                 <input type="file" name="upload_csv"/>
                 <button type="submit" class="btn btn-primary">
