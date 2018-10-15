@@ -8,7 +8,7 @@
   <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
   </g:if>
-  <g:form useToken="true" action="signIn">
+  <g:form useToken="true" action="signIn" autocomplete="off">
     <input type="hidden" name="targetUri" value="${targetUri}" />
     <table>
       <tbody>
