@@ -72,10 +72,6 @@ class Patient implements Serializable {
     @SearchableProperty
     String screeningResult
 
-
-    //
-    @SearchableProperty
-    String ssn
     @SearchableProperty
     String streetAddress
     @SearchableProperty

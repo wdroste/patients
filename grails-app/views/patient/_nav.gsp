@@ -28,9 +28,6 @@
             <dt>dateCreated:[2015-12-01 TO 2015-12-30]</dt>
             <dd>All new patients in December 2015.</dd>
 
-            <dt>*:* -ssn:[* TO *]</dt>
-            <dd>All patients without a SSN</dd>
-
             <dt>firstName:Joe</dt>
             <dd>First name is equal to 'Joe'</dd>
 

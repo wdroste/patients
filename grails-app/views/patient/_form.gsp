@@ -3,7 +3,6 @@
 
 <f:with bean="patientInstance">
     <f:field property="patientId" autocomplete="off"/>
-    <f:field property="ssn" autocomplete="off" default="XXX-XX-XXXX"/>
     <f:field property="lastName"/>
     <f:field property="firstName"/>
     <f:field property="screeningResult"/>
