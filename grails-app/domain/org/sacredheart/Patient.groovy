@@ -37,9 +37,6 @@ class Patient implements Serializable {
     @SearchableId
     Long id
 
-//    static searchable = [only: ['lastName', 'firstName', 'patientId', 'dateOfBirth',
-//            'ssn', 'homePhoneNumber', 'mobilePhoneNumber', 'emailAddress']]
-
     @SearchableProperty
     String patientId
     @SearchableProperty
@@ -126,7 +123,6 @@ class Patient implements Serializable {
         reference nullable: true, inList: REFERENCE
         federalPoverty nullable: true
 
-        ssn nullable: true, matches: "^(\\d{3}-?\\d{2}-?\\d{4}|XXX-XX-XXXX)\$"
         streetAddress blank: false, nullable: true
         city blank: false, nullable: true
         state blank: false, nullable: true

@@ -28,9 +28,6 @@
             <dt>dateOfVisit:[2015-12-01 TO 2015-12-20]</dt>
             <dd>All visits between these dates</dd>
 
-            <dt>*:* -patient_ssn:[* TO *]</dt>
-            <dd>All visits with patients without a SSN</dd>
-
             <dt>dateOfVisit:[2014-12-01 TO 2014-12-20] provider_lastName:Smith</dt>
             <dd>All visits between these dates for provider 'Smith'.</dd>
 
